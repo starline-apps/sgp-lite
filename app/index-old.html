@@ -1,0 +1,421 @@
+﻿<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="description" content="Gerenciamento de atletas" />
+    <meta name="author" content="BeetCorp" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    <title>Beet</title>
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato&#038;ver=3.9.1' type='text/css' media='all' />
+
+    <!-- build:css({.tmp,app}) styles/application.css -->
+    <link rel="stylesheet" href="styles/polymer.css" media="all" type="text/css" >
+    <link rel="stylesheet" href="styles/style.css" media="all" type="text/css" >
+    <link rel="stylesheet" href="styles/colors.css" media="all" type="text/css" >
+    <link rel="stylesheet" href="styles/components/datepicker/datepicker.css">
+    <!-- endbuild -->
+</head>
+
+<body  ng-app="beetApp" ng-controller="MainController">
+<!-- BEGIN TOP MENU -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-if="!login && !loadingPage"  style="display:none;" id="Beet-top-menu">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="menu-medium" class="sidebar-toggle tooltips">
+                <i class="fa fa-outdent"></i>
+            </a>
+            <a class="navbar-brand" href="index.html"></a>
+        </div>
+        <div class="navbar-center" style="font-size:8px;height:10px;margin-top:-5px;">
+            <div data-style="btn-dark" >
+                <avatar module="company" photo="{{session.company._id}}" scale="32px" class=""></avatar>
+                <button class="btn btn-dark" data-modal="modal-12" style="padding-left:1px;" ng-click="toggleDialog('dialog-companies');">
+                    &nbsp;&nbsp;
+                    {{session.company.attributes.company_data.name}}
+                    &nbsp;&nbsp;
+                    <i class="fa fa-angle-down p-r-10"></i>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <ul class="nav navbar-nav pull-right header-menu">
+
+
+        <!-- BEGIN MESSAGES DROPDOWN -->
+        <li class="dropdown" id="messages-header">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <i class="glyph-icon glyphicon glyphicon-globe"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header clearfix">
+                    <p class="pull-left" translate="global.choose_language">
+                        Language
+                    </p>
+                </li>
+                <li class="dropdown-body">
+                    <ul class="dropdown-menu-list withScroll" data-height="130">
+                        <li class="clearfix" ng-repeat="language in languages" ng-click="changeLanguage(language)">
+                            <span class="pull-left p-r-5">
+                                <img ng-src="/images/flags/{{language}}.png" alt="{{language}}">
+                            </span>
+                            <div class="clearfix">
+                                <div>
+                                    <strong translate="languages.{{language}}"></strong>
+                                </div>
+                            </div>
+                        </li>              
+                    </ul>
+                </li>
+                <li class="dropdown-footer clearfix">
+                    <a href="mailbox.html" class="pull-left" translate="global.suggest_language"></a>
+                    <a href="#" class="pull-right">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- END MESSAGES DROPDOWN -->
+
+
+        <!-- BEGIN NOTIFICATION DROPDOWN -->
+        <li class="dropdown" id="notifications-header">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <i class="glyph-icon flaticon-notifications"></i>
+                <span class="badge badge-danger badge-header">6</span>
+            </a>
+
+            <ul class="dropdown-menu">
+                <li class="dropdown-header clearfix">
+                    <p class="pull-left" translate="global.notifications"></p>
+                </li>
+                <li>
+                    <ul class="dropdown-menu-list withScroll" data-height="220">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-star p-r-10 f-18 c-orange"></i>
+                                Steve have rated your photo
+                                <span class="dropdown-time">Just now</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-heart p-r-10 f-18 c-red"></i>
+                                John added you to his favs
+                                <span class="dropdown-time">15 mins</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-file-text p-r-10 f-18"></i>
+                                New document available
+                                <span class="dropdown-time">22 mins</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+                                New picture added
+                                <span class="dropdown-time">40 mins</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
+                                Meeting in 1 hour
+                                <span class="dropdown-time">1 hour</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bell p-r-10 f-18"></i>
+                                Server 5 overloaded
+                                <span class="dropdown-time">2 hours</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown-footer clearfix">
+                    <a href="#" class="pull-left" translate="global.all_notifications"></a>
+                    <a href="#" class="pull-right">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- END NOTIFICATION DROPDOWN -->
+
+        <!-- BEGIN USER DROPDOWN -->
+        <li class="dropdown" id="user-header">
+            <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <img src="/images/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
+                <span class="username">{{session.user.local.email}}</span>
+                <i class="fa fa-angle-down p-r-10"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a ui-sref="user/edit({_id:session.user._id})">
+                        <i class="glyph-icon flaticon-account"></i> Perfil
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="company/list">
+                        <i class="glyphicon glyphicon-lock"></i> Empresas
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="config">
+                        <i class="glyph-icon flaticon-settings21"></i> Configurações
+                    </a>
+                </li>
+                <li class="dropdown-footer clearfix">
+                    <a href="javascript:;" class="toggle_fullscreen" title="Fullscreen">
+                        <i class="glyph-icon flaticon-fullscreen3"></i>
+                    </a>
+                    <a href="" title="Lock Screen">
+                        <i class="glyph-icon flaticon-padlock23"></i>
+                    </a>
+                    <a ui-sref="logout" title="Logout">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- END USER DROPDOWN -->
+
+        </ul>
+        <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>  
+</nav>
+<!-- END TOP MENU -->
+<!-- BEGIN WRAPPER -->
+<div id="wrapper"  style="display:none;">
+
+    <!-- BEGIN MAIN SIDEBAR -->
+    <nav id="sidebar" ng-if="!login && !loadingPage">
+        <div id="main-menu">
+            
+            <ul class="sidebar-nav">
+
+                <li ng-repeat="menu in session.menus">
+                    <a ng-click="changeMenu(menu)" style="cursor:pointer;"><i class="{{menu.icon_class}}"></i><span class="sidebar-text">{{menu.description}}</span></a>
+                    <!--
+                        <a href="#">
+                            <i class="glyph-icon flaticon-pages"></i>
+                            <span class="sidebar-text">{{menu.description}}</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="submenu collapse">
+                            <li ng-repeat="submenu in menu.menus">
+                                <a ui-sref="{{submenu.url}}"><span class="sidebar-text">{{submenu.description}}</span></a>
+                            </li>
+                        </ul>
+                    -->
+                </li>
+
+                <br>
+            </ul>
+
+        </div>
+    </nav>
+    <!-- END MAIN SIDEBAR -->
+
+
+
+    <!-- Add your site or application content here
+    <datepickerk value="19/12/1991" attr="name='teste'"></datepickerk>  
+     -->
+    <div ui-view="" ng-show="!loadingPage && !loadingContent">
+
+    </div>
+
+
+
+    <div id="main-content" class="page-mailbox" style="width:100%;height:100%;overflow-y: hidden;text-align:center;background-color:#fff" ng-show="loadingContent" ng-include src="'views/loading.html'">
+    </div>
+
+
+
+</div>
+
+<!-- END WRAPPER -->
+
+    <div style="left:0;top:0;z-index:999;position:absolute;width:100%;height:100%;overflow-y: hidden;text-align:center;background-color:#fff" ng-show="loadingPage" ng-include src="'views/loadingPage.html'">
+    </div>    
+
+
+<!-- BEGIN MODALS -->
+    <link href="assets/plugins/modal/css/component.css" rel="stylesheet">
+
+
+
+
+
+    <div class="md-modal md-effect-11" id="modal-14">
+        <div class="md-content md-content-red">
+            <h3>Acesso Negado</h3>
+            <div>
+                <p>Dados Inválidos !</p>
+                <button class="btn btn-default btn-modal-close">Ok</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="md-overlay"></div>
+<!-- END MODALS -->
+
+
+<!-- BEGIN MANDATORY SCRIPTS -->
+
+
+<script type="text/javascript">
+    var cSpeed=6;
+    var cWidth=220;
+    var cHeight=20;
+    var cTotalFrames=37;
+    var cFrameWidth=220;
+    var cImageSrc='/images/sprites.gif';
+    
+    var cImageTimeout=false;
+    var cIndex=0;
+    var cXpos=0;
+    var cPreloaderTimeout=false;
+    var SECONDS_BETWEEN_FRAMES=0;
+    
+    function startAnimation(){
+        
+        document.getElementById('loaderImage').style.backgroundImage='url('+cImageSrc+')';
+        document.getElementById('loaderImage').style.width=cWidth+'px';
+        document.getElementById('loaderImage').style.height=cHeight+'px';
+        
+        //FPS = Math.round(100/(maxSpeed+2-speed));
+        FPS = Math.round(100/cSpeed);
+        SECONDS_BETWEEN_FRAMES = 1 / FPS;
+        
+        cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES/1000);
+        
+    }
+    
+    function continueAnimation(){
+        
+        cXpos += cFrameWidth;
+        //increase the index so we know which frame of our animation we are currently on
+        cIndex += 1;
+         
+        //if our cIndex is higher than our total number of frames, we're at the end and should restart
+        if (cIndex >= cTotalFrames) {
+            cXpos =0;
+            cIndex=0;
+        }
+        
+        if(document.getElementById('loaderImage'))
+            document.getElementById('loaderImage').style.backgroundPosition=(-cXpos)+'px 0';
+        
+        cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES*1000);
+    }
+    
+    function stopAnimation(){//stops animation
+        clearTimeout(cPreloaderTimeout);
+        cPreloaderTimeout=false;
+    }
+    
+    function imageLoader(s, fun)//Pre-loads the sprites image
+    {
+        clearTimeout(cImageTimeout);
+        cImageTimeout=0;
+        genImage = new Image();
+        genImage.onload=function (){cImageTimeout=setTimeout(fun, 0)};
+        genImage.onerror=new Function('alert(\'Could not load the image\')');
+        genImage.src=s;
+    }
+    
+</script>
+
+<script src="bower_components/platform/platform.js"></script>
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
+
+<script src="scripts/components/datepicker/bootstrap-datepicker.js"></script>
+
+<script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="assets/plugins/jquery-mobile/jquery.mobile-1.4.2.js"></script>
+<script src="assets/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="assets/plugins/mmenu/js/jquery.mmenu.min.all.js"></script>
+<script src="assets/plugins/nprogress/nprogress.js"></script>
+<script src="assets/plugins/jquery-cookie/jquery.cookie.min.js"></script>
+<script src="assets/plugins/modal/js/classie.js"></script>
+<script src="assets/plugins/modal/js/modalEffects.js"></script>
+<!-- END MANDATORY SCRIPTS -->
+
+
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/router.js"></script>
+<script src="scripts/util.js"></script>
+<script src="scripts/application.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/signup.js"></script>
+<script src="scripts/controllers/logout.js"></script>
+<script src="scripts/controllers/person.js"></script>
+<script src="scripts/controllers/company.js"></script>
+<script src="scripts/controllers/user.js"></script>
+<script src="scripts/controllers/expense.js"></script>
+<script src="scripts/controllers/home.js"></script>
+<script src="scripts/services/main.js"></script>
+<script src="scripts/services/login.js"></script>
+<script src="scripts/services/signup.js"></script>
+<script src="scripts/services/person.js"></script>
+<script src="scripts/services/company.js"></script>
+<script src="scripts/services/user.js"></script>
+<script src="scripts/services/attribute.js"></script>
+<script src="scripts/services/expense.js"></script>
+<script src="scripts/directives/datepicker.js"></script>
+<script src="scripts/directives/avatar.js"></script>
+<script src="scripts/directives/attribute.js"></script>
+<script src="scripts/directives/common.js"></script>
+<!-- endbuild -->
+
+
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog-transition.html">
+<link rel="import" href="bower_components/core-dropdown/core-dropdown.html">
+<link rel="import" href="bower_components/core-icons/core-icons.html">
+
+<paper-toast id="beet-toast-message" class="capsule" text="Dados enviados com sucesso !" style="padding-right: 60px;"></paper-toast>
+
+</body>
+</html>
+
+

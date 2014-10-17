@@ -1,0 +1,25 @@
+<div>
+    <core-dropdown model="{{data.group.description+'.'+ data.description}}" id="{{data.group.description+'.'+ data.description}}" selected="{{value}}" template="{{data.type.template}}" valueattr="name" label="{{'attributes.'+data.group.description+'.'+ data.description + '.description' | translate}}">
+        <core-item
+            ng-repeat="selection in data.type.selection"
+            name="{{selection}}"
+            label="{{'attributes.'+data.group.description+'.'+ data.description + '.selection.' + selection | translate}}"
+        ></core-item>
+    </core-dropdown>
+
+    <style>
+        core-dropdown::shadow #menu {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            max-height: 50px;
+            overflow: hidden;
+        }
+        core-dropdown{
+            font-size:20px;
+            max-height: 50px;
+            color:#757575;
+            margin:0px 0px 10px -10px;
+        }
+    </style>
+</div>
+

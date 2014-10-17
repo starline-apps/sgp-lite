@@ -1,0 +1,41 @@
+/*
+core-scaffold {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+core-toolbar{
+    padding-top:5px;
+    text-align: center;
+}
+core-animated-pages {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+core-animated-pages section {
+    height: 100%;
+    width:100%;
+}
+core-pages-animated transitions {
+    width: 100%;
+    height: 100%;
+}
+paper-progress {
+    width: 80%;
+}
+paper-butaton{
+    width:100%;
+    height:100%;
+}
+
+.core-overlay-backdrop{
+    z-index:999 !important;
+
+}
+*/

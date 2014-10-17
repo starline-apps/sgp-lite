@@ -1,0 +1,136 @@
+﻿{
+
+    "global": {
+
+		"choose_company"  : "Choose company:" ,
+		"choose_language" : "Choose language"  ,
+		"suggest_language" : "Suggest language" ,
+		"notifications"   : "Notifications",
+		"all_notifications"   : "See all notifications",
+
+		"buttons" : {
+			"save" : "Save",
+			"cancel" : "Cancel"
+		}
+
+    },
+    "languages" : {
+
+    	"en"    : "English"      ,
+    	"es"    : "Spanish"      ,
+    	"pt_br" : "Portuguese(BR)" 
+
+    },
+	"attributes" : {
+
+	   "person_data": {
+
+			 "name" : "Name",
+			 "gender" : {
+			 	"description":"Gender",
+			 	"selection" : {
+			 		"male" : "Male",
+			 		"female" : "Female"
+			 	}
+			 },
+			 "cpf" : "Identify ID",
+			 "postcode" : "Post code",
+			 "street" : "Street",
+			 "complement" : "Complement",
+			 "neighborhood" : "Neighborhood",
+			 "city" : "City",
+			 "state" : "State",
+			 "birth_date" : "Birth date",
+			 "email" : "E-mail",
+			 "video_link" : "Video link"
+		},
+
+		"training_contract" : {
+
+			"initial_date" : "Initial date",
+			"final_date" : "Final date",
+			"number" : "Number contract",
+			"percentage_athlete" : "Percentage Athlete",
+			"percentage_representative" : "Percentage Representative",
+			"percentage_club" : "Percentage Club",
+			"professional_training" : "Professional training",
+			"transport" : "Transport",
+			"feeding" : "Feeding",
+			"accommodation" : "Accommodation",
+			"clothing" : "Clothing",
+			"health_care" : "Health Care",
+			"dental_care" : "Dental Care",
+			"psychological_assistance" : "Psychological Assistance",
+			"school_supplies" : "School Supplies",
+			"sport_supplies" : "Sport Supplies",
+			"leisure" : "Leisure",
+			"foreign_language_classes" : "Foreign Language Classes",
+			"computer_science_classes" : "Computer Science Classes"
+		},
+
+		"professional_contract" : {
+
+			"initial_date" : "Initial date",
+			"final_date" : "Final date",
+			"number" : "Number contract",
+			"federative_rights" : "Federative Rights",
+			"percentage_athlete" : "Percentage Athlete",
+			"percentage_representative" : "Percentage Representative",
+			"percentage_club" : "Percentage Club",			
+			"salary" : "Salary"
+		},
+
+		"company_data" : {
+			"name" : "Name",
+			"cnpj" : "CNPJ",			
+			"postcode" : "Post code",
+			"street" : "Street",
+			"complement" : "Complement",
+			"neighborhood" : "Neighborhood",
+			"city" : "City",
+			"state" : "State",			
+			"number" : "Number"
+		},
+        "expense_data" : {
+            "category" : {
+                "description":"Category",
+                "selection" : {
+                    "travel":"Travel",
+                    "sporting_goods":"Sport Goods",
+                    "food":"Food",
+                    "other":"Other"
+                }
+            },
+            "description" : "Description",
+            "value" : "Value",
+            "date" : "Date",
+            "observation" : "Observation"
+        },
+		"user_data" : {
+
+			"name" : "Name",
+			"gender" : "Gender",
+			"cpf" : "Identify ID",
+			"postcode" : "Post code",
+			"street" : "Street",
+			"complement" : "Complement",
+			"neighborhood" : "Neighborhood",
+			"city" : "City",
+			"state" : "State",
+			"birth_date" : "Birth date"
+		}
+	},
+	"person" : {
+		"create" : "New Athlete",
+		"title" : "Athlete",
+		"person_data" : "Personal Data",
+		"professional_contract" : "Professional Contract",
+		"training_contract" : "Training Contract"
+	},
+	"expense" : {
+		"title" : "Expenses"
+	},
+	"user" : {
+		"user_data" : "User Data"
+	}
+ }

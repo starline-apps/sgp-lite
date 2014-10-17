@@ -1,0 +1,190 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow:hidden;
+}
+
+.pointer {
+    cursor: pointer;
+}
+.p-0{
+    padding:0 !important;
+}
+.bold{
+    font-weight: bold;
+}
+.scrollable{
+    overflow-y: auto !important
+}
+
+.p-5{
+    padding:5px !important;
+}
+.p-v-5{
+     padding-top:5px !important;
+     padding-bottom:5px !important;
+ }
+.p-h-20{
+    padding-left:20px !important;
+    padding-right:20px !important;
+}
+.m-20 {
+    margin: 20px;
+}
+.m-5 {
+    margin: 5px;
+}
+.m-10 {
+    margin: 10px;
+}
+.m-t-0 {
+    margin-top: 0;
+}
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.m-t-15 {
+    margin-top: 15px;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.m-t-25 {
+    margin-top: 25px;
+}
+
+.m-t-30 {
+    margin-top: 30px;
+}
+
+.m-center {
+    margin: 0 auto !important;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+.size-5 {
+    font-size: 5px;
+}
+.size-10 {
+    font-size: 10px;
+}
+.size-15 {
+    font-size: 15px;
+}
+.size-18 {
+    font-size: 18px;
+}
+.size-20 {
+    font-size: 20px;
+}
+.size-24 {
+    font-size: 24px;
+}
+.size-25 {
+    font-size: 25px;
+}
+.size-30 {
+    font-size: 30px;
+}
+.s-180 {
+    font-size: 1.8em;
+}
+.s-150 {
+    font-size: 1.5em;
+}
+.s-130 {
+    font-size: 1.3em;
+}
+.s-120 {
+    font-size: 1.2em;
+}
+.s-110 {
+     font-size: 1.1em;
+ }
+.s-100 {
+    font-size: 1em;
+}
+.w-80 {
+    width:80%;
+}
+.w-30 {
+    width:30%;
+}
+.m-t-b-10{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.m-v-15{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.m-v-10{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.m-v-5{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+.m-h-10{
+    margin-left:10px;
+    margin-right:10px;
+}
+.m-b-10{
+    margin-bottom:10px;
+}
+.fill-vertical {
+    min-height: 100%;
+    height: 100%;
+}
+.fill-horizontal {
+    min-width: 100%;
+    width: 100%;
+}
+.fill{
+    min-height: 100%;
+    height: 100%;
+    min-width: 100%;
+    width: 100%;
+}
+.pointer{
+    cursor: pointer;
+}
+.border{
+    border:1px #000 solid;
+}
+.list-none{
+    list-style: none;
+}
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.bg-1{
+    background-image: url("../images/background.gif");
+}
+.align-middle {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}

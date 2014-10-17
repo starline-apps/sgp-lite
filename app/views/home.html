@@ -1,0 +1,21 @@
+<div class="row p-v-5 p-h-20">
+    <div ng-repeat="mainMenu in menutest" class="col-xs-6 col-sm-4 col-lg-4">
+        <div class="col-xs-12 p-5">
+            <div class="row bg-{{mainMenu.background_color}}-light text-center" layout="horizontal" layout-align="center center" style="height:160px">
+                <div class="col-xs-6"  layout="horizontal" layout-align="center center">
+                    <img src="images/icons/{{mainMenu.flat_icon}}.png" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row bg-{{mainMenu.background_color}}-dark color-5 c-{{mainMenu.text_color}}"  layout="horizontal" layout-align="center center">
+                <div class="col-xs-9" >
+                    <label class="s-130 hidden-xs">{{mainMenu.description}}</label>
+                    <label class="s-100 visible-xs">{{mainMenu.description}}</label>
+                </div>
+                <div class="col-xs-3 text-right" >
+                    <span class="glyphicon glyphicon-play"></span>
+                </div>
+            </div>
+        </div>
+        <div class="material-ripple"></div>
+    </div>
+</div>
