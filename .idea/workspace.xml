@@ -2,19 +2,130 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b90c8e67-cd46-4d82-b708-0250a6bdabca" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/payment.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/scripts/controllers/payment.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/favicon2.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/faviconbeet.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar10@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar10_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar10_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar11@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar11_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar11_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar12.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar12@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar12_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar12_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar13@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar13_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar13_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar1@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar1_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar1_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar2@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar2_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar2_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar3@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar3_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar3_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar4@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar4_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar4_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar5@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar5_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar5_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar6@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar6_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar6_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar7@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar7_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar7_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar8@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar8_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar8_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar9@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar9_big.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/avatars/avatar9_big@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/background.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/galo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/header-logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/iconbeet.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/loading.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/logo_toolbar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/tardelli.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/tardelli3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/company/538dcf8bc2cd7d080c000006.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/company/538dcfa9c2cd7d080c000008.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/company/53c47610ff31209402000002.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/company/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/company/default2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac59caad8f889c0700000.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac5a5fad8f889c07000003.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac8dfb5672117817000002.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac8e235672117817000003.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac8e415672117817000004.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac8e6c5672117817000005.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac93cd567211781700000b.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac93e8567211781700000c.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ac9400567211781700000d.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53de71c2dc53230b00000002.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ec11ec0dcd460b00000002.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ec14e70dcd460b00000003.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ec22530dcd460b00000004.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/53ec24b10dcd460b00000005.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/person/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/images/uploads/user/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/index-old.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/index2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/index23092014.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/scripts/controllers/company.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/scripts/controllers/expense.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/scripts/controllers/person.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/scripts/controllers/user.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/alternative.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/alternative.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/alternative.js" afterPath="$PROJECT_DIR$/app/scripts/services/alternative.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/app.js" afterPath="$PROJECT_DIR$/app/scripts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/directives/attribute.js" afterPath="$PROJECT_DIR$/app/scripts/directives/attribute.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/attribute.js" afterPath="$PROJECT_DIR$/app/scripts/services/attribute.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/directives/avatar.js" afterPath="$PROJECT_DIR$/app/scripts/directives/avatar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/company.js" afterPath="$PROJECT_DIR$/app/scripts/services/company.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/config.js" afterPath="$PROJECT_DIR$/app/scripts/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/directives/datepicker.js" afterPath="$PROJECT_DIR$/app/scripts/directives/datepicker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/exam.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/exam.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/exam.js" afterPath="$PROJECT_DIR$/app/scripts/services/exam.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/header.html" afterPath="$PROJECT_DIR$/app/views/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/directives/expense.js" afterPath="$PROJECT_DIR$/app/scripts/directives/expense.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/expense.js" afterPath="$PROJECT_DIR$/app/scripts/services/expense.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/header.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home.html" afterPath="$PROJECT_DIR$/app/views/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/home.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/login.html" afterPath="$PROJECT_DIR$/app/views/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/menu.html" afterPath="$PROJECT_DIR$/app/views/menu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/item.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/item.js" afterPath="$PROJECT_DIR$/app/scripts/services/item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/login.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/login.js" afterPath="$PROJECT_DIR$/app/scripts/services/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/logout.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/logout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/main.js" afterPath="$PROJECT_DIR$/app/scripts/services/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/person.js" afterPath="$PROJECT_DIR$/app/scripts/services/person.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/router.js" afterPath="$PROJECT_DIR$/app/scripts/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/signup.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/signup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/signup.js" afterPath="$PROJECT_DIR$/app/scripts/services/signup.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/style.css" afterPath="$PROJECT_DIR$/app/styles/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/user.js" afterPath="$PROJECT_DIR$/app/scripts/services/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/util.js" afterPath="$PROJECT_DIR$/app/scripts/util.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sgp-lite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +146,149 @@
   <component name="FavoritesManager">
     <favorites_list name="sgp-lite" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.5" vertical-offset="75" max-vertical-offset="2430">
+              <caret line="25" column="76" selection-start-line="25" selection-start-column="76" selection-end-line="25" selection-end-column="76" />
+              <folding>
+                <element signature="n#style#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/payment.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="975">
+              <caret line="25" column="54" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/payment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/util.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2865">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alternative.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/alternative.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="1185">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/header.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5640">
+              <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="555">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="27" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="2415">
+              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auth0-widget.min.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/components/auth0-widget/auth0-widget.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.8846154" vertical-offset="0" max-vertical-offset="210">
+              <caret line="5" column="25019" selection-start-line="5" selection-start-column="24992" selection-end-line="5" selection-end-column="25019" />
+              <folding>
+                <marker date="1415649589000" expanded="true" signature="355037:355048" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45403588" vertical-offset="0" max-vertical-offset="892">
+              <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/alternative.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/company.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/exam.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/expense.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/header.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/home.js" />
+        <option value="$PROJECT_DIR$/app/scripts/config.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/payment.js" />
+        <option value="$PROJECT_DIR$/app/styles/style.css" />
+        <option value="$PROJECT_DIR$/app/scripts/components/auth0-widget/pt-BR.json" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/login.js" />
+        <option value="$PROJECT_DIR$/app/bower_components/auth0-lock/build/auth0-lock.min.js" />
+        <option value="$PROJECT_DIR$/app/bower_components/auth0-lock/i18n/pt-BR.json" />
+        <option value="$PROJECT_DIR$/app/bower_components/i18n/pt-BR.json" />
+        <option value="$PROJECT_DIR$/app/bower_components/auth0-lock/build/auth0-lock.js" />
+        <option value="$PROJECT_DIR$/app/bower_components/auth0-lock/i18n/en.json" />
+        <option value="$PROJECT_DIR$/app/scripts/components/auth0-widget/auth0-widget.min.js" />
+        <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/app/scripts/router.js" />
+        <option value="$PROJECT_DIR$/app/views/payment.html" />
+      </list>
+    </option>
   </component>
   <component name="JsGruntFileManager">
     <gruntfiles>
@@ -125,7 +377,105 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sgp-lite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -137,7 +487,60 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/bower_components" />
+      <recent name="$PROJECT_DIR$/app/bower_components/auth0-lock" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/app/scripts/components/auth0-widget" />
+      <recent name="$PROJECT_DIR$/app/scripts/controllers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/scripts/components/auth0-widget/i18n" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -151,26 +554,26 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="5" y="22" width="1249" height="1025" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979983" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979983" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294979" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -191,6 +594,248 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1097" max-vertical-offset="2565">
+          <caret line="87" column="30" selection-start-line="87" selection-start-column="30" selection-end-line="87" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bower_components/auth0-lock/build/auth0-lock.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225">
+          <caret line="2" column="3628" selection-start-line="2" selection-start-column="3618" selection-end-line="2" selection-end-column="3628" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="900">
+          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/components/auth0-widget/auth0-widget.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="210">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <marker date="1415649589000" expanded="true" signature="355037:355048" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="2415">
+          <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="855">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/components/auth0-UserService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="928">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44267878" vertical-offset="0" max-vertical-offset="881">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/components/auth0-AWSService/auth0-AWSService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="1" column="178" selection-start-line="1" selection-start-column="178" selection-end-line="1" selection-end-column="178" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/exam.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1275">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="570">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="32" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="3270">
+          <caret line="104" column="18" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bower_components/auth0-lock/build/auth0-lock.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1513453" vertical-offset="0" max-vertical-offset="892">
+          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bower_components/auth0-lock/i18n/pt-BR.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3872054" vertical-offset="0" max-vertical-offset="891">
+          <caret line="23" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bower_components/auth0-lock/build/auth0-lock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.76923" vertical-offset="38532" max-vertical-offset="224745">
+          <caret line="2610" column="19" selection-start-line="2610" selection-start-column="19" selection-end-line="2610" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bower_components/auth0-lock/i18n/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="1050">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/alternative.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1185">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="555">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="27" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5640">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/components/auth0-widget/auth0-widget.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8846154" vertical-offset="0" max-vertical-offset="210">
+          <caret line="5" column="25019" selection-start-line="5" selection-start-column="24992" selection-end-line="5" selection-end-column="25019" />
+          <folding>
+            <marker date="1415649589000" expanded="true" signature="355037:355048" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5" vertical-offset="75" max-vertical-offset="2430">
+          <caret line="25" column="76" selection-start-line="25" selection-start-column="76" selection-end-line="25" selection-end-column="76" />
+          <folding>
+            <element signature="n#style#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2865">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="2415">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="975">
+          <caret line="25" column="54" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/payment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45403588" vertical-offset="0" max-vertical-offset="892">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
 

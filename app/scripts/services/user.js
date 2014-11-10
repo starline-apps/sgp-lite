@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .factory('User', function($http, Common) {
         return {
             update : function(data, _id) {

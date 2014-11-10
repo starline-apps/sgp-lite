@@ -2,7 +2,7 @@
 /*jshint -W083 */
 "use strict";
 var refreshResult, refreshExamTime, examListInterval, examResultInterval;
-BeetApp
+SGPApp
     .controller("ExamController", ["$rootScope", "$scope", "$stateParams","ExamService","Common",function($rootScope, $scope, $stateParams, ExamService, Common) {
         /** View attributes **/
 

@@ -1,4 +1,4 @@
-BeetApp.directive("datepicker", function () {
+SGPApp.directive("datepicker", function () {
     return {
         replace: true,
         restrict: 'E',

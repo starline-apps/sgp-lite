@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .factory('Attribute', function($http, Common, $q) {
         return {
             getByModule : function(moduleId) {

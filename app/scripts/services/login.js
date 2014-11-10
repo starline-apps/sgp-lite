@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .factory('Login', function($http, Common) {
         return {
             get : function() {

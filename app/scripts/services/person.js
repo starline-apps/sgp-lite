@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .factory('Person', function($http, $q, Config) {
         return {
             getByCompany : function(companyId) {

@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .directive("attribute", function (Common, $timeout) {
 
 

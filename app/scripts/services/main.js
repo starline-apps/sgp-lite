@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
 
     .factory('Main', function($http) {
         return {

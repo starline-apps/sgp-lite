@@ -1,5 +1,5 @@
 ﻿"use strict";
-BeetApp.factory('errorInterceptor', ['$q', '$rootScope', '$location',
+SGPApp.factory('errorInterceptor', ['$q', '$rootScope', '$location',
     function ($q, $rootScope, $location) {
         return {
             request: function (config) {
@@ -22,10 +22,10 @@ BeetApp.factory('errorInterceptor', ['$q', '$rootScope', '$location',
             }
         };
     }]);
-BeetApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider) {
     $httpProvider.defaults.withCredentials = true;
     //$locationProvider.html5Mode(true);
-    $httpProvider.interceptors.push('errorInterceptor');
+
 
     $urlRouterProvider.otherwise('/login');
 
@@ -33,7 +33,12 @@ BeetApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loca
 
         .state('login', {
             url: '/login',
-            controller: 'LoginController'
+            controller: 'PaymentLoginController'
+        })
+
+        .state('payment', {
+            url: '/payment',
+            controller: 'PaymentLoginController'
         })
 
         .state('logout', {
@@ -111,8 +116,33 @@ BeetApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loca
             controller: 'ExpenseController'
         });
 
+    authProvider.init({
+        domain: 'starline.auth0.com',
+        clientID: 'vzlgoiuJkmXHW8pPcd4DOeR45BQPSo9I',
+        callbackURL: location.href,
+        dict: 'pt-BR'
+    });
+})
 
-});
+    .run(["$rootScope", "$state","$location", "auth",function ($rootScope, $state,$location, auth) {
+
+        auth.hookEvents();
+        /*
+        $rootScope.$on("$stateChangeStart", function() {
+            if (!auth.isAuthenticated) {
+
+
+                if ($state.current.url!="/login" && $state.current.url!="/payment"){
+
+                    alert("asd");
+                    $location.path("/login");
+                }
+            }
+        });
+        */
+
+
+    }]);
 
 
 

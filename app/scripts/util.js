@@ -1,5 +1,5 @@
 ﻿"use strict";
-BeetApp
+SGPApp
     .factory("Common", ["$rootScope", "$mdToast",function ($rootScope, $mdToast) {
         function formatElementName(strName){
             strName = strName.replace("dialog-","");

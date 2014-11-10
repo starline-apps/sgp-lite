@@ -1,4 +1,4 @@
-BeetApp
+SGPApp
     .controller('SignupController', function($scope, $http, $location, Signup) {
 
         $scope.formData = {};

@@ -1,20 +1,21 @@
 "use strict";
 SGPApp
-    .controller("LoginController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
+    .controller("PaymentLoginController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
         $scope.formData = {};
 
+        $rootScope.payment = true;
 
         if (!auth.isAuthenticated) {
             auth.signin({
                 popup: true,
                 standalone:true,
                 icon:           "images/sgp_logo_toolbar.png",
-                showIcon:       true,
-                dict:"pt-BR"
+                showIcon:       true
             }, function () {
 
                 setTimeout(function () {
                     $rootScope.session = auth;
+                    console.log($rootScope.session);
                         loadData();
                 }, 1000);
 
@@ -39,14 +40,34 @@ SGPApp
 
             setTimeout(function(){
                 $("#loadingApp").hide();
-                $("#container").fadeIn("slow");
                 $("#header").fadeIn("slow");
                 $("#footer").fadeIn("slow");
+                $rootScope.$apply();
+
             },2000);
-            $state.transitionTo('home');
 
 
 
 
         }
+    }]);
+
+SGPApp
+    .controller("PaymentController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
+        $scope.descriptions = [
+            {
+                "text": "Correção automatica de Gabaritos"
+            },
+            {
+                "text": "Criação de Turmas e Alunos"
+            },
+            {
+                "text": "Sincronização das notas dentro do Aplicativo"
+            },
+            {
+                "text": "Correção em segundos"
+            }
+        ];
+
+
     }]);

@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .directive("avatar", function (Common) {
         return {
             replace: true,

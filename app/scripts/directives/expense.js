@@ -1,4 +1,4 @@
-﻿BeetApp
+﻿SGPApp
     .directive("expense", function () {
         return {
             replace: true,

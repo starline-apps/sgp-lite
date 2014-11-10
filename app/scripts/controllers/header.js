@@ -1,23 +1,12 @@
-﻿BeetApp
-    .controller('HeaderController', function($scope, $rootScope,$sce, $http, $location, $translate, Login, Common,$state) {
+﻿SGPApp
+    .controller('HeaderController', function($scope, $rootScope,$sce, $http, $location, $translate, Login, Common,$state,auth) {
         $scope.formData = {};
 
         $rootScope.languages = new Array("pt_br", "en", "es");
 
-        Login.get()
-            .success(function (data) {
-                loadData(data);
-            })
-            .error(function (error) {
-                $rootScope.loadingApp = false;
-                $rootScope.login = true;
-
-                setTimeout(function(){
-                    $("#loadingApp").hide();
-                    $("#login").fadeIn("slow");
-                },2000);
-
-            });
+        $rootScope.logout = function() {
+            auth.signout();
+        }
         function loadData(data){
             $rootScope.session = {};
             $rootScope.session.user = data;

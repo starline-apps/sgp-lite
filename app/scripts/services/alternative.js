@@ -1,6 +1,6 @@
 "use strict";
 
-BeetApp
+SGPApp
     .factory("ExamService", ["$http","$q","localStorageService","Common", function($http,$q, localStorageService,Common) {
 
         return {

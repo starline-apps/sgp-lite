@@ -1,4 +1,4 @@
-BeetApp
+SGPApp
     .factory('Expense', function($http, Common) {
         return {
             getByPersonAndInterval : function(personId, initialDate, finalDate) {
