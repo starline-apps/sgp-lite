@@ -1,0 +1,47 @@
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10">
+    <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+        <md-toolbar class="md-theme-dark color-bg-4 p-0">
+            <h2 class="md-toolbar-tools">
+                <md-button ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+                    <button class="md-button-inner">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <div class="md-ripple-container"></div>
+                </md-button>
+                <span>Questões Cadastradas</span>
+            </h2>
+        </md-toolbar>
+        <md-content class="p-5 ">
+
+
+            <div class="row m-v-20 m-h-10 scroll" ng-show="editMode">
+                <div class="col-xs-12">
+
+
+                    <div class="row m-t-20" ng-repeat="alternative in alternatives">
+                        <div class="col-xs-12 col-xs-offset-0 m-h-10 s-150">
+                            <label>Alternativa {{alternative.order}}</label>
+                        </div>
+                        <div class="col-xs-12 col-xs-offset-0 m-h-10">
+                            <div ckeditor="options" id="alternative{{alternative.order}}" ng-model="alternative.order" ready="onReady()"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row m-t-20">
+
+                        <div class="col-xs-6 col-xs-offset-0">
+                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
+                                <button class="md-button-inner">Salvar</button>
+                            </md-button>
+                            <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
+                                <button class="md-button-inner">Cancelar</button>
+                            </md-button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+</div>

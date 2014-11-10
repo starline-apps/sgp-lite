@@ -1,4 +1,4 @@
-<div ng-repeat="menuLeft in menutest" ng-click="changeMenu(menuLeft)" class="m-t-b-10 s-120 pointer color-5" layout="horizontal" layout-padding>
-    <span layout-align="start center" layout="horizontal" flex="20" class="glyphicon glyphicon-home"></span>
-    <label layout-align="start center" layout="horizontal" flex>{{menuLeft.description}}</label>
+<div ui-sref="{{menuLeft.url}}" ng-repeat="menuLeft in menutest" ng-click="changeMenu(menuLeft)" class="pointer m-t-b-10 s-120 pointer color-5" layout="horizontal" layout-padding>
+    <span layout-align="start center" layout="horizontal" flex="20" class="pointer {{menuLeft.icon_class}}"></span>
+    <label layout-align="start center" layout="horizontal" flex class="pointer">{{menuLeft.description}}</label>
 </div>

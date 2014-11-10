@@ -85,99 +85,99 @@
         $rootScope.menutest = [
             {
                 "description" : "Provas",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "exam",
+                "icon_class" : "glyphicon glyphicon-list-alt",
                 "flat_icon":"contract",
                 "background_color":"purple",
                 "text_color":"white"
             },
             {
-                "description" : "Correções",
-                "url" : "accomodation",
-                "icon_class" : "home",
+                "description" : "Questões",
+                "url" : "item",
+                "icon_class" : "glyphicon glyphicon-th-list",
                 "flat_icon":"correction",
                 "background_color":"blue",
                 "text_color":"black"
-            },
-            {
+            },{
                 "description" : "Relatórios",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "expehfgnse",
+                "icon_class" : "glyphicon glyphicon-stats",
                 "flat_icon":"graphics",
                 "background_color":"yellow",
                 "text_color":"black"
             },
             {
                 "description" : "Alunos",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "expenvbnse",
+                "icon_class" : "glyphicon glyphicon-sort-by-alphabet",
                 "flat_icon":"student",
                 "background_color":"grey",
                 "text_color":"white"
             },
             {
                 "description" : "Melhores Alunos",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "dfg",
+                "icon_class" : "glyphicon glyphicon-thumbs-up",
                 "flat_icon":"medal",
                 "background_color":"green",
                 "text_color":"black"
             },
             {
                 "description" : "Calendário",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "ert",
+                "icon_class" : "glyphicon glyphicon-calendar",
                 "flat_icon":"calendar",
                 "background_color":"red",
                 "text_color":"white"
             },
             {
                 "description" : "Turmas",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "qweq",
+                "icon_class" : "glyphicon glyphicon-tasks",
                 "flat_icon":"class",
                 "background_color":"blue",
                 "text_color":"black"
             },
             {
                 "description" : "Pesquisar",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "asdas",
+                "icon_class" : "glyphicon glyphicon-filter",
                 "flat_icon":"search",
                 "background_color":"red",
                 "text_color":"white"
             },
             {
                 "description" : "Escolas",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "assa",
+                "icon_class" : "glyphicon glyphicon-globe",
                 "flat_icon":"world",
                 "background_color":"yellow",
                 "text_color":"black"
             }      ,      {
                 "description" : "Alunos",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "sadasd",
+                "icon_class" : "glyphicon glyphicon-sort-by-alphabet",
                 "flat_icon":"student",
                 "background_color":"grey",
                 "text_color":"white"
             },
             {
                 "description" : "Melhores Alunos",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "ads",
+                "icon_class" : "glyphicon glyphicon-thumbs-up",
                 "flat_icon":"medal",
                 "background_color":"green",
                 "text_color":"black"
             },
             {
                 "description" : "Calendário",
-                "url" : "expense",
-                "icon_class" : "home",
+                "url" : "asd",
+                "icon_class" : "glyphicon glyphicon-calendar",
                 "flat_icon":"calendar",
                 "background_color":"red",
                 "text_color":"white"
             }
+
         ];
 
 /*              

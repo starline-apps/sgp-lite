@@ -1,0 +1,93 @@
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10">
+    <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+        <md-toolbar class="md-theme-dark color-bg-4 p-0">
+            <h2 class="md-toolbar-tools">
+                <md-button ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+                    <button class="md-button-inner">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <div class="md-ripple-container"></div>
+                </md-button>
+                <span>Provas Cadastradas</span>
+            </h2>
+        </md-toolbar>
+        <md-content class="p-5 scrollable" ng-show="editMode">
+
+            <div class="row m-v-20 m-h-10" >
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-0 m-h-10">
+                            <md-input-group  class="md-input-group-theme-nreen s-150 fill-horizontal text-left">
+                                <label for="description"  class="fill-horizontal text-left">Descrição</label>
+                                <md-input id="description" type="text" ng-model="description" class="fill-horizontal text-left"/>
+                            </md-input-group>
+                        </div>
+                    </div>
+                    <div class="row m-v-20">
+                        <div class="col-xs-6 col-xs-offset-0 m-h-10">
+                            <md-input-group  class="md-input-group-theme-green s-150 fill-horizontal text-left">
+                                <label for="observation"  class="fill-horizontal text-left">Observação</label>
+                                <md-input id="observation" type="text" ng-model="observation" class="fill-horizontal text-left"/>
+                            </md-input-group>
+                        </div>
+                    </div>
+                    <div class="row m-t-20">
+
+                        <div class="col-xs-12 col-xs-offset-0">
+                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
+                                <button class="md-button-inner">Salvar</button>
+                            </md-button>
+                            <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
+                                <button class="md-button-inner">Cancelar</button>
+                            </md-button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </md-content>
+        <md-content class="p-5 scrollable" ng-show="!editMode">
+            <div class="row m-v-10">
+                <div class="col-xs-12 col-xs-offset-0">
+                    <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="setEditMode()">
+                        <button class="md-button-inner">Cadastar</button>
+                    </md-button>
+                    <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button">
+                        <button class="md-button-inner">Excluir Selecionados</button>
+                    </md-button>
+                </div>
+            </div>
+
+            <md-item ng-repeat="(key,item) in dataSource" class="ng-scope" role="listitem">
+                <md-item-content>
+                    <div class="md-tile-left">
+                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
+
+                        </md-checkbox>
+                    </div>
+                    <div class="md-tile-content pointer s-150" ng-click="setEditMode(key)">
+                        <h4 class="ng-binding">{{item.data.description}}</h4>
+                        <p class="ng-binding">
+                            {{item.data.observation}}
+                        </p>
+                    </div>
+
+                </md-item-content>
+                <md-divider inset=""></md-divider>
+            </md-item>
+            <md-item ng-if="dataSource.length==0" class="ng-scope" role="listitem">
+                <md-item-content>
+                    <div class="md-tile-left">
+
+                    </div>
+                    <div class="md-tile-content pointer">
+                        <h4 class="ng-binding">Não existem provas cadastradas</h4>
+
+                    </div>
+                </md-item-content>
+                <md-divider inset=""></md-divider>
+            </md-item>
+        </md-content>
+    </div>
+</div>

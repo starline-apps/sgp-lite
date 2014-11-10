@@ -1,21 +1,33 @@
-<div class="row p-v-5 p-h-20">
-    <div ng-repeat="mainMenu in menutest" class="col-xs-6 col-sm-4 col-lg-4">
-        <div class="col-xs-12 p-5">
-            <div class="row bg-{{mainMenu.background_color}}-light text-center" layout="horizontal" layout-align="center center" style="height:160px">
-                <div class="col-xs-6"  layout="horizontal" layout-align="center center">
-                    <img src="images/icons/{{mainMenu.flat_icon}}.png" class="img-responsive" />
+
+
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10">
+    <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+        <md-toolbar class="md-theme-dark color-bg-4 p-0">
+            <h2 class="md-toolbar-tools">
+
+                <span>Menu Principal</span>
+            </h2>
+        </md-toolbar>
+        <div class="row p-v-5 p-h-20" style="height:100%">
+            <div ng-repeat="mainMenu in menutest" class="col-xs-12 col-sm-4 col-lg-4 pointer" ui-sref="{{mainMenu.url}}">
+                <div class="col-xs-12 p-5">
+                    <div class="row bg-{{mainMenu.background_color}}-light text-center" layout="horizontal" layout-align="center center" style="height:160px">
+                        <div class="col-xs-6"  layout="horizontal" layout-align="center center">
+                            <img src="images/icons/{{mainMenu.flat_icon}}.png" class="img-responsive" />
+                        </div>
+                    </div>
+                    <div class="row bg-{{mainMenu.background_color}}-dark color-5 c-{{mainMenu.text_color}}"  layout="horizontal" layout-align="center center">
+                        <div class="col-xs-9" >
+                            <label class="s-110 hidden-xs">{{mainMenu.description}}</label>
+                            <label class="s-100 visible-xs">{{mainMenu.description}}</label>
+                        </div>
+                        <div class="col-xs-3 text-right" >
+                            <span class="glyphicon glyphicon-play"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row bg-{{mainMenu.background_color}}-dark color-5 c-{{mainMenu.text_color}}"  layout="horizontal" layout-align="center center">
-                <div class="col-xs-9" >
-                    <label class="s-130 hidden-xs">{{mainMenu.description}}</label>
-                    <label class="s-100 visible-xs">{{mainMenu.description}}</label>
-                </div>
-                <div class="col-xs-3 text-right" >
-                    <span class="glyphicon glyphicon-play"></span>
-                </div>
+                <div class="md-ripple"></div>
             </div>
         </div>
-        <div class="material-ripple"></div>
     </div>
 </div>

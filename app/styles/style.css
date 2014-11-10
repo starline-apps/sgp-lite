@@ -20,7 +20,9 @@ body {
 .scrollable{
     overflow-y: auto !important
 }
-
+.scroll{
+    overflow-y: scroll !important
+}
 .p-5{
     padding:5px !important;
 }
@@ -117,6 +119,12 @@ body {
 .s-100 {
     font-size: 1em;
 }
+.s-80 {
+    font-size: 0.8em;
+}
+.s-70 {
+    font-size: 0.7em;
+}
 .w-80 {
     width:80%;
 }
@@ -126,6 +134,10 @@ body {
 .m-t-b-10{
     margin-top:10px;
     margin-bottom:10px;
+}
+.m-v-20{
+    margin-top:20px;
+    margin-bottom:20px;
 }
 .m-v-15{
     margin-top:15px;
@@ -142,6 +154,14 @@ body {
 .m-h-10{
     margin-left:10px;
     margin-right:10px;
+}
+.m-h-15{
+    margin-left:15px;
+    margin-right:15px;
+}
+.m-h-20{
+    margin-left:20px;
+    margin-right:20px;
 }
 .m-b-10{
     margin-bottom:10px;

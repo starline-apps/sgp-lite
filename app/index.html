@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="styles/polymer.css" media="all" type="text/css" >
     <link rel="stylesheet" href="styles/style.css" media="all" type="text/css" >
     <link rel="stylesheet" href="styles/colors.css" media="all" type="text/css" >
-    <link rel="stylesheet" href="styles/components/datepicker/datepicker2.css">  
     <!-- endbuild -->
 </head>
 
@@ -54,7 +53,7 @@
     </div>
 
 
-    <footer id="footer" ng-include src="'views/footer.html'" class="color-bg-4 material-whiteframe-z3 hidden-lg" layout="horizontal" style="display: none;">
+    <footer id="footer" ng-include src="'views/footer.html'" class="color-bg-4 material-whiteframe-z3 hidden" layout="horizontal" style="display: none;">
 
     </footer>
 
@@ -84,9 +83,13 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/hammerjs/hammer.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/ng-ckeditor/ng-ckeditor.js"></script>
+    <script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -107,7 +110,7 @@
     <![endif]-->
 
 
-
+    <script src="scripts/components/ckeditor/ckeditor.js"></script>
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/router.js"></script>
@@ -117,14 +120,16 @@
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/signup.js"></script>
     <script src="scripts/controllers/logout.js"></script>
-    <script src="scripts/controllers/person.js"></script>
+    <script src="scripts/controllers/exam.js"></script>
+    <script src="scripts/controllers/item.js"></script>
     <script src="scripts/controllers/company.js"></script>
     <script src="scripts/controllers/user.js"></script>
     <script src="scripts/controllers/expense.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/services/login.js"></script>
     <script src="scripts/services/signup.js"></script>
-    <script src="scripts/services/person.js"></script>
+    <script src="scripts/services/exam.js"></script>
+    <script src="scripts/services/item.js"></script>
     <script src="scripts/services/company.js"></script>
     <script src="scripts/services/user.js"></script>
     <script src="scripts/services/attribute.js"></script>

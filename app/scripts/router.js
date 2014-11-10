@@ -71,12 +71,16 @@ BeetApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loca
             controller: 'PersonController'
         })
 
-        .state('person', {
-            url: '/person',
-            templateUrl: 'views/person/person.html',
-            controller: 'PersonController'
+        .state('exam', {
+            url: '/exam',
+            templateUrl: 'views/exam.html',
+            controller: 'ExamController'
         })
-
+        .state('item', {
+            url: '/item',
+            templateUrl: 'views/item.html',
+            controller: 'ItemController'
+        })
         .state('company/create', {
             url: '/company/create',
             templateUrl: 'views/company/company.html',

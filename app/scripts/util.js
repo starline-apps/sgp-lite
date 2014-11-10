@@ -1,6 +1,6 @@
 ﻿"use strict";
 BeetApp
-    .factory("Common", ["$rootScope", "$materialToast",function ($rootScope, $materialToast) {
+    .factory("Common", ["$rootScope", "$mdToast",function ($rootScope, $mdToast) {
         function formatElementName(strName){
             strName = strName.replace("dialog-","");
             var arr = strName.split("-");
@@ -175,8 +175,8 @@ BeetApp
 
             },
             showToastMessage: function(text) {
-                $materialToast({
-                    template: "<material-toast class='color-bg-4'>"+text+"</material-toast>",
+                $mdToast({
+                    template: "<md-toast class='color-bg-4'>"+text+"</md-toast>",
                     duration: 3000,
                     position:"bottom right"
                 });

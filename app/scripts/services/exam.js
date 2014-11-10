@@ -1,83 +1,38 @@
 "use strict";
 
 BeetApp
-    .factory("Exam", ["$http","$q","Config","localStorageService","auth","UserService", "AWSService","Common", function($http,$q, Config, localStorageService, auth, UserService, AWSService,Common) {
-
-
-
-        function sendAnswersFile(fileName, fileContent) {
-
-            var defer = $q.defer();
-
-            AWSService.s3().then(function (s3) {
-                console.log("Saving file on S3...");
-                console.log(JSON.stringify(fileContent));
-                console.log("------------");
-
-                s3.putObject(
-                    {
-                        Bucket: "strtec",
-                        Key: "Temp/" + fileName + ".json",
-                        Body: JSON.stringify(fileContent),
-                        //ACL:"public-read",
-                        ContentType: "application/json"
-                    },
-                    function (err, response) {
-                        if (response){
-                            defer.resolve(response);
-                        }else{
-                            defer.resolve(null);
-                        }
-                    }
-                );
-            });
-
-            return defer.promise;
-
-        }
-
-        function sendMessage(objMessage) {
-
-            return $http.post(Common.getApiUrl() + "/api/v1/ib/rest/updatequestionscores/", objMessage);
-            //return {success:function(){return "teste";},error:function(){return "teste";}}
-        }
-
+    .factory("ExamService", ["$http","$q","localStorageService","Common", function($http,$q, localStorageService,Common) {
 
         return {
-            getFile : function(file) {
+            getAll : function() {
                 var defer = $q.defer();
-                AWSService.s3()
-                    .then(function (s3) {
-                        s3.getObject({Bucket: "strtec", Key: file})
-                            .on("httpDownloadProgress", function (progress) {
-                                if (progress.total===0){
-                                    Common.setProgress("loading-exam-progress", "0");
-                                }else{
-                                    Common.setProgress("loading-exam-progress", Math.round((progress.loaded*100)/progress.total));
-                                }
-                                console.log("Downloaded", progress.loaded, "of", progress.total, "bytes");
-
-                            })
-                            .send(function(err, response) {
-                                if (response===null){
-                                    defer.resolve(null);
-                                }else{
-                                    if (response.body===null){
-                                        defer.resolve(null);
-                                    }else{
-                                        defer.resolve(response.Body.toString());
-                                    }
-                                }
-
-                            });
-
-                    });
-
+                if (localStorageService.get("test_exam") === null){
+                    localStorageService.add("test_exam", new Array());
+                }
+                defer.resolve(localStorageService.get("test_exam"));
+                return defer.promise;
+            },
+            get : function(_id) {
+                var defer = $q.defer();
+                defer.resolve(localStorageService.get("test_exam")[_id]);
+                return defer.promise;
+            },
+            create : function(data) {
+                var defer = $q.defer();
+                var list = localStorageService.get("test_exam");
+                list.push(data);
+                localStorageService.add("test_exam", list);
+                defer.resolve(localStorageService.get("test_exam"));
                 return defer.promise;
 
             },
-            getExams : function(code) {
-                return $http.get(Common.getApiUrl() + "/api/v1/ib/rest/availableassessment/" + code + "/", {withCredentials : false});
+            update : function(data, _id) {
+                var defer = $q.defer();
+                var list = localStorageService.get("test_exam");
+                list[_id] = data;
+                localStorageService.add("test_exam", list);
+                defer.resolve(localStorageService.get("test_exam"));
+                return defer.promise;
             },
             getExamsResult : function(code) {
                 return $http.get(Common.getApiUrl() + "/api/v1/ib/rest/assessmentresult/" + code + "/", {withCredentials : false});
