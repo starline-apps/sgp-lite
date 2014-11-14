@@ -78,61 +78,61 @@ body {
     float: right;
 }
 .size-5 {
-    font-size: 5px;
+    font-size: 5px !important;
 }
 .size-10 {
-    font-size: 10px;
+    font-size: 10px !important;
 }
 .size-15 {
-    font-size: 15px;
+    font-size: 15px !important;
 }
 .size-18 {
-    font-size: 18px;
+    font-size: 18px !important;
 }
 .size-20 {
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .size-24 {
-    font-size: 24px;
+    font-size: 24px !important;
 }
 .size-25 {
-    font-size: 25px;
+    font-size: 25px !important;
 }
 .size-30 {
-    font-size: 30px;
+    font-size: 30px !important;
 }
 .s-250 {
-    font-size: 2.5em;
+    font-size: 2.5em !important;
 }
 .s-180 {
-    font-size: 1.8em;
+    font-size: 1.8em !important;
 }
 .s-150 {
-    font-size: 1.5em;
+    font-size: 1.5em !important;
 }
 .s-130 {
-    font-size: 1.3em;
+    font-size: 1.3em !important;
 }
 .s-120 {
-    font-size: 1.2em;
+    font-size: 1.2em !important;
 }
 .s-110 {
-     font-size: 1.1em;
+     font-size: 1.1em !important;
  }
 .s-100 {
-    font-size: 1em;
+    font-size: 1em !important;
 }
 .s-80 {
-    font-size: 0.8em;
+    font-size: 0.8em !important;
 }
 .s-70 {
-    font-size: 0.7em;
+    font-size: 0.7em !important;
 }
 .w-80 {
-    width:80%;
+    width:80% !important;
 }
 .w-30 {
-    width:30%;
+    width:30% !important;
 }
 .m-t-b-10{
     margin-top:10px;

@@ -35,6 +35,23 @@ SGPApp
 
 
         return {
+            generateUUID: function() {
+                var d = new Date().getTime();
+                var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = (d + Math.random()*16)%16 | 0;
+                    d = Math.floor(d/16);
+                    return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+                });
+                return uuid;
+            },
+            getTimestamp: function() {
+                var now = new Date;
+                var timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() ,
+                    now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+                timestamp = Math.floor(timestamp / 1000);
+                return timestamp;
+            },
+
 
             loadingPage : function(blnShow, strImageControl){
                 if (blnShow){
@@ -174,12 +191,21 @@ SGPApp
                 });
 
             },
-            showToastMessage: function(text) {
-                $mdToast({
-                    template: "<md-toast class='color-bg-4'>"+text+"</md-toast>",
-                    duration: 3000,
-                    position:"bottom right"
-                });
+            showToastMessage: function(text, type) {
+                if (type==="warning"){
+                    $mdToast.show({
+                        template: "<md-toast class='bg-yellow-dark c-black s-120 bold'>"+text+"</md-toast>",
+                        hideDelay: 2000,
+                        position:"bottom right"
+                    });
+                }else{
+                    $mdToast.show({
+                        template: "<md-toast class='color-bg-3 c-white s-120 bold'>"+text+"</md-toast>",
+                        hideDelay: 3000,
+                        position:"bottom right"
+                    });
+                }
+
             }
 
         };

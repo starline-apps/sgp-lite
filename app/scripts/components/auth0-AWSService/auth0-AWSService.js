@@ -38,7 +38,6 @@ SGPApp
             var service = {
                 credentials: function() {
                     var d = $q.defer();
-
                     if (!(self.awsCredentials && new Date(self.awsCredentials.Expiration) > new Date())) {
                         UserService.awsCredentials().then(function(credentials){
                             self.setCredentials(credentials);

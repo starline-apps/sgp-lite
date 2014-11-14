@@ -22,7 +22,7 @@ SGPApp.factory('errorInterceptor', ['$q', '$rootScope', '$location',
             }
         };
     }]);
-SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider) {
+SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
     //$locationProvider.html5Mode(true);
 
@@ -33,7 +33,7 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, authPr
 
         .state('login', {
             url: '/login',
-            controller: 'PaymentLoginController'
+            controller: 'LoginController'
         })
 
         .state('payment', {
@@ -81,6 +81,7 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, authPr
             templateUrl: 'views/exam.html',
             controller: 'ExamController'
         })
+
         .state('item', {
             url: '/item',
             templateUrl: 'views/item.html',
@@ -115,31 +116,23 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider, authPr
             templateUrl: 'views/expense/expense.html',
             controller: 'ExpenseController'
         });
-
-    authProvider.init({
-        domain: 'starline.auth0.com',
-        clientID: 'vzlgoiuJkmXHW8pPcd4DOeR45BQPSo9I',
-        callbackURL: location.href,
-        dict: 'pt-BR'
-    });
 })
 
     .run(["$rootScope", "$state","$location", "auth",function ($rootScope, $state,$location, auth) {
 
         auth.hookEvents();
-        /*
+
         $rootScope.$on("$stateChangeStart", function() {
             if (!auth.isAuthenticated) {
 
 
                 if ($state.current.url!="/login" && $state.current.url!="/payment"){
 
-                    alert("asd");
                     $location.path("/login");
                 }
             }
         });
-        */
+
 
 
     }]);

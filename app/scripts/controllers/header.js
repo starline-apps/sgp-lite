@@ -6,16 +6,13 @@
 
         $rootScope.logout = function() {
             auth.signout();
-        }
-        function loadData(data){
-            $rootScope.session = {};
-            $rootScope.session.user = data;
-            Login.getCompanies()
-                .success(function (companies) {
-                    $rootScope.session.companies = companies;
-                    $rootScope.session.company = companies[0];
-                    $rootScope.session.menus = companies[0].menus;
-                    $rootScope.session.menu = companies[0].menus[0];
+        };
+        setTimeout(function(){
+            if (!auth.isAuthenticated) {
+                $state.transitionTo('login');
+            }else{
+                setTimeout(function () {
+                    $rootScope.session = auth;
                     $rootScope.loadingApp = false;
                     $rootScope.login = false;
 
@@ -24,17 +21,14 @@
                         $("#container").fadeIn("slow");
                         $("#header").fadeIn("slow");
                         $("#footer").fadeIn("slow");
-                    },1000);
+                    },2000);
                     $state.transitionTo('home');
-                })
-                .error(function (error) {
+                }, 1000);
+            }
 
-                });
+        },2000);
 
 
-        }
-        $rootScope.dialogCompany = false;
-        
         $scope.changeCompany = function(intIndex) {
             $rootScope.session.menus = $rootScope.session.companies[intIndex].menus;
             $rootScope.session.company = $rootScope.session.companies[intIndex];
@@ -85,9 +79,18 @@
                 "url" : "item",
                 "icon_class" : "glyphicon glyphicon-th-list",
                 "flat_icon":"correction",
+                "background_color":"red",
+                "text_color":"white"
+            },
+            {
+                "description" : "Turmas",
+                "url" : "qweq",
+                "icon_class" : "glyphicon glyphicon-tasks",
+                "flat_icon":"class",
                 "background_color":"blue",
                 "text_color":"black"
-            },{
+            },
+            {
                 "description" : "Relatórios",
                 "url" : "expehfgnse",
                 "icon_class" : "glyphicon glyphicon-stats",
@@ -116,17 +119,10 @@
                 "url" : "ert",
                 "icon_class" : "glyphicon glyphicon-calendar",
                 "flat_icon":"calendar",
-                "background_color":"red",
-                "text_color":"white"
-            },
-            {
-                "description" : "Turmas",
-                "url" : "qweq",
-                "icon_class" : "glyphicon glyphicon-tasks",
-                "flat_icon":"class",
                 "background_color":"blue",
                 "text_color":"black"
             },
+
             {
                 "description" : "Pesquisar",
                 "url" : "asdas",

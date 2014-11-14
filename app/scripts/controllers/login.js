@@ -15,7 +15,16 @@ SGPApp
 
                 setTimeout(function () {
                     $rootScope.session = auth;
-                        loadData();
+                    $rootScope.loadingApp = false;
+                    $rootScope.login = false;
+
+                    setTimeout(function(){
+                        $("#loadingApp").hide();
+                        $("#container").fadeIn("slow");
+                        $("#header").fadeIn("slow");
+                        $("#footer").fadeIn("slow");
+                    },2000);
+                    $state.transitionTo('home');
                 }, 1000);
 
             }, function () {
@@ -24,29 +33,18 @@ SGPApp
 
         }else{
             setTimeout(function () {
-                Common.loadingPage();
                 $rootScope.session = auth;
-                $state.transitionTo("main");
+                $rootScope.loadingApp = false;
+                $rootScope.login = false;
+
+                setTimeout(function(){
+                    $("#loadingApp").hide();
+                    $("#container").fadeIn("slow");
+                    $("#header").fadeIn("slow");
+                    $("#footer").fadeIn("slow");
+                },2000);
+                $state.transitionTo('home');
             }, 1000);
         }
 
-
-        function loadData(data){
-
-
-            $rootScope.loadingApp = false;
-            $rootScope.login = false;
-
-            setTimeout(function(){
-                $("#loadingApp").hide();
-                $("#container").fadeIn("slow");
-                $("#header").fadeIn("slow");
-                $("#footer").fadeIn("slow");
-            },2000);
-            $state.transitionTo('home');
-
-
-
-
-        }
     }]);

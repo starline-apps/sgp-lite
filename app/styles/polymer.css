@@ -39,3 +39,5 @@ paper-butaton{
 
 }
 */
+md-button:not([disabled]):hover, md-button:not([disabled]).focus {
+    background-color: #03A9F4; }
