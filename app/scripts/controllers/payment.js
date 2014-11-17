@@ -1,6 +1,6 @@
 "use strict";
 SGPApp
-    .controller("PaymentLoginController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
+    .controller("PaymentLoginController", ["$scope","$rootScope", "$state", "Common","auth","User", function ($scope,$rootScope, $state, Common,auth, User) {
         $scope.formData = {};
 
         $rootScope.payment = true;
@@ -12,27 +12,32 @@ SGPApp
                 icon:           "images/sgp_logo_toolbar.png",
                 showIcon:       true
             }, function () {
-
-                setTimeout(function () {
-                    $rootScope.session = auth;
-                    console.log($rootScope.session);
-                        loadData();
-                }, 1000);
-
+                    loadData();
             }, function () {
                 // Error callback
             });
 
         }else{
-            setTimeout(function () {
-                Common.loadingPage();
-                $rootScope.session = auth;
-                $state.transitionTo("main");
-            }, 1000);
+                loadData();
         }
 
+        function loadData(){
+            User.get(auth.profile.email).then(function(data){
+                if (data!=null){
+                    if(data.isSubscribed.toString()=="1"){
+                        $state.transitionTo('login');
+                    }else{
+                        done();
+                    }
 
-        function loadData(data){
+                }else{
+                    User.save(auth.profile).then(function(data){
+                        done();
+                    });
+                }
+            });
+        }
+        function done(){
 
 
             $rootScope.loadingApp = false;
@@ -53,7 +58,7 @@ SGPApp
     }]);
 
 SGPApp
-    .controller("PaymentController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
+    .controller("PaymentController", ["$scope","$rootScope", "$state", "Common","auth", function ($scope,$rootScope, $state, Common,auth) {
         $scope.descriptions = [
             {
                 "text": "Correção automatica de Gabaritos"

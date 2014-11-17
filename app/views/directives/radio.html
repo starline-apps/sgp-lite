@@ -1,9 +1,0 @@
-<div class="col-md-12">
-	<div class="row" style="font-size:20px;color:#757575;font-weight:bold;" translate="{{'attributes.'+data.group.description+'.'+ data.description + '.description'}}"></div>
-	<div class="row">
-		<paper-radio-group  template="{{data.type.template}}"  model="{{data.group.description+'.'+ data.description}}" id="{{data.group.description+'.'+ data.description}}" style="font-size:20px;color:#757575;font-weight:bold;margin-left: -10px;">
-			<paper-radio-button ng-repeat="selection in data.type.selection" name="{{selection}}" label="{{'attributes.'+data.group.description+'.'+ data.description + '.selection.' + selection | translate}}">
-			</paper-radio-button>
-		</paper-radio-group>
-	</div>
-</div>

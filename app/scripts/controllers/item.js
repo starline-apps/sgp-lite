@@ -33,6 +33,7 @@ SGPApp
                                 .then(function (allData) {
                                     $scope.items = allData;
                                     $rootScope.loadingContent = false;
+
                                 });
                         }
                     });
@@ -43,6 +44,7 @@ SGPApp
 
 
         $scope.edit = function(item) {
+            $rootScope.loadingContent = true;
             if ($rootScope.exam!==undefined){
                 if ($rootScope.exam._id!==undefined){
                     $scope.editMode = true;
@@ -55,6 +57,7 @@ SGPApp
                                     $scope.text = data.text;
                                     $scope.alternatives = data.alternatives;
                                     $scope.num_alternatives = data.alternatives.length;
+                                    $rootScope.loadingContent = false;
                                 });
                         }else{
                             $scope._id = undefined;
@@ -62,20 +65,27 @@ SGPApp
                             $scope.text = item.text;
                             $scope.alternatives = item.alternatives;
                             $scope.num_alternatives = 5;
+                            $scope.setNumAlternatives(5);
+                            $rootScope.loadingContent = false;
                         }
+                        $scope.order = item.order;
                     }else{
                         $scope._id = undefined;
                         $scope.tags = "";
                         $scope.text = "";
                         $scope.num_alternatives = 5;
                         $scope.alternatives = [];
+                        $scope.order = $scope.items.length+1;
+                        $scope.setNumAlternatives(5);
+                        $rootScope.loadingContent = false;
                     }
-                    $scope.order = item.order;
                 }else{
                     Common.showToastMessage("Favor escolher a prova !", "warning");
+                    $rootScope.loadingContent = false;
                 }
             }else{
                 Common.showToastMessage("Favor escolher a prova !", "warning");
+                $rootScope.loadingContent = false;
             }
 
 
@@ -103,7 +113,7 @@ SGPApp
         };
 
         $scope.save = function() {
-
+            $rootScope.loadingContent = true;
             var objSend = {};
             objSend["guid"] = $rootScope.exam._id;
             objSend["tags"] = $scope.tags;
@@ -112,20 +122,54 @@ SGPApp
             objSend["num_alternatives"] = $scope.num_alternatives;
             objSend["alternatives"] = $scope.alternatives;
             objSend._id  = ($scope._id != undefined) ? $scope._id : Common.generateUUID();
-            console.log(objSend);
 
-            UserService.currentUser().then(function(user) {
-                objService.save(user, objSend)
-                    .then(function(data) {
-                        $scope.loadData();
-                        Common.showToastMessage("Dados atualizados com sucesso !");
+            var blnAlternatives = false;
 
-                    });
-            });
+            for (var x=0 ; x<objSend.alternatives.length ; x++){
+                if (objSend.alternatives[x].checked.toString()=="1"){
+                    blnAlternatives = true;
+                }
+            }
+
+            if (!isNotEmpty(objSend["tags"])){
+                alert("Preencha as Tags");
+                $rootScope.loadingContent = false;
+            }else if (!isNotEmpty(objSend["text"])){
+                alert("Preencha o enunciado")
+                $rootScope.loadingContent = false;
+            }else if (!blnAlternatives){
+                alert("Preencha a alternativa correta !");
+                $rootScope.loadingContent = false;
+            }else{
+                UserService.currentUser().then(function(user) {
+
+                    objService.save(user, objSend)
+                        .then(function(data) {
+                            $scope.loadData();
+                            Common.showToastMessage("Dados atualizados com sucesso !");
+
+                        });
+                });
+            }
+
+
+
 
         };
 
+        function isNotEmpty(str){
 
+            if (str===undefined){
+                return false;
+            }
+            if (str===null){
+                return false;
+            }
+            if (str===""){
+                return false;
+            }
+            return true;
+        }
     }]);
 
 

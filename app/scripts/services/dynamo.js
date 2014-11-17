@@ -15,7 +15,6 @@ SGPApp
                         }else{
                             dataSet.putItem(item, function(err, data) {
                                 if (data===null){
-                                    console.log(err);
                                     d.resolve(null);
                                 }else{
                                     d.resolve(data);
@@ -26,7 +25,7 @@ SGPApp
                     });
                 return d.promise;
             },
-            query: function(table, keyConditions) {
+            query: function(table, keyConditions, indexName) {
                 var d = $q.defer();
                 var params = {
                     params: {
@@ -38,6 +37,9 @@ SGPApp
                         TableName: table,
                         KeyConditions: keyConditions
                     };
+                    if (indexName){
+                        params.IndexName = indexName;
+                    }
                     dataSet.query(params, function(err, data) {
                         var items = [];
                         if(data) {

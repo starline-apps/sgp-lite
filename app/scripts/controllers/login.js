@@ -1,8 +1,43 @@
 "use strict";
 SGPApp
-    .controller("LoginController", ["$scope","$rootScope", "$state", "Common","Login","auth", function ($scope,$rootScope, $state, Common, Login,auth) {
+    .controller("LoginController", ["$scope","$rootScope", "$state", "Common","User","auth", function ($scope,$rootScope, $state, Common, User,auth) {
         $scope.formData = {};
 
+        $rootScope.payment = false;
+        function done(){
+            setTimeout(function(){
+                $("#loadingApp").hide();
+                $("#container").fadeIn("slow");
+                $("#header").fadeIn("slow");
+                $("#footer").fadeIn("slow");
+            },2000);
+            $state.transitionTo('home');
+        }
+
+        function loadData(){
+            $rootScope.session = auth;
+            $rootScope.loadingApp = false;
+            $rootScope.login = false;
+
+            User.get(auth.profile.email).then(function(data){
+                if (data!=null){
+                    if(data.isSubscribed.toString()=="1"){
+                        done();
+                    }else{
+                        alert("Sua assinatura não está ativa, ou seu pagamento ainda não foi processado !");
+                        $state.transitionTo('payment');
+                    }
+
+                }else{
+                    User.save(auth.profile).then(function(data){
+                        alert("Sua assinatura não está ativa, ou seu pagamento ainda não foi processado !");
+                        $state.transitionTo('payment');
+                    });
+                }
+            });
+
+
+        }
 
         if (!auth.isAuthenticated) {
             auth.signin({
@@ -14,17 +49,7 @@ SGPApp
             }, function () {
 
                 setTimeout(function () {
-                    $rootScope.session = auth;
-                    $rootScope.loadingApp = false;
-                    $rootScope.login = false;
-
-                    setTimeout(function(){
-                        $("#loadingApp").hide();
-                        $("#container").fadeIn("slow");
-                        $("#header").fadeIn("slow");
-                        $("#footer").fadeIn("slow");
-                    },2000);
-                    $state.transitionTo('home');
+                    loadData();
                 }, 1000);
 
             }, function () {
@@ -33,17 +58,7 @@ SGPApp
 
         }else{
             setTimeout(function () {
-                $rootScope.session = auth;
-                $rootScope.loadingApp = false;
-                $rootScope.login = false;
-
-                setTimeout(function(){
-                    $("#loadingApp").hide();
-                    $("#container").fadeIn("slow");
-                    $("#header").fadeIn("slow");
-                    $("#footer").fadeIn("slow");
-                },2000);
-                $state.transitionTo('home');
+                loadData();
             }, 1000);
         }
 

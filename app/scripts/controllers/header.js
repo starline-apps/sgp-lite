@@ -1,11 +1,12 @@
 ﻿SGPApp
-    .controller('HeaderController', function($scope, $rootScope,$sce, $http, $location, $translate, Login, Common,$state,auth) {
+    .controller('HeaderController', function($scope, $rootScope,$sce, $http, $location, $translate, Common,$state,auth) {
         $scope.formData = {};
 
         $rootScope.languages = new Array("pt_br", "en", "es");
 
         $rootScope.logout = function() {
             auth.signout();
+            window.location.href="/";
         };
         setTimeout(function(){
             if (!auth.isAuthenticated) {
@@ -81,7 +82,7 @@
                 "flat_icon":"correction",
                 "background_color":"red",
                 "text_color":"white"
-            },
+            }/*,
             {
                 "description" : "Turmas",
                 "url" : "qweq",
@@ -162,7 +163,7 @@
                 "background_color":"red",
                 "text_color":"white"
             }
-
+            */
         ];
 
 /*              

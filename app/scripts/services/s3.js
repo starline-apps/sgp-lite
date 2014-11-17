@@ -3,11 +3,14 @@ SGPApp
         var service = {
             putObject: function(bucket, key, object) {
                 var d = $q.defer();
-                AWSService.s3({params: {Bucket: bucket }}).then(function(s3){
+                AWSService.s3().then(function(s3){
+                    console.log(s3);
                     var params = {
+                        Bucket: bucket,
                         Key: key,
-                        Body: object,
+                        Body: JSON.stringify(object),
                         ContentType: 'application/json'
+
                     };
                     s3.putObject(params, function(err, data){
                         if(!err) {
@@ -39,6 +42,9 @@ SGPApp
                         ResponseContentType: 'application/json'
                     };
                     s3.getObject(params, function (err, data) {
+                        if (err!==null){
+                            console.log(err);
+                        }
                         if (data===null){
                             d.resolve(null);
                         }else{

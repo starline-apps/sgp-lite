@@ -1,4 +1,4 @@
 ﻿SGPApp
-    .controller('HomeController', function($scope, $rootScope,$sce, $http, $location, $translate, Login, Common) {
-        $scope.formData = {};
+    .controller('HomeController', function($scope, $rootScope,$sce, $http, $location, $translate, Common) {
+        $rootScope.exam = undefined;
     });

@@ -124,10 +124,7 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
         $rootScope.$on("$stateChangeStart", function() {
             if (!auth.isAuthenticated) {
-
-
                 if ($state.current.url!="/login" && $state.current.url!="/payment"){
-
                     $location.path("/login");
                 }
             }

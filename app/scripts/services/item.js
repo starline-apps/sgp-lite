@@ -1,7 +1,7 @@
 "use strict";
 
 SGPApp
-    .factory("ItemService", ["$http","$q","localStorageService","Common","Dynamo","S3","Config", function($http,$q, localStorageService,Common, Dynamo, S3, Config) {
+    .factory("ItemService", ["$http","$q","localStorageService","Common","Dynamo","S3","Config","$timeout", function($http,$q, localStorageService,Common, Dynamo, S3, Config, $timeout) {
 
         return {
             getByExam : function(user, guid) {
@@ -25,74 +25,87 @@ SGPApp
                 };
                 Dynamo.query("UserKeys",keyConditions).then(function(dataSet) {
                     if (dataSet) {
-                        ct = 1;
                         angular.forEach(dataSet, function(itemSet) {
 
                             data = JSON.parse(itemSet.Data.S);
                             if (data.questions != undefined){
-                                while (data.questions[ct] != undefined){
+                                angular.forEach(data.questions, function(questionSet, questionKey) {
                                     obj = {
-                                        "text" : "Questão " + ct.toString(),
+                                        "text" : "Questão " + questionKey.toString(),
                                         "tags" : "Edite a questão para cadastrar tags !",
                                         "alternatives": []
                                     };
-
-                                    if (data.questions[ct].answers != undefined){
-                                        var arrAlternatives = new Array(data.questions[ct].answers.length);
-                                        angular.forEach(data.questions[ct].answers, function(value, key) {
+                                    //obj._id = '416d25b5-9e64-4682-82d4-7f05b6ec22c8';
+                                    if (questionSet.answers != undefined){
+                                        var arrAlternatives = new Array(questionSet.answers.length);
+                                        angular.forEach(questionSet.answers, function(value, key) {
                                             arrAlternatives[parseInt(arrAlternativesIndex[key])] = {"checked":(value!=undefined)? value : 0}
                                         });
                                         obj.alternatives = arrAlternatives;
                                     }
 
-                                    obj.order = ct;
-                                    keyConditions.Order = {
-                                        "ComparisonOperator": "EQ",
-                                        "AttributeValueList": [
-                                            {"N": parseInt(ct)}
-                                        ]
-                                    };
-                                    Dynamo.query("UserItems",keyConditions).then(function(dataSetUserItems) {
-                                        if (dataSetUserItems) {
-                                            angular.forEach(dataSetUserItems, function(itemSetUserItems) {
-                                                if (itemSetUserItems.Text.S!=undefined){
-                                                    obj.text = itemSetUserItems.Text.S;
-                                                }
-                                                if (itemSetUserItems.ItemId.S!=undefined){
-                                                    obj._id = itemSetUserItems.ItemId.S;
-                                                }
-                                                if (itemSetUserItems.Tags.S!=undefined){
-                                                    obj.tags = itemSetUserItems.Tags.S;
-                                                }
-                                                if (itemSetUserItems.Tags.S!=undefined){
-                                                    obj.num_alternatives = itemSetUserItems.Num_Alternatives.N;
-                                                }
-                                            });
-                                        }
-                                    });
+                                    obj.order = questionKey;
+
                                     arr.push(obj);
-                                    ct++;
-                                }
+
+                                });
 
                             }
                         });
                     }
+
+
+
+                    angular.forEach(arr, function(questionSet, questionKey) {
+                        keyConditions = {
+                            "Order": {
+                                "ComparisonOperator": "EQ",
+                                "AttributeValueList": [
+                                    {"N": questionSet.order.toString()}
+                                ]
+                            },
+                            "ExamId": {
+                                "ComparisonOperator": "EQ",
+                                "AttributeValueList": [
+                                    {"S": guid}
+                                ]
+                            }
+                        };
+                        Dynamo.query("UserItems",keyConditions, "Order-index").then(function(dataSetUserItems) {
+                            if (dataSetUserItems) {
+                                angular.forEach(dataSetUserItems, function(itemSetUserItems) {
+                                    if (itemSetUserItems.Text.S!=undefined){
+                                        questionSet.text = itemSetUserItems.Text.S;
+                                    }
+                                    if (itemSetUserItems.Guid.S!=undefined){
+                                        questionSet._id = itemSetUserItems.Guid.S;
+                                    }
+                                    if (itemSetUserItems.Tags.S!=undefined){
+                                        questionSet.tags = itemSetUserItems.Tags.S;
+                                    }
+                                    if (itemSetUserItems.Num_Alternatives.N!=undefined){
+                                        questionSet.num_alternatives = itemSetUserItems.Num_Alternatives.N;
+                                    }
+                                });
+                            }
+                        });
+                    });
                     d.resolve(arr);
                 });
-
 
 
                 return d.promise;
             },
             getFile : function(item) {
                 var defer = $q.defer();
-
+                console.log(item._id);
                 if (item._id != undefined){
-                    S3.getObject(Config.getBucket, "items/" +  item._id + ".json").then(function(data){
+                    S3.getObject(Config.getBucketName(), "items/" +  item._id + ".json").then(function(data){
+                        alert("opa");
                         if (data.text != undefined){
                             item.text = data.text;
                         }
-
+                        console.log(data);
                         if (data.alternatives != undefined){
                             angular.forEach(data.alternatives, function(alternative_set, key) {
                                 if (item.alternatives[key] != undefined){
@@ -112,28 +125,109 @@ SGPApp
                 var d = $q.defer();
 
                 var timestamp = Common.getTimestamp();
-                var dataSet = {
-                    Item: {
-                        'ItemId': {S: item._id},
-                        'Guid': {S: item.guid},
-                        'UserEmail': {S: user.email},
-                        'LastModifiedBy': {S: "web"},
-                        'LastWritten' : {N: timestamp.toString()},
-                        'Order' : {N: item.order},
-                        'Text' : {S: $("<div/>").html(item.text).text()},
-                        'Tags' : {S: item.tags},
-                        'Num_Alternatives' : {S: item.num_alternatives}
+                var arrIndexes = ["A","B","C","D","E"];
 
+                //var a = {"questions":{"3":{"answers":{"A":0,"D":0,"B":1,"E":0,"C":0}},"1":{"answers":{"A":0,"D":1,"B":0,"E":0,"C":0}},"4":{"answers":{"A":1,"D":0,"B":0,"E":0,"C":0}},"2":{"answers":{"A":0,"D":0,"B":0,"E":0,"C":1}},"5":{"answers":{"A":0,"D":0,"B":0,"E":1,"C":0}}},"guid":"6129E92C-A082-4E4D-9288-676EF9CD4999","lastModified":1412708417}
+
+                var keyConditions = {
+                    "UserEmail": {
+                        "ComparisonOperator": "EQ",
+                        "AttributeValueList": [
+                            {"S": user.email}
+                        ]
+                    },
+                    "Guid": {
+                        "ComparisonOperator": "EQ",
+                        "AttributeValueList": [
+                            {"S": item.guid}
+                        ]
                     }
                 };
+                Dynamo.query("UserKeys",keyConditions).then(function(dataSetUserKeys) {
+                    var questions;
+                    var question = {"answers":{}};
+                    for(var j=0; j<item.alternatives.length;j++) {
+                        question.answers[arrIndexes[j]] = item.alternatives[j].checked==1 ? 1 : 0;
+                    }
 
-                Dynamo.putItem("UserItems", dataSet).then(function(data){
+
+                    if (dataSetUserKeys!=null){
+                        if (dataSetUserKeys.length!=0){
+                            questions = JSON.parse(dataSetUserKeys[0].Data.S).questions;
+                            questions[item.order] = question;
+                        }else{
+                            questions = {};
+                            questions[item.order] = question;
+                        }
+
+                    }else{
+                        questions = {};
+                        questions.questions[item.order] = question;
+                    }
 
 
+                    var keys = {
+                        guid: item.guid,
+                        questions: questions,
+                        lastModified: timestamp
+                    };
+
+                    var dataSet = {
+                        Item: {
+                            'Guid': {S: item.guid},
+                            'UserEmail': {S: user.email},
+                            'Data': {
+                                S: JSON.stringify(keys)
+                            },
+                            'LastModifiedBy':{S: 'web'}
+                        }
+                    };
+                    Dynamo.putItem("UserKeys", dataSet).then(function(keysResult){
+                        if (keysResult!=null){
+                            dataSet = {
+                                Item: {
+                                    'ExamId': {S: item.guid},
+                                    'Guid': {S: item._id},
+                                    'LastModifiedBy': {S: "web"},
+                                    'LastWritten' : {N: timestamp.toString()},
+                                    'Order' : {N: item.order.toString()},
+                                    'Text' : {S: $("<div/>").html(item.text).text()},
+                                    'Tags' : {S: item.tags},
+                                    'Num_Alternatives' : {N: item.num_alternatives.toString()}
+
+                                }
+                            };
+                            Dynamo.putItem("UserItems", dataSet).then(function(itemsResult){
+                                if (itemsResult!=null){
+                                    var obj = {
+                                        "_id" : item._id,
+                                        "user_email" : user.email,
+                                        "guid" : item.guid,
+                                        "text" : item.text,
+                                        "alternatives" : item.alternatives
+                                    };
+
+                                    S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
+                                        if (data!=null) {
+                                            d.resolve(data);
+                                        }else {
+                                            d.resolve(null);
+                                        }
+
+                                    });
+                                }else{
+                                    d.resolve(null);
+                                }
+                            });
+                        }else{
+                            d.resolve(null);
+                        }
 
 
-                    d.resolve(data);
+                    });
+
                 });
+
 
                 return d.promise;
             },
@@ -163,57 +257,7 @@ SGPApp
             },
             saveLocal : function(code, value) {
                 localStorageService.add(code, value);
-            },
-            sendAnswers : function(mode, fileName, fileContent) {
-                var defer = $q.defer();
-                if (1===1){
-                    sendAnswersFile(fileName, fileContent).then(function(response){
-                        if (response === null){
-                            defer.resolve(null);
-                        }else{
-                            var obj = {};
-                            obj.code = fileName;
-                            obj.url = "https://strtec.s3.amazonaws.com/Temp/" + fileName + ".json";
-                            console.log("Sending message to API...");
-                            console.log(obj);
-                            console.log("------------");
-                            if (response){
-
-                                sendMessage(obj)
-                                    .success(function(data){
-                                        //defer.resolve(data);
-                                        defer.resolve("Temp/" + fileName + ".json");
-                                    }).error(function(err){
-                                        defer.resolve(null);
-
-                                    });
-
-                            }
-                        }
-
-                    });
-                }else{
-                    sendAnswersFile(fileName, fileContent).then(function(response){
-                        var obj = {};
-                        obj.code = fileName;
-                        obj.url = "https://strtec.s3.amazonaws.com/Temp/" + fileName + ".json";
-                        console.log("mandando..");
-                        console.log(obj);
-                        if (response){
-
-                            defer.resolve("Temp/" + fileName + ".json");
-
-                        }
-                        //console.log("oh ! to mandando isso aqui : " + "Temp/" + fileName + ".json");
-                        // retirar assim que a API estiver pronta
-                    });
-
-                }
-
-
-                return defer.promise;
             }
-
         };
 
 

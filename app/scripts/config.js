@@ -10,7 +10,7 @@ SGPApp
     .factory("Config", [function () {
         return {
             getBucketName : function(){
-                return "sgp_lite";
+                return "strtec";
             },
             getAuth0Domain : function(){
                 return getAuth0Domain();

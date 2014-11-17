@@ -6,11 +6,13 @@ SGPApp
     .controller("ExamController", ["$rootScope", "$scope","$location", "$stateParams","ExamService","Common","UserService",function($rootScope, $scope,$location, $stateParams, ExamService, Common,UserService) {
         /** View attributes **/
 
+
         var objService = ExamService;
         $rootScope.loadingContent = true;
 
         $scope.loadData = function(){
             $scope.editMode = false;
+            $scope.printMode = false;
             $scope.dataSource = undefined;
             $rootScope.loadingContent = true;
             UserService.currentUser().then(function(user) {
@@ -53,7 +55,20 @@ SGPApp
 
         };
 
+        $scope.print = function(exam){
+            $rootScope.loadingContent = true;
+            UserService.currentUser().then(function(user) {
+                ExamService.getPrintableVersion(user, exam).then(function(data){
+                    $scope.printData = data;
 
+                    $rootScope.loadingContent = false;
+                    $scope.printMode = true;
+                });
+            });
+
+
+
+        };
 
         $scope.save = function() {
 

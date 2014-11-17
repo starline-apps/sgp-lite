@@ -1,9 +1,9 @@
 "use strict";
 
 SGPApp
-    .factory("ExamService", ["$http","$q","localStorageService","Common","S3","Dynamo","Config", function($http,$q, localStorageService,Common,S3,Dynamo,Config) {
+    .factory("ExamService", ["$http","$q","localStorageService","Common","S3","Dynamo","Config","ItemService", function($http,$q, localStorageService,Common,S3,Dynamo,Config, ItemService) {
 
-        return {
+        var service = {
             getAll : function(user) {
                 var d = $q.defer();
 
@@ -75,6 +75,38 @@ SGPApp
                 });
                 return d.promise;
             },
+            getPrintableVersion : function(user, exam) {
+                var d = $q.defer();
+
+                this.getEntireExam(user, exam).then(function(exam){
+                    angular.forEach(exam.items, function(itemSet, itemIndex) {
+                        ItemService.getFile(itemSet).then(function(file){
+                            console.log(file);
+                            file.order = itemSet.order;
+                            itemSet = file;
+                        });
+                    });
+                    d.resolve(exam);
+                });
+
+
+
+                return d.promise;
+            },
+            getEntireExam : function(user, exam) {
+                var d = $q.defer();
+
+                ItemService.getByExam(user, exam._id).then(function(arrItems){
+                    if (arrItems===null){
+                        d.resolve(null);
+                    }else{
+                        exam.items = arrItems;
+                        d.resolve(exam);
+                    }
+                });
+
+                return d.promise;
+            },
             save : function(user, exam) {
 
                 var d = $q.defer();
@@ -90,7 +122,7 @@ SGPApp
                 }
                 */
                 var timestamp = Common.getTimestamp();
-                console.log(timestamp);
+
                 var dataSet = {
                     Item: {
                         'Guid': {S: exam._id},
@@ -116,72 +148,12 @@ SGPApp
                 });
 
                 return d.promise;
-            },
-            getExamsResult : function(code) {
-                return $http.get(Common.getApiUrl() + "/api/v1/ib/rest/assessmentresult/" + code + "/", {withCredentials : false});
-            },
-            getLocal : function(code) {
-                return localStorageService.get(code);
-            },
-            removeLocal : function(code) {
-                return localStorageService.remove(code);
-            },
-            saveLocal : function(code, value) {
-                localStorageService.add(code, value);
-            },
-            sendAnswers : function(mode, fileName, fileContent) {
-                var defer = $q.defer();
-                if (1===1){
-                    sendAnswersFile(fileName, fileContent).then(function(response){
-                        if (response === null){
-                            defer.resolve(null);
-                        }else{
-                            var obj = {};
-                            obj.code = fileName;
-                            obj.url = "https://strtec.s3.amazonaws.com/Temp/" + fileName + ".json";
-                            console.log("Sending message to API...");
-                            console.log(obj);
-                            console.log("------------");
-                            if (response){
-
-                                sendMessage(obj)
-                                    .success(function(data){
-                                        //defer.resolve(data);
-                                        defer.resolve("Temp/" + fileName + ".json");
-                                    }).error(function(err){
-                                        defer.resolve(null);
-
-                                    });
-
-                            }
-                        }
-
-                    });
-                }else{
-                    sendAnswersFile(fileName, fileContent).then(function(response){
-                        var obj = {};
-                        obj.code = fileName;
-                        obj.url = "https://strtec.s3.amazonaws.com/Temp/" + fileName + ".json";
-                        console.log("mandando..");
-                        console.log(obj);
-                        if (response){
-
-                            defer.resolve("Temp/" + fileName + ".json");
-
-                        }
-                        //console.log("oh ! to mandando isso aqui : " + "Temp/" + fileName + ".json");
-                        // retirar assim que a API estiver pronta
-                    });
-
-                }
-
-
-                return defer.promise;
             }
+
 
         };
 
-
+        return service;
 
     }]);
 
