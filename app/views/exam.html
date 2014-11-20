@@ -34,22 +34,114 @@
 
             <div class="row m-v-20 m-h-10" >
                 <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6 col-xs-offset-0 m-h-10">
-                            <md-input-group  class="md-input-group-theme-green s-150 fill-horizontal text-left">
-                                <label for="description"  class="fill-horizontal text-left">Descrição</label>
-                                <md-input id="description" type="text" ng-model="description" class="fill-horizontal text-left"/>
-                            </md-input-group>
+
+                    <md-divider class="m-t-20 p-5 md-whiteframe-z1">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="m-10 m-t-10 s-130">Dados da Prova</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row m-v-20" style="display:none;">
-                        <div class="col-xs-6 col-xs-offset-0 m-h-10">
-                            <md-input-group  class="md-input-group-theme-green s-150 fill-horizontal text-left">
-                                <label for="observation"  class="fill-horizontal text-left">Observação</label>
-                                <md-input id="observation" type="text" ng-model="observation" class="fill-horizontal text-left"/>
-                            </md-input-group>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-0 m-h-10">
+                                <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left">
+                                    <label for="description"  class="fill-horizontal text-left">Descrição</label>
+                                    <md-input id="description" type="text" ng-model="description" class="fill-horizontal text-left"/>
+                                </md-input-group>
+                            </div>
+                            <div class="col-xs-5 col-xs-offset-0 m-h-10 pull-right">
+                                <md-input-group  class="md-input-group-theme-green s-130 text-left" style="height:40px;">
+                                    <label for="points"  class="fill-horizontal text-left">Pontos</label>
+                                    <md-input id="points" type="text" ng-model="points" class="fill-horizontal text-left"/>
+                                </md-input-group>
+                            </div>
                         </div>
-                    </div>
+                    </md-divider>
+
+
+                    <md-divider class="m-t-20 p-5 md-whiteframe-z1">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="m-10 m-t-10 s-130">Cabeçalho</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class=" m-h-10 col-xs-3 col-xs-offset-0">
+                                <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left">
+                                    <label class="fill-horizontal text-left">Descrição</label>
+                                    <md-input  type="text" ng-model="headerDescription" class="fill-horizontal text-left"/>
+                                </md-input-group>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-0">
+                                <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left">
+                                    <label class="fill-horizontal text-left">Texto</label>
+                                    <md-input  type="text" ng-model="headerText" class="fill-horizontal text-left"/>
+                                </md-input-group>
+                            </div>
+                            <div class="col-xs-2 col-xs-offset-0">
+                                <md-button class="md-button-fab color-bg-3 c-white" style="width:30px;height:30px;margin-top:40px" tabindex="-1" aria-label="" ng-click="setExamHeader()">
+                                    <button class="md-button-inner" style="padding:3px;padding-top:0;">
+                                        <span ng-show="headerIndex!=null" class="glyphicon glyphicon-check"></span>
+                                        <span ng-show="headerIndex==null" class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <div class="md-ripple-container"></div>
+                                </md-button>
+                            </div>
+                        </div>
+
+                        <div class="row m-t-10" >
+                            <div class="col-xs-5 border-light m-h-20 m-v-5" ng-repeat="itemHeader in header" ng-class="$odd ? 'pull-right' : 'pull-left'">
+                                <span class="s-130">{{itemHeader.description}} : </span>
+                                <span class="s-130">{{itemHeader.text}}</span>
+                                &nbsp;&nbsp;&nbsp;
+                                <span class="pointer s-130 pull-right" ng-click="removeExamHeader($index)">x</span>
+                            </div>
+                        </div>
+                    </md-divider>
+
+                    <md-divider class="m-t-20 p-5 md-whiteframe-z1">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="m-10 m-t-10 s-130">Áreas de conhecimento</span>
+                            </div>
+                        </div>
+                        <div class="row m-v-20">
+                            <div class="col-xs-4 col-xs-offset-0 m-h-10">
+                                <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left" >
+                                    <label for="tagText"  class="text-left" >
+                                        <span ng-show="tagIndex==null">Adicionar Tag</span>
+                                        <span ng-show="tagIndex!=null">Modificar Tag</span>
+                                    </label>
+                                    <md-input id="tagText" type="text" ng-enter="setTag()" ng-model="tagText" class="fill-horizontal text-left"/>
+                                </md-input-group>
+                            </div>
+                            <div class="col-xs-1 col-xs-offset-0 m-h-10" layout="horizontal" layout-align="start end">
+                                <md-button class="md-button-fab color-bg-3 c-white" style="width:30px;height:30px;margin-top:40px" tabindex="-1" aria-label="" ng-click="setTag()">
+                                    <button class="md-button-inner" style="padding:3px;padding-top:0;">
+                                        <span ng-show="tagIndex!=null" class="glyphicon glyphicon-check"></span>
+                                        <span ng-show="tagIndex==null" class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <div class="md-ripple-container"></div>
+                                </md-button>
+                            </div>
+                        </div>
+                        <div class="row m-v-5">
+                            <div class="col-xs-12 col-xs-offset-0 m-h-10">
+                                <div ng-repeat="tag in arrTags" style="float: left;" class="m-v-10 m-h-10" ng-if="tag!=''">
+                                    <span class="label label-default s-130" ng-class="{ 'color-bg-3': $index==tagIndex, 'color-bg-4': $index!=tagIndex }">
+                                        <span class="pointer" ng-click="editTag($index)">{{tag}}</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="pointer s-130" ng-click="removeTag($index)">x</span>
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </md-divider>
+
+
                     <div class="row m-t-20">
 
                         <div class="col-xs-12 col-xs-offset-0">
@@ -85,11 +177,19 @@
 
                         </md-checkbox>
                     </div>
-                    <div class="col-xs-6 col-lg-7 md-tile-content s-150" layout="vertical" layout-align="center start">
-                        <h4 class="ng-binding">{{item.description}}</h4>
-                        <p class="ng-binding">
-                            {{item.observation}}
-                        </p>
+                    <div class="col-xs-6 col-lg-7 md-tile-content" layout="vertical" layout-align="center start">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="ng-binding m-h-10 s-150">{{item.description}}</h4>
+                            </div>
+                            <div class="col-xs-12">
+                                <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
+                                    <span class="label label-default s-80 color-bg-4">
+                                        <span class="pointer">{{tag}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-xs-1" layout="vertical" layout-align="center center">
@@ -140,27 +240,60 @@
 
 
 
-        <md-content class="p-5 scrollable" ng-show="printMode && !loadingContent">
+        <md-content class="p-5 scrollable" ng-if="printMode && !loadingContent && printData" id="divPrint">
 
-            <div class="row m-v-20" >
+            <div class="row" >
                 <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-12 col-xs-offset-0 m-h-10">
-                            {{printData.description}}
+                    <div class="row m-t-10">
+                        <div class="col-xs-5 m-h-20 m-v-5 pull-left">
+                            <span class="bold">Prova : </span>
+                            <span class="">{{printData.description}}</span>
+                        </div>
+                        <div class="col-xs-5 m-h-20 m-v-5 pull-right">
+                            <span class="bold">Valor : </span>
+                            <span class="">{{printData.points}} pontos</span>
                         </div>
                     </div>
-                    <div class="row m-v-20" ng-repeat="item in printData.items">
-                        <div class="col-xs-12 col-xs-offset-0 m-h-10">
-                            {{item.text}}
+
+                    <div class="row m-v-10">
+                        <div class="col-xs-5 m-h-20 m-v-5" ng-repeat="itemHeader in printData.header" ng-class="$odd ? 'pull-right' : 'pull-left'">
+                            <span class=" bold">{{itemHeader.description}} : </span>
+                            <span class="">{{itemHeader.text}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row m-v-20">
+                        <div class="col-xs-10 m-h-20 m-v-5">
+                            <span class="bold">Nome do Aluno</span>
+                        </div>
+                        <div class="col-xs-10 m-l-30 m-v-5" style="border-bottom: 1px solid #000;">
+                            &nbsp;
+                        </div>
+                    </div>
+
+
+                    <div class="row item-print" ng-repeat="item in printData.items" ng-if="item._id" ng-init="getItem($index)">
+                        <div class="col-xs-12 col-xs-offset-0 m-h-10" style="margin-top:35px;" >
+                            <table style="width:100%;border-top:0px;padding:10px">
+                                <tr>
+                                    <td style="width:30px;border:0;">{{$index+1}} )</td>
+                                    <td style="vertical-align:middle;border:0;" ng-bind-html="item.text"></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="col-xs-12 col-xs-offset-0 m-h-10" ng-repeat="alternative in item.alternatives">
-                           {{$index}} - {{alternative.text}}
+                            <table style="width:100%;border:0;padding:10px">
+                                <tr style="border:0;">
+                                    <td style="width:30px;vertical-align:middle;border:0;">{{arrAlternativeIndex[$index]}} ) </td>
+                                    <td style="vertical-align:middle;border:0;" ng-bind-html="alternative.text"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="row m-t-20">
+                    <div class="row m-t-20" id="printCommands">
 
                         <div class="col-xs-12 col-xs-offset-0">
-                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
+                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="printDiv()">
                                 <button class="md-button-inner">Imprimir</button>
                             </md-button>
                             <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">

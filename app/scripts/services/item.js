@@ -98,14 +98,12 @@ SGPApp
             },
             getFile : function(item) {
                 var defer = $q.defer();
-                console.log(item._id);
                 if (item._id != undefined){
                     S3.getObject(Config.getBucketName(), "items/" +  item._id + ".json").then(function(data){
-                        alert("opa");
+
                         if (data.text != undefined){
                             item.text = data.text;
                         }
-                        console.log(data);
                         if (data.alternatives != undefined){
                             angular.forEach(data.alternatives, function(alternative_set, key) {
                                 if (item.alternatives[key] != undefined){

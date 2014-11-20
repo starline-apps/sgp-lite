@@ -65,7 +65,9 @@ body {
 .m-t-30 {
     margin-top: 30px;
 }
-
+.m-l-30 {
+    margin-left: 30px;
+}
 .m-center {
     margin: 0 auto !important;
 }
@@ -186,8 +188,9 @@ body {
 .pointer{
     cursor: pointer;
 }
-.border{
-    border:1px #000 solid;
+
+.border-light{
+    border:1px silver solid;
 }
 .list-none{
     list-style: none;
@@ -210,4 +213,17 @@ body {
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
+}
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+}
+.item-print{
+    margin-top:40px !important;
+    page-break-inside: avoid !important;
+
+}
+.item-print p:first-of-type{
+    margin:0 !important;
 }

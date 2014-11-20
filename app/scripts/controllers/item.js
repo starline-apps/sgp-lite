@@ -38,6 +38,9 @@ SGPApp
                         }
                     });
             });
+            $scope.arrTags = [];
+            $scope.tags = "";
+            $scope.tagText = "";
         };
 
         $scope.loadData();
@@ -54,7 +57,10 @@ SGPApp
                             objService.getFile(item)
                                 .then(function (data) {
                                     $scope.tags = data.tags;
+                                    $scope.arrTags = data.tags.split(";");
+                                    $scope.tags = data.tags;
                                     $scope.text = data.text;
+                                    $scope.tagText = "";
                                     $scope.alternatives = data.alternatives;
                                     $scope.num_alternatives = data.alternatives.length;
                                     $rootScope.loadingContent = false;
@@ -62,6 +68,8 @@ SGPApp
                         }else{
                             $scope._id = undefined;
                             $scope.tags = "";
+                            $scope.arrTags = [];
+                            $scope.tagText = "";
                             $scope.text = item.text;
                             $scope.alternatives = item.alternatives;
                             $scope.num_alternatives = 5;
@@ -72,6 +80,8 @@ SGPApp
                     }else{
                         $scope._id = undefined;
                         $scope.tags = "";
+                        $scope.arrTags = [];
+                        $scope.tagText = "";
                         $scope.text = "";
                         $scope.num_alternatives = 5;
                         $scope.alternatives = [];
@@ -133,12 +143,13 @@ SGPApp
 
             if (!isNotEmpty(objSend["tags"])){
                 alert("Preencha as Tags");
+                Common.showToastMessage("Favor preencher ao menos uma tag !","warning");
                 $rootScope.loadingContent = false;
             }else if (!isNotEmpty(objSend["text"])){
-                alert("Preencha o enunciado")
+                Common.showToastMessage("Favor preencher o enunciado !","warning");
                 $rootScope.loadingContent = false;
             }else if (!blnAlternatives){
-                alert("Preencha a alternativa correta !");
+                Common.showToastMessage("Favor preencher a alternativa correta !","warning");
                 $rootScope.loadingContent = false;
             }else{
                 UserService.currentUser().then(function(user) {
@@ -156,6 +167,40 @@ SGPApp
 
 
         };
+
+
+        $scope.tagIndex = null;
+        $scope.editTag = function(index) {
+            $scope.tagIndex = index;
+            $scope.tagText = $scope.arrTags[index];
+        };
+        $scope.removeTag = function(index) {
+            $scope.tagText = "";
+            $scope.tagIndex = null;
+            $scope.arrTags.splice(index, 1);
+            $scope.tags = $scope.arrTags.join(";");
+        };
+        $scope.setTag = function() {
+            if ($scope.tagText!==""){
+                if ($scope.arrTags.indexOf($scope.tagText) === -1 || $scope.arrTags.indexOf($scope.tagText) === $scope.tagIndex){
+                    if ($scope.tagIndex){
+                        $scope.arrTags[$scope.tagIndex] = $scope.tagText;
+                    }else{
+                        $scope.arrTags.push($scope.tagText);
+                    }
+                    $scope.tagText = "";
+                    $scope.tags = $scope.arrTags.join(";");
+                    $scope.tagIndex = null;
+                }else{
+                    Common.showToastMessage("A tag &quot;"  + $scope.tagText  + "&quot; já existe !","warning");
+                }
+
+            }else{
+                Common.showToastMessage("Favor preencher a tag !","warning");
+            }
+
+        };
+
 
         function isNotEmpty(str){
 

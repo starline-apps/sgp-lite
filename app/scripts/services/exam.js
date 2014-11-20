@@ -23,7 +23,9 @@ SGPApp
                             obj = {};
                             data = JSON.parse(itemSet.Data.S);
                             obj.description = data.name;
-                            obj.observation = data.name;
+                            obj.points = data.points;
+                            obj.header = (itemSet.Header!==undefined) ? JSON.parse(itemSet.Header.S) : [];
+                            obj.tags = (itemSet.Tags!==undefined) ? itemSet.Tags.S : "";
                             obj._id = itemSet.Guid.S;
                             arr.push(obj);
                         });
@@ -64,7 +66,9 @@ SGPApp
 
                             data = JSON.parse(itemSet.Data.S);
                             obj.description = data.name;
-                            obj.observation = data.name;
+                            obj.points = data.points;
+                            obj.tags = (itemSet.Tags!==undefined) ? itemSet.Tags.S : "";
+                            obj.header = (itemSet.Header!==undefined) ? JSON.parse(itemSet.Header.S) : [];
                             obj._id = itemSet.Guid.S;
                         });
                         d.resolve(obj);
@@ -79,17 +83,8 @@ SGPApp
                 var d = $q.defer();
 
                 this.getEntireExam(user, exam).then(function(exam){
-                    angular.forEach(exam.items, function(itemSet, itemIndex) {
-                        ItemService.getFile(itemSet).then(function(file){
-                            console.log(file);
-                            file.order = itemSet.order;
-                            itemSet = file;
-                        });
-                    });
                     d.resolve(exam);
                 });
-
-
 
                 return d.promise;
             },
@@ -129,12 +124,14 @@ SGPApp
                         'UserEmail': {S: user.email},
                         'LastModifiedBy': {S: "web"},
                         'LastWritten' : {N: timestamp.toString()},
+                        'Tags': {S: exam.tags},
+                        'Header': {S: JSON.stringify(exam.header)},
                         'Data': {
                             S: JSON.stringify({
                                 guid: exam._id,
                                 name: exam.description,
                                 idPublished: 0,
-                                points: 10,
+                                points: exam.points,
                                 isDeleted: 0,
                                 lastModified: timestamp,
                                 answerSheetId: 1

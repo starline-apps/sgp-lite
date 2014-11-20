@@ -3,7 +3,7 @@
 "use strict";
 var refreshResult, refreshExamTime, examListInterval, examResultInterval;
 SGPApp
-    .controller("ExamController", ["$rootScope", "$scope","$location", "$stateParams","ExamService","Common","UserService",function($rootScope, $scope,$location, $stateParams, ExamService, Common,UserService) {
+    .controller("ExamController", ["$rootScope", "$scope","$location", "$stateParams","ExamService","Common","UserService","ItemService","$q",function($rootScope, $scope,$location, $stateParams, ExamService, Common,UserService, ItemService, $q) {
         /** View attributes **/
 
 
@@ -23,7 +23,14 @@ SGPApp
                         $rootScope.loadingContent = false;
                     });
             });
-
+            $scope._id = undefined;
+            $scope.description = "";
+            $scope.points = "";
+            $scope.tags = "";
+            $scope.arrTags = [];
+            $rootScope.exam = undefined;
+            $scope.headerIndex = null;
+            $scope.tagIndex = null;
 
         };
 
@@ -37,14 +44,20 @@ SGPApp
                     objService.get(user, exam._id)
                         .then(function(data) {
                             $scope.description = data.description;
-                            $scope.observation = data.observation;
+                            $scope.arrTags = data.tags.split(";");
+                            $scope.tags = data.tags;
+                            $scope.header = data.header;
+                            $scope.points = data.points;
                         });
                 });
 
             }else{
                 $scope._id = undefined;
                 $scope.description = "";
-                $scope.observation = "";
+                $scope.tags = "";
+                $scope.arrTags = [];
+                $scope.header = [];
+                $scope.points = "";
             }
 
         };
@@ -52,6 +65,67 @@ SGPApp
         $scope.viewItems = function(exam) {
             $rootScope.exam = exam;
             $location.path("item");
+        };
+
+        $scope.tagIndex = null;
+        $scope.editTag = function(index) {
+            $scope.tagIndex = index;
+            $scope.tagText = $scope.arrTags[index];
+        };
+        $scope.removeTag = function(index) {
+            $scope.tagText = "";
+            $scope.tagIndex = null;
+            $scope.arrTags.splice(index, 1);
+            $scope.tags = $scope.arrTags.join(";");
+        };
+        $scope.setTag = function() {
+            if ($scope.tagText!==""){
+                if ($scope.arrTags.indexOf($scope.tagText) === -1 || $scope.arrTags.indexOf($scope.tagText) === $scope.tagIndex){
+                    if ($scope.tagIndex){
+                        $scope.arrTags[$scope.tagIndex] = $scope.tagText;
+                    }else{
+                        $scope.arrTags.push($scope.tagText);
+                    }
+                    $scope.tagText = "";
+                    $scope.tags = $scope.arrTags.join(";");
+                    $scope.tagIndex = null;
+                }else{
+                    Common.showToastMessage("A tag &quot;"  + $scope.tagText  + "&quot; já existe !","warning");
+                }
+
+            }else{
+                Common.showToastMessage("Favor preencher a tag !","warning");
+            }
+
+        };
+
+        $scope.headerIndex = null;
+        $scope.removeExamHeader = function(index) {
+            $scope.headerText = "";
+            $scope.headerDescription = "";
+            $scope.headerIndex = null;
+            $scope.header.splice(index, 1);
+        };
+        $scope.setExamHeader = function() {
+            if ($scope.headerText!=="" && $scope.headerDescription!==""){
+                var obj = {
+                    "description": $scope.headerDescription,
+                    "text":$scope.headerText
+                };
+                if ($scope.headerIndex){
+                    $scope.header[$scope.headerIndex] =obj;
+                }else{
+                    $scope.header.push(obj);
+                }
+                $scope.headerText = "";
+                $scope.headerDescription = "";
+
+                $scope.headerIndex = null;
+
+
+            }else{
+                Common.showToastMessage("Favor preencher a descrição e o texto do cabeçalho !","warning");
+            }
 
         };
 
@@ -69,28 +143,73 @@ SGPApp
 
 
         };
+        $scope.getItemFile = function(item){
+            var defer = $q.defer();
+            ItemService.getFile(item).then(function(data){
+                defer.resolve(data);
+
+            });
+            return defer.promise;
+        };
+        $scope.getItem = function(index){
+            $scope.getItemFile($scope.printData.items[index]).then(function(data){
+                $scope.printData.items[index] = data;
+            });
+        };
+        $scope.arrAlternativeIndex = ["A","B","C","D","E"];
 
         $scope.save = function() {
+            if ($scope.description!==""){
+                if ($scope.tags!==""){
+                    if (isNormalInteger($scope.points)){
+                        var objSend = {};
 
-            var objSend = {};
+                        objSend._id = angular.isUndefined($scope._id) ? Common.generateUUID() : $scope._id;
+                        objSend["description"] = $scope.description;
+                        objSend["tags"] = $scope.tags;
+                        objSend["points"] = $scope.points;
+                        objSend["header"] = $scope.header;
 
-            objSend._id = angular.isUndefined($scope._id) ? Common.generateUUID() : $scope._id;
-            objSend["description"] = $scope.description;
-            objSend["observation"] = $scope.observation;
+                        UserService.currentUser().then(function(user) {
+                            objService.save(user, objSend)
+                                .then(function(data) {
+                                    $scope.loadData();
+                                    Common.showToastMessage("Dados atualizados com sucesso !");
 
+                                });
+                        });
+                    }else{
+                        Common.showToastMessage("Favor preencher os pontos com um valor inteiro !","warning");
+                    }
 
-            UserService.currentUser().then(function(user) {
-                objService.save(user, objSend)
-                    .then(function(data) {
-                        $scope.loadData();
-                        Common.showToastMessage("Dados atualizados com sucesso !");
-
-                    });
-            });
+                }else{
+                    Common.showToastMessage("Favor preencher ao menos uma tag !","warning");
+                }
+            }else{
+                Common.showToastMessage("Favor preencher a descrição !","warning");
+            }
 
         };
 
+        $scope.printDiv = function(){
+            $("#printCommands").hide();
+            $("#header").hide();
+            $("#footer").hide();
+            $("#container").hide();
+            $("#printWindow").show();
+            document.getElementById("printWindow").innerHTML = document.getElementById("divPrint").innerHTML;
+            window.print();
+            $("#printWindow").hide();
+            $("#printCommands").show();
+            $("#header").show();
+            $("#footer").show();
+            $("#container").show();
 
+        }
+        function isNormalInteger(str) {
+            var n = ~~Number(str);
+            return String(n) === str && n >= 0;
+        }
     }]);
 
 
