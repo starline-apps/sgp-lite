@@ -162,9 +162,9 @@
             <div class="row m-v-10">
                 <div class="col-xs-12 col-xs-offset-0">
                     <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit()">
-                        <button class="md-button-inner">Cadastrar</button>
+                        <button class="md-button-inner">Cadastrar Novo</button>
                     </md-button>
-                    <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button">
+                    <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
                         <button class="md-button-inner">Excluir Selecionados</button>
                     </md-button>
                 </div>
@@ -244,19 +244,16 @@
 
             <div class="row" >
                 <div class="col-xs-12">
-                    <div class="row m-t-10">
-                        <div class="col-xs-5 m-h-20 m-v-5 pull-left">
+                    <div class="row m-v-10 border-styled">
+                        <div class="col-xs-5 m-h-10 m-v-5 pull-left">
                             <span class="bold">Prova : </span>
                             <span class="">{{printData.description}}</span>
                         </div>
-                        <div class="col-xs-5 m-h-20 m-v-5 pull-right">
+                        <div class="col-xs-5 m-h-10 m-v-5 pull-right">
                             <span class="bold">Valor : </span>
                             <span class="">{{printData.points}} pontos</span>
                         </div>
-                    </div>
-
-                    <div class="row m-v-10">
-                        <div class="col-xs-5 m-h-20 m-v-5" ng-repeat="itemHeader in printData.header" ng-class="$odd ? 'pull-right' : 'pull-left'">
+                        <div class="col-xs-5 m-h-10 m-v-5" ng-repeat="itemHeader in printData.header" ng-class="$odd ? 'pull-right' : 'pull-left'">
                             <span class=" bold">{{itemHeader.description}} : </span>
                             <span class="">{{itemHeader.text}}</span>
                         </div>
@@ -272,7 +269,7 @@
                     </div>
 
 
-                    <div class="row item-print" ng-repeat="item in printData.items" ng-if="item._id" ng-init="getItem($index)">
+                    <div class="row item-print border-styled" ng-repeat="item in printData.items" ng-if="item._id" ng-init="getItem($index)">
                         <div class="col-xs-12 col-xs-offset-0 m-h-10" style="margin-top:35px;" >
                             <table style="width:100%;border-top:0px;padding:10px">
                                 <tr>

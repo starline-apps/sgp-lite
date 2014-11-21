@@ -74,5 +74,36 @@ SGPApp
             }
         ];
 
+        $scope.descriptions2 = [
+            {
+                "text": "Criação do seu próprio Banco de Questões na WEB"
+            },
+            {
+                "text": "Criação do seu próprio Banco de Provas na WEB"
+            },
+            {
+                "text": "Diagramação automática das provas"
+            },
+            {
+                "text": "Busca de questões por metadados"
+            },
+            {
+                "text": "Criação automática de provas"
+            },
+            {
+                "text": "Correção automática de Gabaritos"
+            },
+            {
+                "text": "Criação de Turmas e Alunos"
+            },
+            {
+                "text": "Sincronização das notas dentro do Aplicativo"
+            },
+            {
+                "text": "Correção em segundos"
+            }
+        ];
+
+
 
     }]);

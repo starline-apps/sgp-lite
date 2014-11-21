@@ -168,6 +168,10 @@ body {
     margin-left:20px;
     margin-right:20px;
 }
+.m-h-30{
+    margin-left:30px !important;
+    margin-right:30px !important;
+}
 .m-b-10{
     margin-bottom:10px;
 }
@@ -226,4 +230,11 @@ body {
 }
 .item-print p:first-of-type{
     margin:0 !important;
+}
+.border-styled{
+    margin-left:10px;
+    margin-right:10px;
+    border:1px solid silver;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
