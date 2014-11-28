@@ -201,7 +201,7 @@
                             <div class="md-ripple-container"></div>
                         </md-button>
                     </div>
-                    <div class="col-xs-2 col-lg-1" layout="vertical" layout-align="center center">
+                    <div class="col-xs-1 col-lg-1" layout="vertical" layout-align="center center">
 
                         <md-button class="md-button-fab bg-purple-dark c-white m-v-10 " tabindex="-1" aria-label="" ng-click="viewItems(item)">
                             <button class="md-button-inner">
@@ -215,6 +215,16 @@
                         <md-button class="md-button-fab bg-grey-dark c-white m-v-10 m-h-10" tabindex="-1" aria-label=""  ng-click="print(item)">
                             <button class="md-button-inner">
                                 <span class="glyphicon glyphicon-print"></span>
+                            </button>
+                            <div class="md-ripple-container"></div>
+                        </md-button>
+                    </div>
+
+                    <div class="col-xs-1" layout="vertical" layout-align="center center">
+
+                        <md-button class="md-button-fab bg-yellow-dark c-black m-v-10 m-h-10" tabindex="-1" aria-label=""  ng-click="getAnswerSheet(item)">
+                            <button class="md-button-inner">
+                                <span class="glyphicon glyphicon-paperclip"></span>
                             </button>
                             <div class="md-ripple-container"></div>
                         </md-button>
@@ -292,6 +302,9 @@
                         <div class="col-xs-12 col-xs-offset-0">
                             <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="printDiv()">
                                 <button class="md-button-inner">Imprimir</button>
+                            </md-button>
+                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="printDivPDF()">
+                                <button class="md-button-inner">PDF</button>
                             </md-button>
                             <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
                                 <button class="md-button-inner">Cancelar</button>

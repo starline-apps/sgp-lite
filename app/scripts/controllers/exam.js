@@ -6,6 +6,17 @@ SGPApp
     .controller("ExamController", ["$rootScope", "$scope","$location", "$stateParams","ExamService","Common","UserService","ItemService","$q",function($rootScope, $scope,$location, $stateParams, ExamService, Common,UserService, ItemService, $q) {
         /** View attributes **/
 
+        $scope.answerSheets = {
+            "1":{
+                url:"http://cdn2.hubspot.net/hub/380284/file-1157768136-pdf/Starline_SGP_APP_-_20_Quest%C3%B5es.pdf"
+            },
+            "2":{
+                url:"http://cdn2.hubspot.net/hub/380284/file-1155721394-pdf/Starline_SGP_APP_-_50_Quest%C3%B5es.pdf"
+            },
+            "3":{
+                url:"http://cdn2.hubspot.net/hub/380284/file-1155721399-pdf/Starline_SGP_APP_-_100_Quest%C3%B5es.pdf"
+            }
+        };
 
         var objService = ExamService;
         $rootScope.loadingContent = true;
@@ -143,6 +154,17 @@ SGPApp
 
 
         };
+
+        $scope.getAnswerSheet = function(exam){
+            var sheetId = exam.answerSheetID!==null ? exam.answerSheetID : 1;
+            window.open(
+                $scope.answerSheets[sheetId.toString()].url,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+
+        };
+
+
         $scope.getItemFile = function(item){
             var defer = $q.defer();
             ItemService.getFile(item).then(function(data){
@@ -205,7 +227,29 @@ SGPApp
             $("#footer").show();
             $("#container").show();
 
-        }
+        };
+        $scope.printDivPDF = function(){
+            $("#printCommands").hide();
+            $("#header").hide();
+            $("#footer").hide();
+            $("#container").hide();
+            $("#printWindow").show();
+            document.getElementById("printWindow").innerHTML = document.getElementById("divPrint").innerHTML;
+            var pdf = new jsPDF('p','pt','a4');
+
+            pdf.addHTML(document.getElementById("divPrint"),function() {
+                pdf.output('dataurlnewwindow');
+            });
+
+
+
+            $("#printWindow").hide();
+            $("#printCommands").show();
+            $("#header").show();
+            $("#footer").show();
+            $("#container").show();
+
+        };
         function isNormalInteger(str) {
             var n = ~~Number(str);
             return String(n) === str && n >= 0;

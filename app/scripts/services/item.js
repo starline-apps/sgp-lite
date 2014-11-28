@@ -1,9 +1,9 @@
 "use strict";
 
 SGPApp
-    .factory("ItemService", ["$http","$q","localStorageService","Common","Dynamo","S3","Config","$timeout", function($http,$q, localStorageService,Common, Dynamo, S3, Config, $timeout) {
+    .factory("ItemService", ["$http","$q","localStorageService","Common","Dynamo","S3","Config","$timeout","ExamService", function($http,$q, localStorageService,Common, Dynamo, S3, Config, $timeout, ExamService) {
 
-        return {
+        var service =  {
             getByExam : function(user, guid) {
                 var d = $q.defer();
                 var arr = [];
@@ -121,7 +121,6 @@ SGPApp
             },
             save : function(user, item) {
                 var d = $q.defer();
-
                 var timestamp = Common.getTimestamp();
                 var arrIndexes = ["A","B","C","D","E"];
 
@@ -206,8 +205,46 @@ SGPApp
                                     };
 
                                     S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
+
                                         if (data!=null) {
-                                            d.resolve(data);
+
+                                            service.getByExam(user, item.guid).then(function(items){
+
+                                                if (items!==null) {
+
+                                                    var ctItems = items.length;
+                                                    ExamService.get(user, item.guid).then(function(examData){
+
+                                                        var examSheetId = 1;
+
+                                                        if (parseInt(ctItems>20)){
+                                                            examSheetId = 2;
+                                                        }else if (ctItems>50){
+                                                            examSheetId = 3;
+                                                        }
+
+                                                        if (examData!==null) {
+                                                            examData.answerSheetID = examSheetId;
+
+                                                            ExamService.save(user, examData).then(function(examSaveData){
+
+                                                                if (examSaveData!==null) {
+                                                                    d.resolve(examSaveData);
+                                                                }else {
+                                                                    d.resolve(null);
+                                                                }
+
+                                                            });
+                                                        }else {
+                                                            d.resolve(null);
+                                                        }
+
+                                                    });
+                                                }else {
+                                                    d.resolve(null);
+                                                }
+
+                                            });
                                         }else {
                                             d.resolve(null);
                                         }
@@ -243,21 +280,10 @@ SGPApp
                 defer.resolve(localStorageService.get("test_item"));
                 return defer.promise;
 
-            },
-            getExamsResult : function(code) {
-                return $http.get(Common.getApiUrl() + "/api/v1/ib/rest/assessmentresult/" + code + "/", {withCredentials : false});
-            },
-            getLocal : function(code) {
-                return localStorageService.get(code);
-            },
-            removeLocal : function(code) {
-                return localStorageService.remove(code);
-            },
-            saveLocal : function(code, value) {
-                localStorageService.add(code, value);
             }
         };
 
+        return service;
 
 
     }]);
