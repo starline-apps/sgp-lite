@@ -238,3 +238,16 @@ body {
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
 }
+.user-menu{
+  display: none;
+    position: fixed;
+    right: 30px;
+    z-index: 99;
+    background-color: #ffffff;
+}
+.user-menu .header{
+
+}
+.user-menu .item{
+
+}

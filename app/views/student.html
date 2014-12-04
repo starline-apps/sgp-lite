@@ -1,0 +1,149 @@
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10">
+    <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+        <md-toolbar class="md-theme-dark color-bg-4 p-0">
+            <h2 class="md-toolbar-tools" ng-if="!editMode">
+                <md-button  ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+                    <button class="md-button-inner">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <div class="md-ripple-container"></div>
+                </md-button>
+                <span>Alunos Cadastrados</span>
+            </h2>
+            <h2 class="md-toolbar-tools" ng-if="editMode">
+                <md-button ng-click="loadData()" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+                    <button class="md-button-inner">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <div class="md-ripple-container"></div>
+                </md-button>
+                <span>Aluno da Turma ({{team.description}})</span>
+            </h2>
+        </md-toolbar>
+
+
+        <md-content class="p-5 scrollable" ng-show="editMode && !loadingContent" style="min-height:400px">
+
+            <div class="row m-v-20 m-h-10 scroll">
+                <div class="col-xs-12">
+
+                  <md-divider class="m-t-20 p-5 md-whiteframe-z1">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <span class="m-10 m-t-10 s-130">Dados do Aluno</span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xs-6 col-xs-offset-0 m-h-10">
+                        <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left">
+                          <label for="name"  class="fill-horizontal text-left">Nome</label>
+                          <md-input id="name" type="text" ng-model="name" class="fill-horizontal text-left"/>
+                        </md-input-group>
+                      </div>
+                    </div>
+                  </md-divider>
+
+
+                    <div class="row m-t-30">
+
+                        <div class="col-xs-12 col-xs-offset-0">
+                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
+                                <button class="md-button-inner">Salvar</button>
+                            </md-button>
+                            <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
+                                <button class="md-button-inner">Cancelar</button>
+                            </md-button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </md-content>
+        <md-content class="p-5 scrollable" ng-show="!editMode && !loadingContent" style="min-height:400px">
+            <div class="row m-v-10" ng-show="!editMode">
+                <div class="col-xs-6">
+                    <div class=col-xs-12" ng-if="teams.length==0" layout="horizontal" layout-align="center center">
+                        <span class="s-110 m-t-10 bold">Não existem turmas cadastradas. Clique <a ui-sref="team">aqui</a> para cadastrar</span>
+                    </div>
+                    <div class="dropdown col-xs-8" ng-if="teams.length!=0">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            <span ng-if="!team.description">Selecione a turma</span>
+                            <span ng-if="team.description">{{team.description}}</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation" ng-repeat="teamFilter in teams"><a role="menuitem" tabindex="-1" ng-click="setTeam(teamFilter)">{{teamFilter.description}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit();">
+                        <button class="md-button-inner">Novo Aluno</button>
+                    </md-button>
+                    <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
+                        <button class="md-button-inner">Excluir Selecionados</button>
+                    </md-button>
+                </div>
+            </div>
+
+            <md-item ng-repeat="(key,item) in students" class="ng-scope" role="listitem" >
+                <md-item-content class="row p-h-20">
+                    <div class="md-tile-left col-xs-1">
+                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
+
+                        </md-checkbox>
+                    </div>
+                    <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
+                        {{$index+1}}
+                    </div>
+                    <div class="col-xs-9 col-lg-9 md-tile-content" layout="vertical" layout-align="center start">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="ng-binding m-h-10 s-150">{{item.name}}</h4>
+                            </div>
+                            <div class="col-xs-12">
+                                <div style="float: left;" class="m-v-5 m-h-5">
+                                    <span class="label label-default s-80 color-bg-4">
+                                        <span class="pointer">{{item.code}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-1" layout="vertical" layout-align="end center">
+
+                        <md-button class="md-button-fab bg-blue-dark c-white m-v-10" tabindex="-1" aria-label=""  ng-click="edit(item)">
+                            <button class="md-button-inner">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <div class="md-ripple-container"></div>
+                        </md-button>
+                    </div>
+                </md-item-content>
+                <md-divider inset=""></md-divider>
+            </md-item>
+            <div ng-if="items.length==0" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+
+                <h3 class="ng-binding">Não existem alunos cadastrados</h4>
+
+            </div>
+            <div ng-if="!team" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+
+                <h3 class="ng-binding">Selecione a turma</h4>
+
+            </div>
+        </md-content>
+        <md-content class="p-5 scrollable" ng-show="loadingContent">
+            <div layout="vertical" layout-align="center center" style="height:400px">
+
+                <div ng-include src="'views/loading-app.html'" layout="vertical" class="fill" layout-align="center center" >
+
+                </div>
+
+            </div>
+        </md-content>
+    </div>
+</div>

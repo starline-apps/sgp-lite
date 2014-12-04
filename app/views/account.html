@@ -1,0 +1,81 @@
+
+
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10" ng-show="!loadingContent">
+  <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+    <md-toolbar class="md-theme-dark color-bg-4 p-0">
+      <h2 class="md-toolbar-tools">
+        <md-button ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+          <button class="md-button-inner">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+          <div class="md-ripple-container"></div>
+        </md-button>
+        <span>Minha Conta</span>
+      </h2>
+    </md-toolbar>
+    <div class="row p-v-5 p-h-20" style="min-height:600px;">
+
+      <div class="col-xs-12 col-sm-8 col-lg-8 " >
+        <div class="col-xs-12 p-5">
+          <div class="row bg-green-dark color-5 c-black"  layout="horizontal" layout-align="center center">
+            <div class="col-xs-12" >
+              <label class="s-120 hidden-xs" layout="horizontal" layout-align="start center">Dados do Usuário</label>
+              <label class="s-100 visible-xs" layout="horizontal" layout-align="start center">Dados do Usuário</label>
+            </div>
+          </div>
+          <div class="row bg-green-light s-130" layout="vertical" layout-align="center start" style="height:160px">
+            <div class="col-xs-12"  layout="vertical" layout-align="center start">
+              <div class="row">
+                <div class="col-xs-12" >
+                    <b>E-mail</b> : {{userEmail}}<br />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12" >
+                  <b>Plano Assinado </b> : SGP Lite (Mensal)
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12" >
+                  <b>Data de expiração </b> : {{subscriptionExpirationDate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md-ripple"></div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4 col-lg-4 " ng-repeat="info in infos" >
+        <div class="col-xs-12 p-5">
+          <div class="row bg-{{info.background_color}}-dark color-5 c-{{info.text_color}}"  layout="horizontal" layout-align="center center">
+            <div class="col-xs-12" >
+              <label class="s-120 hidden-xs" layout="horizontal" layout-align="start center">{{info.description}}</label>
+              <label class="s-100 visible-xs" layout="horizontal" layout-align="start center">{{info.description}}</label>
+            </div>
+          </div>
+          <div class="row bg-{{info.background_color}}-light text-center" layout="horizontal" layout-align="center center" style="height:160px">
+            <div class="col-xs-12"  layout="vertical" layout-align="center center">
+              <span style="height:100px;" layout="vertical" layout-align="center center" class="s-250" ng-if="info.value!=''">{{info.value}}</span>
+              <span style="height:100px;" layout="vertical" layout-align="center center" class="s-250" ng-if="info.value==''">
+                <img src="images/preloader_content.gif" />
+              </span>
+            </div>
+          </div>
+
+        </div>
+        <div class="md-ripple"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<md-content class="p-5 scrollable" ng-show="loadingContent">
+  <div layout="vertical" layout-align="center center" style="height:400px">
+
+    <div ng-include src="'views/loading-app.html'" layout="vertical" class="fill" layout-align="center center" >
+
+    </div>
+
+  </div>
+</md-content>

@@ -160,18 +160,25 @@
         </md-content>
         <md-content class="p-5 scrollable" ng-show="!printMode && !editMode && !loadingContent">
             <div class="row m-v-10">
-                <div class="col-xs-12 col-xs-offset-0">
+                <div class="col-xs-5 pull-left" style="height:60px;" layout="vertical" layout-align="center center">
+                    <md-input-group  class="md-input-group-theme-green s-130 text-left fill-horizontal" style="margin: 0 0 0 45px !important;">
+                        <label class="fill-horizontal text-left">Pesquisar</label>
+                        <md-input  type="text" ng-model="search" class="fill-horizontal text-left"/>
+                    </md-input-group>
+                </div>
+                <div class="col-xs-7  pull-right" style="height:60px;" layout="vertical" layout-align="center end">
                     <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit()">
-                        <button class="md-button-inner">Cadastrar Novo</button>
+                        <button class="md-button-inner">Nova Prova</button>
                     </md-button>
                     <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
                         <button class="md-button-inner">Excluir Selecionados</button>
+
                     </md-button>
                 </div>
             </div>
 
             <md-item ng-repeat="(key,item) in dataSource" class="ng-scope" role="listitem">
-                <md-item-content class="row p-h-20">
+                <md-item-content class="row p-h-20" style="min-height: 100px;">
                     <div class="md-tile-left col-xs-2 col-lg-1">
                         <md-checkbox ng-model="isChecked" aria-label="Finished?">
 
@@ -180,12 +187,12 @@
                     <div class="col-xs-6 col-lg-7 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
                             <div class="col-xs-12">
-                                <h4 class="ng-binding m-h-10 s-150">{{item.description}}</h4>
+                                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.description}}</h4>
                             </div>
                             <div class="col-xs-12">
                                 <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
                                     <span class="label label-default s-80 color-bg-4">
-                                        <span class="pointer">{{tag}}</span>
+                                        <span class="pointer searchable">{{tag}}</span>
                                     </span>
                                 </div>
                             </div>
@@ -193,41 +200,37 @@
                     </div>
 
                     <div class="col-xs-1" layout="vertical" layout-align="center center">
-
-                        <md-button class="md-button-fab bg-blue-dark c-white m-v-10" tabindex="-1" aria-label=""  ng-click="edit(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                        <stl-fab id="'fabEdit'+$index"
+                                 iconclass="'glyphicon glyphicon-pencil'"
+                                 tooltip="'Editar'"
+                                 css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
+                                 ng-click="edit(item)">
+                        </stl-fab>
                     </div>
                     <div class="col-xs-1 col-lg-1" layout="vertical" layout-align="center center">
-
-                        <md-button class="md-button-fab bg-purple-dark c-white m-v-10 " tabindex="-1" aria-label="" ng-click="viewItems(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-list"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                        <stl-fab id="'fabItems'+$index"
+                                 iconclass="'glyphicon glyphicon-list'"
+                                 tooltip="'Questões'"
+                                 css="'md-button-fab bg-purple-dark c-white m-v-10 m-h-10'"
+                                 ng-click="viewItems(item)">
+                        </stl-fab>
                     </div>
                     <div class="col-xs-1" layout="vertical" layout-align="center center">
-
-                        <md-button class="md-button-fab bg-grey-dark c-white m-v-10 m-h-10" tabindex="-1" aria-label=""  ng-click="print(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-print"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                        <stl-fab id="'fabPrint'+$index"
+                                 iconclass="'glyphicon glyphicon-print'"
+                                 tooltip="'Imprimir'"
+                                 css="'md-button-fab bg-grey-dark c-white m-v-10 m-h-10'"
+                                 ng-click="print(item)">
+                        </stl-fab>
                     </div>
 
                     <div class="col-xs-1" layout="vertical" layout-align="center center">
-
-                        <md-button class="md-button-fab bg-yellow-dark c-black m-v-10 m-h-10" tabindex="-1" aria-label=""  ng-click="getAnswerSheet(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-paperclip"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                        <stl-fab id="'fabAnswer'+$index"
+                            iconclass="'glyphicon glyphicon-paperclip'"
+                            tooltip="'Gabarito'"
+                            css="'md-button-fab bg-yellow-dark c-black m-v-10 m-h-10'"
+                            ng-click="getAnswerSheet(item)">
+                        </stl-fab>
                     </div>
                 </md-item-content>
                 <md-divider inset=""></md-divider>

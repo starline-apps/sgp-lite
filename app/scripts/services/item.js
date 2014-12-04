@@ -4,6 +4,50 @@ SGPApp
     .factory("ItemService", ["$http","$q","localStorageService","Common","Dynamo","S3","Config","$timeout","ExamService", function($http,$q, localStorageService,Common, Dynamo, S3, Config, $timeout, ExamService) {
 
         var service =  {
+          getAllLength:function(user){
+
+            var d = $q.defer();
+
+
+            ExamService.getAll(user).then(function(arrExams){
+              var guid, keyConditions, length, ct;
+              length = 0;
+              if (arrExams.length===0){
+                d.resolve(length);
+              }else{
+                ct = 0;
+                for(var x=0 ; x<arrExams.length ; x++){
+                  guid = arrExams[x]._id;
+                  keyConditions = {
+                    "ExamId": {
+                      "ComparisonOperator": "EQ",
+                      "AttributeValueList": [
+                        {"S": guid}
+                      ]
+                    }
+                  };
+                  Dynamo.query("UserItems",keyConditions).then(function(dataSetUserItems) {
+                    length += parseInt(dataSetUserItems.length);
+                    ct++;
+                    if (ct===arrExams.length){
+                      d.resolve(length);
+                    }
+
+                  });
+
+
+                }
+              }
+
+
+
+
+
+            });
+
+            return d.promise;
+
+          },
             getByExam : function(user, guid) {
                 var d = $q.defer();
                 var arr = [];

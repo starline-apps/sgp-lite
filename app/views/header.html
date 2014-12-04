@@ -7,11 +7,24 @@
     </div>
     <div class="col-xs-3 col-lg-1" layout="vertical" layout-align="center end">
 
-        <md-button class="md-button-fab color-bg-4 c-white m-v-10" tabindex="-1" aria-label="" ng-click="logout()">
+        <md-button class="md-button-fab color-bg-4 c-white m-v-10" tabindex="-1" aria-label="" ng-click="showUserMenu()">
             <button class="md-button-inner">
-                <span class="glyphicon glyphicon-log-in"></span>
+                <span class="glyphicon glyphicon-align-justify"></span>
             </button>
             <div class="md-ripple-container"></div>
         </md-button>
+
+
+    </div>
+</div>
+
+<div class="md-whiteframe-z2 user-menu">
+    <div ui-sref="{{menuUser.url}}" ng-repeat="menuUser in menusUser" ng-click="changeMenu(menuUser)" class="m-t-10 color-5 row p-h-20"  layout="horizontal" layout-padding>
+        <div class="col-xs-2 s-150" layout-align="center start" layout="vertical" >
+            <span style="height:48px; !important" class="pointer {{menuUser.icon_class}}"></span>
+        </div>
+        <div class="col-xs-10 s-150 " layout-align="center start" layout="vertical">
+            <label   style="height:48px; !important;" class="pointer m-t-10">{{menuUser.description}}</label>
+        </div>
     </div>
 </div>

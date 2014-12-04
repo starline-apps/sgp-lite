@@ -94,4 +94,4 @@ SGPApp.directive('ngEnter', function () {
             }
         });
     };
-});;
+});

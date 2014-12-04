@@ -10,7 +10,7 @@ SGPApp
                 $("#container").fadeIn("slow");
                 $("#header").fadeIn("slow");
                 $("#footer").fadeIn("slow");
-            },2000);
+            },1000);
             $state.transitionTo('home');
         }
 
@@ -63,3 +63,9 @@ SGPApp
         }
 
     }]);
+SGPApp
+  .controller("LogoutController", ["$scope","$rootScope", "$state", "Common","User","auth", function ($scope,$rootScope, $state, Common, User,auth) {
+      auth.signout();
+      window.location.href="/";
+
+  }]);

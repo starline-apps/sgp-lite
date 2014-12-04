@@ -1,3 +1,12 @@
+
+<div ui-sref="home" class="m-t-20 pointer color-5 row"  layout="horizontal" layout-padding>
+    <div class="col-xs-2 s-150" layout-align="center start" layout="vertical" >
+        <span style="height:64px; !important" class="pointer glyphicon glyphicon-home"></span>
+    </div>
+    <div class="col-xs-10 s-150 " layout-align="center start" layout="vertical">
+        <label   style="height:64px; !important" class="pointer">Principal</label>
+    </div>
+</div>
 <div ui-sref="{{menuLeft.url}}" ng-repeat="menuLeft in menutest" ng-click="changeMenu(menuLeft)" class="m-t-20 pointer color-5 row"  layout="horizontal" layout-padding>
     <div class="col-xs-2 s-150" layout-align="center start" layout="vertical" >
         <span style="height:64px; !important" class="pointer {{menuLeft.icon_class}}"></span>
@@ -5,6 +14,4 @@
     <div class="col-xs-10 s-150 " layout-align="center start" layout="vertical">
         <label   style="height:64px; !important" class="pointer">{{menuLeft.description}}</label>
     </div>
-
-
 </div>

@@ -45,7 +45,21 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
             url: '/logout',
             controller: 'LogoutController'
         })
-
+        .state('account', {
+          url: '/account',
+          templateUrl: 'views/account.html',
+          controller: 'AccountController'
+        })
+        .state('settings', {
+          url: '/settings',
+          templateUrl: 'views/settings.html',
+          controller: 'SettingsController'
+        })
+        .state('help', {
+          url: '/help',
+          templateUrl: 'views/help.html',
+          controller: 'HelpController'
+        })
         .state('signup', {
             url: '/signup',
             templateUrl: 'views/signup.html',
@@ -58,23 +72,7 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: 'HomeController'
         })
 
-        .state('menu', {
-            url: '/menu',
-            templateUrl: 'views/menu/menu.html',
-            controller: 'MenuController'
-        })
 
-        .state('person/create', {
-            url: '/person/create',
-            templateUrl: 'views/person/person.html',
-            controller: 'PersonController'
-        })
-
-        .state('person/edit', {
-            url: '/person/edit/:_id',
-            templateUrl: 'views/person/person.html',
-            controller: 'PersonController'
-        })
 
         .state('exam', {
             url: '/exam',
@@ -87,28 +85,15 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
             templateUrl: 'views/item.html',
             controller: 'ItemController'
         })
-        .state('company/create', {
-            url: '/company/create',
-            templateUrl: 'views/company/company.html',
-            controller: 'CompanyController'
+        .state('team', {
+          url: '/team',
+          templateUrl: 'views/team.html',
+          controller: 'TeamController'
         })
-
-        .state('company/edit', {
-            url: '/company/edit/:_id',
-            templateUrl: 'views/company/company.html',
-            controller: 'CompanyController'
-        })
-
-        .state('company/list', {
-            url: '/company/list',
-            templateUrl: 'views/company/list.html',
-            controller: 'CompanyController'
-        })
-
-        .state('user/edit', {
-            url: '/user/edit/:_id',
-            templateUrl: 'views/user/user.html',
-            controller: 'UserController'
+        .state('student', {
+          url: '/student',
+          templateUrl: 'views/student.html',
+          controller: 'StudentController'
         })
 
         .state('expense', {

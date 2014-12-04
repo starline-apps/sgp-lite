@@ -155,6 +155,26 @@ SGPApp
 
         };
 
+        $scope.$watch('search', function(value) {
+            if (value==="" || value===undefined){
+                $("md-item-content").each(function(){
+                    $(this).show(false);
+                    $(this).next("md-divider").show(false);
+                });
+            }else{
+                $("md-item-content").each(function(){
+                    $(this).hide();
+                    $(this).next("md-divider").hide();
+                });
+            }
+            $(".searchable").each(function(){
+                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+                    $(this).closest("md-item-content").show();
+                    $(this).closest("md-item-content").next("md-divider").show();
+                }
+            });
+        });
+
         $scope.getAnswerSheet = function(exam){
             var sheetId = exam.answerSheetID!==null ? exam.answerSheetID : 1;
             window.open(

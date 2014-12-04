@@ -40,6 +40,7 @@
         };
 
         $scope.changeMenu = function(menu) {
+            $(".user-menu").fadeOut("fast");
             $rootScope.session.menu = menu;
             $location.path(menu.url);
         };
@@ -48,6 +49,15 @@
             $translate.use(key);
         };
 
+        $scope.showUserMenu = function(){
+          $(".user-menu").fadeIn("fast");
+          $(".user-menu").mouseleave(function(){
+              $(".user-menu").fadeOut("fast");
+          });
+          $(".user-menu").mouseover(function(){
+              $(this).fadeIn("fast");
+          });
+        };
 
         $rootScope.createHtmlElement = function(attribute, data){
             var strHtml = createHtml(attribute, data);
@@ -65,6 +75,41 @@
             //var d = document.querySelector("#" + strDialog);
             //d.toggle();
         };
+        $rootScope.menusUser = [
+            {
+                "description" : "Minha conta",
+                "url" : "account",
+                "icon_class" : "glyphicon glyphicon-user",
+                "flat_icon":"contract",
+                "background_color":"purple",
+                "text_color":"white"
+            },
+            {
+                "description" : "Configurações",
+                "url" : "settings",
+                "icon_class" : "glyphicon glyphicon-cog",
+                "flat_icon":"correction",
+                "background_color":"red",
+                "text_color":"white"
+            },
+            {
+                "description" : "Ajuda",
+                "url" : "help",
+                "icon_class" : "glyphicon glyphicon-question-sign",
+                "flat_icon":"correction",
+                "background_color":"red",
+                "text_color":"white"
+            },
+            {
+                "description" : "Logout",
+                "url" : "logout",
+                "icon_class" : "glyphicon glyphicon-log-out",
+                "flat_icon":"class",
+                "background_color":"blue",
+                "text_color":"black"
+
+            }
+        ];
 
         $rootScope.menutest = [
             {
@@ -82,10 +127,10 @@
                 "flat_icon":"correction",
                 "background_color":"red",
                 "text_color":"white"
-            }/*,
+            },
             {
                 "description" : "Turmas",
-                "url" : "qweq",
+                "url" : "team",
                 "icon_class" : "glyphicon glyphicon-tasks",
                 "flat_icon":"class",
                 "background_color":"blue",
@@ -93,7 +138,7 @@
             },
             {
                 "description" : "Relatórios",
-                "url" : "expehfgnse",
+                "url" : "report",
                 "icon_class" : "glyphicon glyphicon-stats",
                 "flat_icon":"graphics",
                 "background_color":"yellow",
@@ -101,12 +146,12 @@
             },
             {
                 "description" : "Alunos",
-                "url" : "expenvbnse",
+                "url" : "student",
                 "icon_class" : "glyphicon glyphicon-sort-by-alphabet",
                 "flat_icon":"student",
-                "background_color":"grey",
-                "text_color":"white"
-            },
+                "background_color":"green",
+                "text_color":"black"
+            }/*,
             {
                 "description" : "Melhores Alunos",
                 "url" : "dfg",
@@ -166,7 +211,7 @@
             */
         ];
 
-/*              
+/*
  {
  "description" : "Despesas",
  "url" : "expense",
@@ -220,7 +265,7 @@
 		       $("#top-menu").show();
 		       $("#sidebar").show();
 		       $("#login-block").hide();
-		    });		
+		    });
 		}
 
 
@@ -310,7 +355,7 @@
                     $(function(){
                         $('#dpYears').datepicker();
                     });
-                  
+
                     break;
 
                     /*
@@ -319,7 +364,7 @@
 
                     for (x=0;x<arrSelection.length;x++)
                     {
-                        
+
                         if (arrSelection[x] != value) {
                             html += "";
                         } else {
