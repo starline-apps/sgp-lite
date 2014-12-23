@@ -83,7 +83,7 @@
                 "flat_icon":"contract",
                 "background_color":"purple",
                 "text_color":"white"
-            },
+            },/*
             {
                 "description" : "Configurações",
                 "url" : "settings",
@@ -99,7 +99,7 @@
                 "flat_icon":"correction",
                 "background_color":"red",
                 "text_color":"white"
-            },
+            },*/
             {
                 "description" : "Logout",
                 "url" : "logout",
@@ -137,21 +137,22 @@
                 "text_color":"black"
             },
             {
-                "description" : "Relatórios",
-                "url" : "report",
+              "description" : "Alunos",
+              "url" : "student",
+              "icon_class" : "glyphicon glyphicon-sort-by-alphabet",
+              "flat_icon":"student",
+              "background_color":"green",
+              "text_color":"black"
+            }/*,
+            {
+                "description" : "Notas",
+                "url" : "grade",
                 "icon_class" : "glyphicon glyphicon-stats",
                 "flat_icon":"graphics",
                 "background_color":"yellow",
                 "text_color":"black"
-            },
-            {
-                "description" : "Alunos",
-                "url" : "student",
-                "icon_class" : "glyphicon glyphicon-sort-by-alphabet",
-                "flat_icon":"student",
-                "background_color":"green",
-                "text_color":"black"
-            }/*,
+            }
+,
             {
                 "description" : "Melhores Alunos",
                 "url" : "dfg",

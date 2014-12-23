@@ -2,7 +2,7 @@
 /*jshint -W083 */
 "use strict";
 SGPApp
-    .controller("AccountController", ["$rootScope", "$scope","$location", "$stateParams","Common","UserService","User","ExamService", "ItemService","TeamService","$q",function($rootScope, $scope,$location, $stateParams, Common,UserService,User, ExamService, ItemService, TeamService, $q) {
+    .controller("AccountController", ["$rootScope", "$scope","$location", "$stateParams","Common","UserService","User","ExamService", "ItemService","TeamService","StudentService", "GradeService","$q",function($rootScope, $scope,$location, $stateParams, Common,UserService,User, ExamService, ItemService, TeamService, StudentService, GradeService, $q) {
 
     var objService = User;
     $rootScope.loadingContent = true;
@@ -78,7 +78,12 @@ SGPApp
           TeamService.getAll(user).then(function(arrTeams){
             $rootScope.infos[4].value = arrTeams.length;
           });
-
+          StudentService.getAllLength(user).then(function(length){
+            $rootScope.infos[5].value = length;
+          });
+          GradeService.getAllLength(user).then(function(length){
+            $rootScope.infos[1].value = length;
+          });
         });
     });
 

@@ -4,7 +4,6 @@ SGPApp
             putObject: function(bucket, key, object) {
                 var d = $q.defer();
                 AWSService.s3().then(function(s3){
-                    console.log(s3);
                     var params = {
                         Bucket: bucket,
                         Key: key,

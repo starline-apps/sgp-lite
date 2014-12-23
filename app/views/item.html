@@ -165,10 +165,16 @@
                         <button class="md-button-inner">Excluir Selecionados</button>
                     </md-button>
                 </div>
+              <div class="col-xs-5 pull-left" ng-show="exam && items.length!=0" style="height:60px;" layout="vertical" layout-align="center center">
+                <md-input-group  class="md-input-group-theme-green s-130 text-left fill-horizontal" style="margin: 0 0 0 45px !important;">
+                  <label class="fill-horizontal text-left">Pesquisar</label>
+                  <md-input  type="text" ng-model="search" class="fill-horizontal text-left"/>
+                </md-input-group>
+              </div>
             </div>
 
             <md-item ng-repeat="(key,item) in items" class="ng-scope" role="listitem" >
-                <md-item-content class="row p-h-20">
+                <md-item-content class="row p-h-20" style="min-height: 100px;">
                     <div class="md-tile-left col-xs-1">
                         <md-checkbox ng-model="isChecked" aria-label="Finished?">
 
@@ -180,12 +186,12 @@
                     <div class="col-xs-9 col-lg-9 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
                             <div class="col-xs-12">
-                                <h4 class="ng-binding m-h-10 s-150">{{item.text}}</h4>
+                                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>
                             </div>
                             <div class="col-xs-12">
                                 <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
                                     <span class="label label-default s-80 color-bg-4">
-                                        <span class="pointer">{{tag}}</span>
+                                        <span class="pointer searchable">{{tag}}</span>
                                     </span>
                                 </div>
                             </div>
@@ -194,12 +200,12 @@
 
                     <div class="col-xs-1" layout="vertical" layout-align="end center">
 
-                        <md-button class="md-button-fab bg-blue-dark c-white m-v-10" tabindex="-1" aria-label=""  ng-click="edit(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                      <stl-fab id="'fabEdit'+$index"
+                               iconclass="'glyphicon glyphicon-pencil'"
+                               tooltip="'Editar'"
+                               css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
+                               ng-click="edit(item)">
+                      </stl-fab>
                     </div>
                 </md-item-content>
                 <md-divider inset=""></md-divider>

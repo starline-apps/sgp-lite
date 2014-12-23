@@ -95,7 +95,11 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
           templateUrl: 'views/student.html',
           controller: 'StudentController'
         })
-
+        .state('grade', {
+          url: '/grade',
+          templateUrl: 'views/grade.html',
+          controller: 'GradeController'
+        })
         .state('expense', {
             url: '/expense',
             templateUrl: 'views/expense/expense.html',

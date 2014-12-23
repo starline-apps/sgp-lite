@@ -1,22 +1,17 @@
 /*jslint evil: true */
 /*jshint -W083 */
 "use strict";
-var refreshResult, refreshExamTime, examListInterval, examResultInterval;
 SGPApp
     .controller("TeamController", ["$rootScope", "$scope","$location", "$stateParams","TeamService","Common","UserService","$q",function($rootScope, $scope,$location, $stateParams, TeamService, Common,UserService, $q) {
-        /** View attributes **/
-
 
         var objService = TeamService;
         $rootScope.loadingContent = true;
 
         $scope.loadData = function(){
             $scope.editMode = false;
-            $scope.printMode = false;
             $scope.dataSource = undefined;
             $rootScope.loadingContent = true;
             UserService.currentUser().then(function(user) {
-
                 objService.getAll(user)
                     .then(function(allData) {
                         $scope.dataSource = allData;
@@ -25,38 +20,36 @@ SGPApp
             });
             $scope._id = undefined;
             $scope.description = "";
-            $scope.points = "";
-            $scope.tags = "";
-            $scope.arrTags = [];
-            $rootScope.exam = undefined;
-            $scope.headerIndex = null;
-            $scope.tagIndex = null;
+            $scope.students = "";
+            $rootScope.team = undefined;
 
         };
 
         $scope.loadData();
 
-        $scope.edit = function(exam) {
+        $scope.edit = function(team) {
             $scope.editMode = true;
-            if (exam !== undefined){
-                $scope._id = exam._id;
+            if (team !== undefined){
+                $scope._id = team._id;
                 UserService.currentUser().then(function(user) {
-                    objService.get(user, exam._id)
+                    objService.get(user, team._id)
                         .then(function(data) {
                             $scope.description = data.description;
+                            $scope.students = data.students;
                         });
                 });
 
             }else{
                 $scope._id = undefined;
                 $scope.description = "";
+                $scope.students = "";
             }
 
         };
 
-        $scope.viewItems = function(exam) {
-            $rootScope.exam = exam;
-            $location.path("item");
+        $scope.viewStudents = function(team) {
+            $rootScope.team = team;
+            $location.path("student");
         };
 
 
@@ -81,22 +74,13 @@ SGPApp
             });
         });
 
-        $scope.getAnswerSheet = function(exam){
-            var sheetId = exam.answerSheetID!==null ? exam.answerSheetID : 1;
-            window.open(
-                $scope.answerSheets[sheetId.toString()].url,
-                '_blank' // <- This is what makes it open in a new window.
-            );
-
-        };
-
-
         $scope.save = function() {
             if ($scope.description!==""){
                 var objSend = {};
 
                 objSend._id = angular.isUndefined($scope._id) ? Common.generateUUID() : $scope._id;
                 objSend["description"] = $scope.description;
+                objSend["students"] = $scope.students;
 
                 UserService.currentUser().then(function(user) {
                     objService.save(user, objSend)

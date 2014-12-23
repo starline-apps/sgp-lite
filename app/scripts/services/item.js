@@ -248,6 +248,7 @@ SGPApp
                                         "alternatives" : item.alternatives
                                     };
 
+
                                     S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
 
                                         if (data!=null) {
@@ -269,7 +270,7 @@ SGPApp
 
                                                         if (examData!==null) {
                                                             examData.answerSheetID = examSheetId;
-
+                                                            examData.tags = (examData.tags==="") ? examData.description : examData.tags;
                                                             ExamService.save(user, examData).then(function(examSaveData){
 
                                                                 if (examSaveData!==null) {

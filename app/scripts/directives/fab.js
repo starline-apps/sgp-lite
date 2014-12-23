@@ -1,6 +1,5 @@
 ﻿SGPApp
     .directive("stlFab", function ($compile) {
-var a;
         var linker = function(scope, element, attrs) {
             $compile(element.contents())(scope);
 
@@ -26,12 +25,12 @@ var a;
                     post: function postLink( scope, element, attributes ) {
                         setTimeout(function(){
                             $("[tooltip='"+scope.id+"']").mouseover(function(){
-                                $("#" + scope.id).fadeIn("fast");
+                                $("#" + scope.id).slideDown("fast");
                             });
                             $("[tooltip='"+scope.id+"']").mouseleave(function(){
-                                $("#" + scope.id).fadeOut("fast");
+                                $("#" + scope.id).slideUp();
                             });
-                        },1000);
+                        },500);
 
 
                     }

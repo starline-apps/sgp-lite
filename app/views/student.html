@@ -42,6 +42,14 @@
                         </md-input-group>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col-xs-6 col-xs-offset-0 m-h-10">
+                        <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal text-left">
+                          <label for="code"  class="fill-horizontal text-left">Código</label>
+                          <md-input id="code" type="text" ng-model="code" class="fill-horizontal text-left"/>
+                        </md-input-group>
+                      </div>
+                    </div>
                   </md-divider>
 
 
@@ -79,7 +87,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit();">
+                    <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit({});">
                         <button class="md-button-inner">Novo Aluno</button>
                     </md-button>
                     <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
@@ -89,7 +97,7 @@
             </div>
 
             <md-item ng-repeat="(key,item) in students" class="ng-scope" role="listitem" >
-                <md-item-content class="row p-h-20">
+                <md-item-content class="row p-h-20" style="min-height: 100px;">
                     <div class="md-tile-left col-xs-1">
                         <md-checkbox ng-model="isChecked" aria-label="Finished?">
 
@@ -115,19 +123,19 @@
 
                     <div class="col-xs-1" layout="vertical" layout-align="end center">
 
-                        <md-button class="md-button-fab bg-blue-dark c-white m-v-10" tabindex="-1" aria-label=""  ng-click="edit(item)">
-                            <button class="md-button-inner">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <div class="md-ripple-container"></div>
-                        </md-button>
+                      <stl-fab id="'fabEdit'+$index"
+                               iconclass="'glyphicon glyphicon-pencil'"
+                               tooltip="'Editar'"
+                               css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
+                               ng-click="edit(item)">
+                      </stl-fab>
                     </div>
                 </md-item-content>
                 <md-divider inset=""></md-divider>
             </md-item>
-            <div ng-if="items.length==0" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+            <div ng-if="students.length==0" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
 
-                <h3 class="ng-binding">Não existem alunos cadastrados</h4>
+                <h3 class="ng-binding">Não existem alunos cadastrados</h3>
 
             </div>
             <div ng-if="!team" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">

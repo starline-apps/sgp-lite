@@ -140,9 +140,7 @@ SGPApp
                     blnAlternatives = true;
                 }
             }
-
             if (!isNotEmpty(objSend["tags"])){
-                alert("Preencha as Tags");
                 Common.showToastMessage("Favor preencher ao menos uma tag !","warning");
                 $rootScope.loadingContent = false;
             }else if (!isNotEmpty(objSend["text"])){
@@ -168,6 +166,25 @@ SGPApp
 
         };
 
+    $scope.$watch('search', function(value) {
+      if (value==="" || value===undefined){
+        $("md-item-content").each(function(){
+          $(this).show(false);
+          $(this).next("md-divider").show(false);
+        });
+      }else{
+        $("md-item-content").each(function(){
+          $(this).hide();
+          $(this).next("md-divider").hide();
+        });
+      }
+      $(".searchable").each(function(){
+        if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+          $(this).closest("md-item-content").show();
+          $(this).closest("md-item-content").next("md-divider").show();
+        }
+      });
+    });
 
         $scope.tagIndex = null;
         $scope.editTag = function(index) {

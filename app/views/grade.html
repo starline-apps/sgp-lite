@@ -1,0 +1,91 @@
+<div class="row p-v-5 p-h-20 m-h-10 m-b-10">
+  <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+    <md-toolbar class="md-theme-dark color-bg-4 p-0">
+      <h2 class="md-toolbar-tools">
+        <md-button  ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
+          <button class="md-button-inner">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+          <div class="md-ripple-container"></div>
+        </md-button>
+        <span>Notas registradas</span>
+      </h2>
+    </md-toolbar>
+
+
+    <md-content class="p-5 scrollable" ng-show="!printMode && !editMode && !loadingContent">
+      <div class="row m-v-10">
+        <div class="col-xs-6">
+          <div class=col-xs-12" ng-if="teams.length==0" layout="horizontal" layout-align="center center">
+            <span class="s-110 m-t-10 bold">Não existem turmas cadastradas. Clique <a ui-sref="team">aqui</a> para cadastrar</span>
+          </div>
+          <div class="dropdown col-xs-8" ng-if="teams.length!=0">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+              <span ng-if="!team.description">Selecione a turma</span>
+              <span ng-if="team.description">{{team.description}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation" ng-repeat="teamFilter in teams"><a role="menuitem" tabindex="-1" ng-click="setTeam(teamFilter)">{{teamFilter.description}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <md-item ng-repeat="(key,item) in dataSource" class="ng-scope" role="listitem">
+        <md-item-content class="row p-h-20" style="min-height: 100px;">
+          <div class="md-tile-left col-xs-2 col-lg-1">
+            <md-checkbox ng-model="isChecked" aria-label="Finished?">
+
+            </md-checkbox>
+          </div>
+          <div class="col-xs-8 col-lg-7 md-tile-content" layout="vertical" layout-align="center start">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.description}}</h4>
+              </div>
+              <div class="col-xs-12">
+                <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
+                  <span class="label label-default s-80 color-bg-4">
+                      <span class="pointer searchable">{{tag}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-1" layout="vertical" layout-align="center center">
+            <stl-fab id="'fabPrint'+$index"
+                     iconclass="'glyphicon glyphicon-print'"
+                     tooltip="'Imprimir'"
+                     css="'md-button-fab bg-grey-dark c-white m-v-10 m-h-10'"
+                     ng-click="print(item)">
+            </stl-fab>
+          </div>
+
+        </md-item-content>
+        <md-divider inset=""></md-divider>
+      </md-item>
+      <div ng-if="dataSource.length==0" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+
+        <h3 class="ng-binding">Não existem Provas Corrigidas pra essa turma</h3>
+
+      </div>
+      <div ng-if="!team" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+
+        <h3 class="ng-binding">Selecione a turma</h3>
+
+      </div>
+    </md-content>
+    <md-content class="p-5 scrollable" ng-show="loadingContent">
+      <div layout="vertical" layout-align="center center" style="height:400px">
+
+        <div ng-include src="'views/loading-app.html'" layout="vertical" class="fill" layout-align="center center" >
+
+        </div>
+
+      </div>
+    </md-content>
+
+  </div>
+</div>

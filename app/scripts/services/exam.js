@@ -211,7 +211,7 @@ SGPApp
                 */
 
 
-                service.getByExam(user, exam._id).then(function(items){
+                service.getItemsByExam(user, exam._id).then(function(items){
 
                     if (items!==null) {
 

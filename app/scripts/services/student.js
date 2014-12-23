@@ -1,20 +1,27 @@
 "use strict";
 
 SGPApp
-    .factory("StudentService", ["$http","$q","localStorageService","Common","S3","Dynamo","Config", function($http,$q, localStorageService,Common,S3,Dynamo,Config) {
+    .factory("StudentService", ["$http","$q","localStorageService","Common","S3","Dynamo","Config","TeamService", function($http,$q, localStorageService,Common,S3,Dynamo,Config, TeamService) {
 
 
-    /*
-
-     DataString:	{\"isDeleted\":0,\"name\":\"Vestiba\",\"guid\":\"87dd9a21-29e4-4131-aab9-19f4c90435e1\",
-     \"students\":{\"41f3f975-c1cc-42c8-a5e1-f3604e175491\":{\"isDeleted\":0,\"name\":\"Rodrigo Chain\",\"code\":\"59853\"
-     ,\"lastModified\":1417035398},\"d633e71d-0e1f-45a3-b982-7de458912b7d\":{\"isDeleted\":0,\"name\":\"Regina Celia\",\"code\":\"20176\",\"lastModified\":1417035411},\"5d508d07-7231-4010-b55a-6cc509077faf\":{\"isDeleted\":0,\"name\":\"Luiz Zeloca\",\"code\":\"73571\",\"lastModified\":1417035394}},\"lastModified\":1417035410}
-     GuidString:	87dd9a21-29e4-4131-aab9-19f4c90435e1
-     LastModifiedByString:	ios-app
-     LastWrittenNumber:	1417088689
-     UserEmailString:	luberju@gmail.com
-     */
         var service = {
+          getAllLength : function(user) {
+            var d = $q.defer();
+            TeamService.getAll(user).then(function(arr){
+              var length = 0;
+
+              for (var x=0 ; x<arr.length ; x++){
+                if (arr[x].students){
+                  angular.forEach(arr[x].students, function(student) {
+                    length++;
+                  });
+                }
+              }
+              d.resolve(length);
+            });
+
+            return d.promise;
+          },
             getByTeam : function(user, guid) {
                 var d = $q.defer();
 
@@ -43,12 +50,8 @@ SGPApp
                             obj.name = (student.name === undefined) ? "" : student.name;
                             obj.code = (student.code === undefined) ? "" : student.code;
                             obj._id = _id;
-                            console.log(obj);
                             arr.push(obj);
-
                           });
-
-
                         });
                         d.resolve(arr);
                     } else {
@@ -57,90 +60,57 @@ SGPApp
                     }
                 });
 
-
-
                 return d.promise;
             },
-            get : function(user, guid) {
-                var d = $q.defer();
+          save : function(user, student) {
+            var d = $q.defer();
 
-                var keyConditions = {
-                    "UserEmail": {
-                        "ComparisonOperator": "EQ",
-                        "AttributeValueList": [
-                            {"S": user.email}
-                        ]
-                    },
-                    "Guid": {
-                        "ComparisonOperator": "EQ",
-                        "AttributeValueList": [
-                            {"S": guid}
-                        ]
-                    }
-                };
-                Dynamo.query("UserClasses",keyConditions).then(function(dataSet) {
-                    if (dataSet) {
-                        var arr = [];
-                        var obj, data;
-                        obj = {};
-                        angular.forEach(dataSet, function(itemSet) {
-                          data = JSON.parse(itemSet.Data.S);
-                          obj.description = data.name;
-                          obj.students = data.students;
-                          obj._id = itemSet.Guid.S;
-                        });
-                        d.resolve(obj);
-                    } else {
-
-                        d.resolve(null);
-                    }
-                });
-                return d.promise;
-            },
-            save : function(user, team) {
-
-                var d = $q.defer();
+            var timestamp = Common.getTimestamp();
 
 
+            var keyConditions = {
+              "UserEmail": {
+                "ComparisonOperator": "EQ",
+                "AttributeValueList": [
+                  {"S": user.email}
+                ]
+              },
+              "Guid": {
+                "ComparisonOperator": "EQ",
+                "AttributeValueList": [
+                  {"S": student.teamId}
+                ]
+              }
+            };
+            Dynamo.query("UserClasses",keyConditions).then(function(dataSet) {
+              if (dataSet) {
+                angular.forEach(dataSet, function(itemSet) {
+                  var teamData = JSON.parse(itemSet.Data.S);
+                  if (!teamData.students){
+                    teamData.students = {};
+                  }
+                  teamData.students[student._id] = student[student._id];
+                  teamData.lastModified = timestamp.toString();
+                  itemSet.Data.S = JSON.stringify(teamData);
+                  itemSet.LastModifiedBy.S = "web";
+                  itemSet.LastWritten.N = timestamp.toString();
 
-
-                var timestamp = Common.getTimestamp();
-
-                var dataSet = {
-                    Item: {
-                        'Guid': {S: team._id},
-                        'UserEmail': {S: user.email},
-                        'LastModifiedBy': {S: "web"},
-                        'LastWritten' : {N: timestamp.toString()},
-                        'Data': {
-                            S: JSON.stringify({
-                                guid: team._id,
-                                name: team.description,
-                                idPublished: 0,
-                                points: team.points,
-                                isDeleted: 0,
-                                lastModified: timestamp,
-                                answerSheetID: team.answerSheetID
-                            })
-                        }
-                    }
-                };
-
-                Dynamo.putItem("UserExams", dataSet).then(function(data){
+                  Dynamo.putItem("UserClasses", {Item:itemSet}).then(function(data){
                     if (data!==null){
-                        d.resolve(data);
+                      d.resolve(data);
                     }else{
-                        d.resolve(null);
+                      d.resolve(null);
                     }
-
+                  });
                 });
+              } else {
+                d.resolve(null);
+              }
+            });
 
+            return d.promise;
 
-
-
-                return d.promise;
-            }
-
+          }
 
         };
 
