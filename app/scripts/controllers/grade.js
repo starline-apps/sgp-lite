@@ -31,8 +31,6 @@ SGPApp
         $scope.loadGrades = function(){
           $rootScope.loadingContent = true;
           UserService.currentUser().then(function(user) {
-
-
             objService.getExamGradeByTeam(user, $scope.exam, $scope.team)
               .then(function (allData) {
                 $scope.students = allData;
@@ -51,31 +49,23 @@ SGPApp
         };
 
         $scope.setExam = function(exam) {
-          $scope.exam = exam;
-          if (!Common.isEmpty($scope.team)){
-            $scope.loadGrades();
-          }
+          $rootScope.loadingContent = true;
+          UserService.currentUser().then(function(user) {
+            ExamService.get(user, exam._id).then(function (examData) {
+                $scope.exam = examData;
+                if (!Common.isEmpty($scope.team)){
+                  $scope.loadGrades();
+                }else{
+                  $rootScope.loadingContent = false;
+                }
+
+              });
+          });
+
+
+
         };
 
-        $scope.$watch('search', function(value) {
-            if (value==="" || value===undefined){
-                $("md-item-content").each(function(){
-                    $(this).show(false);
-                    $(this).next("md-divider").show(false);
-                });
-            }else{
-                $("md-item-content").each(function(){
-                    $(this).hide();
-                    $(this).next("md-divider").hide();
-                });
-            }
-            $(".searchable").each(function(){
-                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
-                    $(this).closest("md-item-content").show();
-                    $(this).closest("md-item-content").next("md-divider").show();
-                }
-            });
-        });
 
     }]);
 

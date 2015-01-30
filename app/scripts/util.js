@@ -72,6 +72,18 @@ SGPApp
               }
               return false;
             },
+            isEmptyOrZero : function(str){
+              if (str==undefined){
+                return true;
+              }else if (str==null){
+                return true;
+              }else if (str.toString==""){
+                return true;
+              }else if (str.toString=="0"){
+                return true;
+              }
+              return false;
+            },
             showToastMessage: function(text, type) {
                 if (type==="warning"){
                     $mdToast.show({

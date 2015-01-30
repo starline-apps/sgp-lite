@@ -41,6 +41,42 @@ SGPApp
 
                 return d.promise;
             },
+            getQuestionsLength : function(user, guid) {
+              var d = $q.defer();
+
+              var keyConditions = {
+                "UserEmail": {
+                  "ComparisonOperator": "EQ",
+                  "AttributeValueList": [
+                    {"S": user.email}
+                  ]
+                },
+                "Guid": {
+                  "ComparisonOperator": "EQ",
+                  "AttributeValueList": [
+                    {"S": guid}
+                  ]
+                }
+              };
+
+              Dynamo.query("UserKeys",keyConditions).then(function(dataSet) {
+                var questions = 0;
+                if (dataSet) {
+                  angular.forEach(dataSet, function(itemSet) {
+                    var data = JSON.parse(itemSet.Data.S);
+                    if (data.questions != undefined){
+                      angular.forEach(data.questions, function(questionSet, questionKey) {
+                        questions++;
+                      });
+                      d.resolve(questions);
+                    }
+                  });
+                }else{
+                  d.resolve(questions);
+                }
+              });
+              return d.promise;
+            },
             get : function(user, guid) {
                 var d = $q.defer();
 
@@ -65,14 +101,19 @@ SGPApp
                         obj = {};
                         angular.forEach(dataSet, function(itemSet) {
 
+                          service.getQuestionsLength(user, guid).then(function(questions){
                             data = JSON.parse(itemSet.Data.S);
+                            obj.questions = questions;
                             obj.description = data.name;
                             obj.points = data.points;
                             obj.tags = (itemSet.Tags!==undefined) ? itemSet.Tags.S : "";
                             obj.header = (itemSet.Header!==undefined) ? JSON.parse(itemSet.Header.S) : [];
                             obj._id = itemSet.Guid.S;
+                            d.resolve(obj);
+                          });
+
                         });
-                        d.resolve(obj);
+
                     } else {
 
                         d.resolve(null);
