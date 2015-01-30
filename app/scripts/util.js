@@ -62,6 +62,16 @@ SGPApp
             getApiUrl : function () {
                 return "http://192.168.16.58:1313/api";
             },
+            isEmpty : function(str){
+              if (str==undefined){
+                return true;
+              }else if (str==null){
+                return true;
+              }else if (str.toString==""){
+                return true;
+              }
+              return false;
+            },
             showToastMessage: function(text, type) {
                 if (type==="warning"){
                     $mdToast.show({

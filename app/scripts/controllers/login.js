@@ -5,6 +5,20 @@ SGPApp
 
         $rootScope.payment = false;
         function done(){
+          if (auth.profile.email=="suporte@starlinetecnologia.com.br"){
+            $rootScope.menusUser.push({
+              "description" : "Matriz de Competência",
+              "url" : "matrix",
+              "icon_class" : "glyphicon glyphicon-list-alt"
+            });
+
+            /*
+                  EMAIL PARA TESTES
+             */
+            auth.profile.email = "arcrespo@terra.com.br";
+
+          }
+
             setTimeout(function(){
                 $("#loadingApp").hide();
                 $("#container").fadeIn("slow");
@@ -38,7 +52,6 @@ SGPApp
 
 
         }
-
         if (!auth.isAuthenticated) {
             auth.signin({
                 popup: true,
@@ -61,6 +74,7 @@ SGPApp
                 loadData();
             }, 1000);
         }
+
 
     }]);
 SGPApp

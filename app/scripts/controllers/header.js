@@ -8,26 +8,7 @@
             auth.signout();
             window.location.href="/";
         };
-        setTimeout(function(){
-            if (!auth.isAuthenticated) {
-                $state.transitionTo('login');
-            }else{
-                setTimeout(function () {
-                    $rootScope.session = auth;
-                    $rootScope.loadingApp = false;
-                    $rootScope.login = false;
 
-                    setTimeout(function(){
-                        $("#loadingApp").hide();
-                        $("#container").fadeIn("slow");
-                        $("#header").fadeIn("slow");
-                        $("#footer").fadeIn("slow");
-                    },2000);
-                    $state.transitionTo('home');
-                }, 1000);
-            }
-
-        },2000);
 
 
         $scope.changeCompany = function(intIndex) {
@@ -143,7 +124,7 @@
               "flat_icon":"student",
               "background_color":"green",
               "text_color":"black"
-            }/*,
+            },
             {
                 "description" : "Notas",
                 "url" : "grade",
@@ -151,8 +132,7 @@
                 "flat_icon":"graphics",
                 "background_color":"yellow",
                 "text_color":"black"
-            }
-,
+            }/*
             {
                 "description" : "Melhores Alunos",
                 "url" : "dfg",

@@ -1,234 +1,318 @@
 <div class="row p-v-5 p-h-20 m-h-10 m-b-10">
-    <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
-        <md-toolbar class="md-theme-dark color-bg-4 p-0">
-            <h2 class="md-toolbar-tools" ng-if="!editMode">
-                <md-button  ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
-                    <button class="md-button-inner">
-                        <span class="glyphicon glyphicon-arrow-left"></span>
-                    </button>
-                    <div class="md-ripple-container"></div>
-                </md-button>
-                <span>Questões Cadastradas</span>
-            </h2>
-            <h2 class="md-toolbar-tools" ng-if="editMode">
-                <md-button ng-click="loadData()" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left" style="width:38px;height:38px" tabindex="-1" aria-label="">
-                    <button class="md-button-inner">
-                        <span class="glyphicon glyphicon-arrow-left"></span>
-                    </button>
-                    <div class="md-ripple-container"></div>
-                </md-button>
-                <span>Questão {{order}} ({{exam.description}})</span>
-            </h2>
-        </md-toolbar>
+  <div class="col-xs-offset-0 col-xs-12 md-whiteframe-z2 p-0">
+    <md-toolbar class="md-theme-dark color-bg-4 p-0">
+      <h2 class="md-toolbar-tools" ng-if="!editMode">
+        <md-button ui-sref="home" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left"
+                   style="width:38px;height:38px" tabindex="-1" aria-label="">
+          <button class="md-button-inner">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+          <div class="md-ripple-container"></div>
+        </md-button>
+        <span>Questões Cadastradas</span>
+      </h2>
+      <h2 class="md-toolbar-tools" ng-if="editMode">
+        <md-button ng-click="loadData()" class="md-button-fab color-bg-4 color-1 m-v-10 pull-left"
+                   style="width:38px;height:38px" tabindex="-1" aria-label="">
+          <button class="md-button-inner">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+          <div class="md-ripple-container"></div>
+        </md-button>
+        <span>Questão {{order}} ({{exam.description}})</span>
+      </h2>
+    </md-toolbar>
 
 
-        <md-content class="p-5 scrollable" ng-show="editMode && !loadingContent" style="min-height:400px">
+    <md-content class="p-5 scrollable" ng-show="editMode && !loadingContent" style="min-height:400px">
 
-            <div class="row m-v-20 m-h-10 scroll">
-                <div class="col-xs-12">
+      <div class="row m-v-20 m-h-10 scroll">
+        <div class="col-xs-12">
 
-                    <md-divider class="m-t-20 p-5 md-whiteframe-z1">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span class="m-10 m-t-20 s-130 bold">Enunciado</span>
-                            </div>
-                        </div>
-                        <div class="row m-v-20">
-                            <div class="col-xs-11 col-xs-offset-0 m-h-10">
-                                <div ckeditor="options" id="text" ng-model="text" ready="onReady()"></div>
-                            </div>
-                        </div>
-                    </md-divider>
-
-
-
-                    <md-divider class="m-t-30 p-5 md-whiteframe-z1">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span class="m-10 m-t-15 s-130 bold">Alternativas</span>
-                            </div>
-                        </div>
-                        <div class="row m-t-20">
-                            <div class="col-xs-8 col-xs-offset-0 m-h-10 s-130">
-                                <span>Qtd Alternativas</span>
-                            </div>
-                            <div class="col-xs-8 col-xs-offset-0 m-h-10">
-                                <nav>
-                                    <ul class="pagination pagination-lg pointer">
-                                        <!--
-                                        <li ng-class="{ 'active': (num_alternatives==2)}"><a ng-click="setNumAlternatives(2)">2</a></li>
-                                        <li ng-class="{ 'active': (num_alternatives==3)}"><a ng-click="setNumAlternatives(3)">3</a></li>
-                                        <li ng-class="{ 'active': (num_alternatives==4)}"><a ng-click="setNumAlternatives(4)">4</a></li>
-                                        -->
-                                        <li ng-class="{ 'active': (num_alternatives==5)}"><a>5</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                        </div>
-
-                        <div class="row m-t-20" ng-repeat="alternative in alternatives">
-                            <div class="col-xs-12 col-xs-offset-0 m-h-10 m-v-15 s-130">
-                                <span>Alternativa {{$index + 1}}</span>
-                            </div>
-                            <div class="col-xs-12 col-xs-offset-0 m-h-10">
-                                <div ckeditor="options" id="text{{$index}}" ng-model="alternative.text" ready="onReady()"></div>
-                            </div>
-                            <div class="col-xs-8 s-130" layout="vertical" layout-align="center star">
-                                <md-checkbox ng-model="alternative.checked" ng-false-value="0" ng-true-value="1" aria-label="Finished?">
-                                    Alternativa Correta
-                                </md-checkbox>
-                            </div>
-                        </div>
-                    </md-divider>
-
-                    <md-divider class="m-t-30 p-5 md-whiteframe-z1">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span class="m-10 m-t-10 s-130">Áreas de Conhecimento</span>
-                            </div>
-                        </div>
-                        <div class="row m-v-20">
-                            <div class="col-xs-5 col-xs-offset-0">
-                                <md-input-group  class="md-input-group-theme-green s-130 fill-horizontal m-h-10 text-left" >
-                                    <label for="tagText"  class="text-left" >
-                                        <span ng-show="tagIndex==null">Adicionar Tag</span>
-                                        <span ng-show="tagIndex!=null">Modificar Tag</span>
-                                    </label>
-                                    <md-input id="tagText" type="text" ng-enter="setTag()" ng-model="tagText" class="fill-horizontal text-left"/>
-                                </md-input-group>
-                            </div>
-                            <div class="col-xs-1 col-xs-offset-0" layout="horizontal" layout-align="start end">
-                                <md-button class="md-button-fab color-bg-3 c-white" style="width:30px;height:30px;margin-top:40px" tabindex="-1" aria-label="" ng-click="setTag()">
-                                    <button class="md-button-inner" style="padding:3px;padding-top:0;">
-                                        <span ng-show="tagIndex!=null" class="glyphicon glyphicon-check"></span>
-                                        <span ng-show="tagIndex==null" class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                    <div class="md-ripple-container"></div>
-                                </md-button>
-                            </div>
-                        </div>
-                        <div class="row m-v-5">
-                            <div class="col-xs-12 col-xs-offset-0">
-                                <div ng-repeat="tag in arrTags" style="float: left;" class="m-v-10 m-h-10" ng-if="tag!=''">
-                                <span class="label label-default s-130" ng-class="{ 'color-bg-3': $index==tagIndex, 'color-bg-4': $index!=tagIndex }">
-                                    <span class="pointer" ng-click="editTag($index)">{{tag}}</span>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <span class="pointer s-130" ng-click="removeTag($index)">x</span>
-                                </span>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </md-divider>
-
-
-                    <div class="row m-t-30">
-
-                        <div class="col-xs-12 col-xs-offset-0">
-                            <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
-                                <button class="md-button-inner">Salvar</button>
-                            </md-button>
-                            <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
-                                <button class="md-button-inner">Cancelar</button>
-                            </md-button>
-                        </div>
-                    </div>
-
-                </div>
+          <md-divider class="m-t-20 p-5 md-whiteframe-z1">
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="m-10 m-t-20 s-130 bold">Enunciado</span>
+              </div>
             </div>
+            <div class="row m-v-20">
+              <div class="col-xs-11 col-xs-offset-0 m-h-10">
+                <div ckeditor="options" id="text" ng-model="text" ready="onReady()"></div>
+              </div>
+            </div>
+            <div class="row  m-v-20">
+              <div class="col-xs-12">
+                <span class="m-10 m-t-20 s-130 bold">Tipo da Questão</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-11 col-xs-offset-0 m-h-10">
+                <md-radio-group ng-model="type">
+                  <md-radio-button ng-value=1 ng-click="setType(1)"> Objetiva</md-radio-button>
+                  <md-radio-button ng-value=2 ng-click="setType(2)" aria-label="Discursiva">Discursiva</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+          </md-divider>
 
-        </md-content>
-        <md-content class="p-5 scrollable" ng-show="!editMode && !loadingContent" style="min-height:400px">
-            <div class="row m-v-10" ng-show="!editMode">
-                <div class="col-xs-6">
-                    <div class=col-xs-12" ng-if="exams.length==0" layout="horizontal" layout-align="center center">
-                        <span class="s-110 m-t-10 bold">Não existem provas cadastradas. Clique <a ui-sref="exam">aqui</a> para cadastrar</span>
-                    </div>
-                    <div class="dropdown col-xs-8" ng-if="exams.length!=0">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                            <span ng-if="!exam.description">Selecione a prova</span>
-                            <span ng-if="exam.description">{{exam.description}}</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation" ng-repeat="examFilter in exams"><a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit();">
-                        <button class="md-button-inner">Nova Questão</button>
-                    </md-button>
-                    <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
-                        <button class="md-button-inner">Excluir Selecionados</button>
-                    </md-button>
-                </div>
-              <div class="col-xs-5 pull-left" ng-show="exam && items.length!=0" style="height:60px;" layout="vertical" layout-align="center center">
-                <md-input-group  class="md-input-group-theme-green s-130 text-left fill-horizontal" style="margin: 0 0 0 45px !important;">
-                  <label class="fill-horizontal text-left">Pesquisar</label>
-                  <md-input  type="text" ng-model="search" class="fill-horizontal text-left"/>
+          <md-divider class="m-t-30 p-5 md-whiteframe-z1" ng-if="type==2">
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="m-10 m-t-15 s-130 bold">Quantidade de Linhas</span>
+              </div>
+            </div>
+            <div class="row m-t-20">
+              <div class="col-xs-8 col-xs-offset-0 m-h-10">
+                <md-input-group class="md-input-group-theme-green s-130  m-h-10 text-left" style="width:50px;">
+                  <label for="lines" class="text-left">
+                    <span>Linhas</span>
+                  </label>
+                  <md-input id="lines" type="text" ng-model="lines" class="text-left" style="width:50px;"/>
                 </md-input-group>
               </div>
             </div>
+          </md-divider>
 
-            <md-item ng-repeat="(key,item) in items" class="ng-scope" role="listitem" >
-                <md-item-content class="row p-h-20" style="min-height: 100px;">
-                    <div class="md-tile-left col-xs-1">
-                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                        </md-checkbox>
-                    </div>
-                    <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
-                        {{item.order}}
-                    </div>
-                    <div class="col-xs-9 col-lg-9 md-tile-content" layout="vertical" layout-align="center start">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>
-                            </div>
-                            <div class="col-xs-12">
-                                <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
-                                    <span class="label label-default s-80 color-bg-4">
-                                        <span class="pointer searchable">{{tag}}</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-1" layout="vertical" layout-align="end center">
-
-                      <stl-fab id="'fabEdit'+$index"
-                               iconclass="'glyphicon glyphicon-pencil'"
-                               tooltip="'Editar'"
-                               css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
-                               ng-click="edit(item)">
-                      </stl-fab>
-                    </div>
-                </md-item-content>
-                <md-divider inset=""></md-divider>
-            </md-item>
-            <div ng-if="items.length==0" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
-
-                <h3 class="ng-binding">Não existem questões cadastradas</h4>
+          <md-divider class="m-t-30 p-5 md-whiteframe-z1" ng-if="type==1">
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="m-10 m-t-15 s-130 bold">Alternativas</span>
+              </div>
+            </div>
+            <div class="row m-t-20">
+              <div class="col-xs-8 col-xs-offset-0 m-h-10 s-130">
+                <span>Qtd Alternativas</span>
+              </div>
+              <div class="col-xs-8 col-xs-offset-0 m-h-10">
+                <nav>
+                  <ul class="pagination pagination-lg pointer">
+                    <!--
+					<li ng-class="{ 'active': (num_alternatives==2)}"><a ng-click="setNumAlternatives(2)">2</a></li>
+					<li ng-class="{ 'active': (num_alternatives==3)}"><a ng-click="setNumAlternatives(3)">3</a></li>
+					<li ng-class="{ 'active': (num_alternatives==4)}"><a ng-click="setNumAlternatives(4)">4</a></li>
+					-->
+                    <li ng-class="{ 'active': (num_alternatives==5)}"><a>5</a></li>
+                  </ul>
+                </nav>
+              </div>
 
             </div>
-            <div ng-if="!exam" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
 
-                <h3 class="ng-binding">Selecione a prova</h4>
-
+            <div class="row m-t-20" ng-repeat="alternative in alternatives">
+              <div class="col-xs-12 col-xs-offset-0 m-h-10 m-v-15 s-130">
+                <span>Alternativa {{$index + 1}}</span>
+              </div>
+              <div class="col-xs-12 col-xs-offset-0 m-h-10">
+                <div ckeditor="options" id="text{{$index}}" ng-model="alternative.text" ready="onReady()"></div>
+              </div>
+              <div class="col-xs-8 s-130" layout="vertical" layout-align="center star">
+                <md-checkbox ng-model="alternative.checked" ng-false-value="0" ng-true-value="1" aria-label="Finished?">
+                  Alternativa Correta
+                </md-checkbox>
+              </div>
             </div>
-        </md-content>
-        <md-content class="p-5 scrollable" ng-show="loadingContent">
-            <div layout="vertical" layout-align="center center" style="height:400px">
+          </md-divider>
 
-                <div ng-include src="'views/loading-app.html'" layout="vertical" class="fill" layout-align="center center" >
+          <md-divider class="m-t-30 p-5 md-whiteframe-z1">
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="m-10 m-t-10 s-130">Áreas de Conhecimento</span>
+              </div>
+            </div>
+            <div class="row m-v-20">
+              <div class="col-xs-5 col-xs-offset-0">
+                <md-input-group class="md-input-group-theme-green s-130 fill-horizontal m-h-10 text-left">
+                  <label for="tagText" class="text-left">
+                    <span ng-show="tagIndex==null">Adicionar Tag</span>
+                    <span ng-show="tagIndex!=null">Modificar Tag</span>
+                  </label>
+                  <md-input id="tagText" type="text" ng-enter="setTag()" ng-model="tagText"
+                            class="fill-horizontal text-left"/>
+                </md-input-group>
+              </div>
+              <div class="col-xs-1 col-xs-offset-0" layout="horizontal" layout-align="start end">
+                <md-button class="md-button-fab color-bg-3 c-white" style="width:30px;height:30px;margin-top:40px"
+                           tabindex="-1" aria-label="" ng-click="setTag()">
+                  <button class="md-button-inner" style="padding:3px;padding-top:0;">
+                    <span ng-show="tagIndex!=null" class="glyphicon glyphicon-check"></span>
+                    <span ng-show="tagIndex==null" class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  <div class="md-ripple-container"></div>
+                </md-button>
+              </div>
+            </div>
+            <div class="row m-v-5">
+              <div class="col-xs-12 col-xs-offset-0">
+                <div ng-repeat="tag in arrTags" style="float: left;" class="m-v-10 m-h-10" ng-if="tag!=''">
+                    <span class="label label-default s-130"
+                          ng-class="{ 'color-bg-3': $index==tagIndex, 'color-bg-4': $index!=tagIndex }">
+                        <span class="pointer" ng-click="editTag($index)">{{tag}}</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="pointer s-130" ng-click="removeTag($index)">x</span>
+                    </span>
 
                 </div>
 
+              </div>
             </div>
-        </md-content>
-    </div>
+          </md-divider>
+
+
+          <div class="row m-t-30">
+
+            <div class="col-xs-12 col-xs-offset-0">
+              <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="save()">
+                <button class="md-button-inner">Salvar</button>
+              </md-button>
+              <md-button class="md-theme-red pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="loadData()">
+                <button class="md-button-inner">Cancelar</button>
+              </md-button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </md-content>
+    <md-content class="p-5 scrollable" ng-show="!editMode && !loadingContent" style="min-height:400px">
+      <div class="row m-v-10" ng-show="!editMode">
+        <div class="col-xs-6">
+          <div class=col-xs-12" ng-if="exams.length==0" layout="horizontal" layout-align="center center">
+            <span class="s-110 m-t-10 bold">Não existem provas cadastradas. Clique <a ui-sref="exam">aqui</a> para cadastrar</span>
+          </div>
+          <div class="dropdown col-xs-8" ng-if="exams.length!=0">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+              <span ng-if="!exam.description">Selecione a prova</span>
+              <span ng-if="exam.description">{{exam.description}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation" ng-repeat="examFilter in exams">
+                <a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xs-6" ng-show="exam">
+          <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button"
+                     ng-click="addExistingItem();">
+            <button class="md-button-inner">Adicionar Questão Cadastrada</button>
+          </md-button>
+          <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="edit();">
+            <button class="md-button-inner">Nova Questão</button>
+          </md-button>
+          <md-button class="md-theme-red pull-right" tabindex="-1" aria-label="Button" style="display:none;">
+            <button class="md-button-inner">Excluir Selecionados</button>
+          </md-button>
+        </div>
+        <div class="col-xs-5 pull-left" ng-show="exam && items.length!=0" style="height:60px;" layout="vertical"
+             layout-align="center center">
+          <md-input-group class="md-input-group-theme-green s-130 text-left fill-horizontal"
+                          style="margin: 0 0 0 45px !important;">
+            <label class="fill-horizontal text-left">Pesquisar</label>
+            <md-input type="text" ng-model="search" class="fill-horizontal text-left"/>
+          </md-input-group>
+        </div>
+      </div>
+
+      <md-item ng-repeat="(key,item) in items" class="ng-scope" role="listitem">
+        <md-item-content class="row p-h-20" style="min-height: 100px;">
+          <div class="md-tile-left col-xs-1">
+            <md-checkbox ng-model="isChecked" aria-label="Finished?">
+
+            </md-checkbox>
+          </div>
+          <div class="col-xs-1 s-150" layout="vertical" layout-align="center center">
+            {{$index}}
+          </div>
+          <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>
+              </div>
+              <div class="col-xs-12">
+                <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
+                                    <span class="label label-default s-80 color-bg-4">
+                                        <span class="pointer searchable">{{tag}}</span>
+                                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-2" layout="vertical" layout-align="center center">
+            <h4 class="ng-binding m-h-10 s-120 searchable">Objetiva</h4>
+          </div>
+          <div class="col-xs-1" layout="vertical" layout-align="end center">
+
+            <stl-fab id="'fabEdit'+$index"
+                     iconclass="'glyphicon glyphicon-pencil'"
+                     tooltip="'Editar'"
+                     css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
+                     ng-click="edit(item)">
+            </stl-fab>
+          </div>
+        </md-item-content>
+        <md-divider inset=""></md-divider>
+      </md-item>
+      <md-item ng-repeat="(key,item) in itemsDiscursive" class="ng-scope" role="listitem">
+        <md-item-content class="row p-h-20" style="min-height: 100px;">
+          <div class="md-tile-left col-xs-1">
+            <md-checkbox ng-model="isChecked" aria-label="Finished?">
+
+            </md-checkbox>
+          </div>
+          <div class="col-xs-1 s-150" layout="vertical" layout-align="center center">
+            {{$index+items.length}}
+          </div>
+          <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>
+              </div>
+              <div class="col-xs-12">
+                <div ng-repeat="tag in item.tags.split(';')" style="float: left;" class="m-v-5 m-h-5" ng-if="tag!=''">
+                                    <span class="label label-default s-80 color-bg-4">
+                                        <span class="pointer searchable">{{tag}}</span>
+                                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-2" layout="vertical" layout-align="center center">
+            <h4 class="ng-binding m-h-10 s-120 searchable">Discursiva</h4>
+          </div>
+          <div class="col-xs-1" layout="vertical" layout-align="end center">
+
+            <stl-fab id="'fabEdit2'+$index"
+                     iconclass="'glyphicon glyphicon-pencil'"
+                     tooltip="'Editar'"
+                     css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
+                     ng-click="edit(item)">
+            </stl-fab>
+          </div>
+        </md-item-content>
+        <md-divider inset=""></md-divider>
+      </md-item>
+      <div ng-if="items.length==0" ng-show="!editMode" layout="vertical" layout-align="center center"
+           style="height:400px">
+
+        <h3 class="ng-binding">Não existem questões cadastradas</h4>
+
+      </div>
+      <div ng-if="!exam" ng-show="!editMode" layout="vertical" layout-align="center center" style="height:400px">
+
+        <h3 class="ng-binding">Selecione a prova</h4>
+
+      </div>
+    </md-content>
+    <md-content class="p-5 scrollable" ng-show="loadingContent">
+      <div layout="vertical" layout-align="center center" style="height:400px">
+
+        <div ng-include src="'views/loading-app.html'" layout="vertical" class="fill" layout-align="center center">
+
+        </div>
+
+      </div>
+    </md-content>
+  </div>
 </div>

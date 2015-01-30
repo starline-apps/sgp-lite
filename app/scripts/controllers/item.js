@@ -3,7 +3,7 @@
 "use strict";
 var refreshResult, refreshExamTime, examListInterval, examResultInterval;
 SGPApp
-    .controller("ItemController", ["$rootScope", "$scope", "$stateParams","ItemService","Common","UserService","ExamService",function($rootScope, $scope, $stateParams, ItemService, Common, UserService, ExamService) {
+    .controller("ItemController", ["$rootScope", "$scope", "$stateParams","ItemService","Common","UserService","ExamService","$location",function($rootScope, $scope, $stateParams, ItemService, Common, UserService, ExamService, $location) {
         /** View attributes **/
 // setup editor options
             // Editor options.
@@ -12,7 +12,7 @@ SGPApp
             allowedContent: true,
             entities: false
         };
-
+        $scope.type=1;
         var objService = ItemService;
 
 
@@ -32,7 +32,13 @@ SGPApp
                             objService.getByExam(user, $rootScope.exam._id)
                                 .then(function (allData) {
                                     $scope.items = allData;
-                                    $rootScope.loadingContent = false;
+                                    objService.getDiscursiveByExam(user, $rootScope.exam._id)
+                                      .then(function (allDiscursiveData) {
+                                        $scope.itemsDiscursive = allDiscursiveData;
+
+                                        $rootScope.loadingContent = false;
+
+                                      });
 
                                 });
                         }
@@ -60,9 +66,15 @@ SGPApp
                                     $scope.arrTags = data.tags.split(";");
                                     $scope.tags = data.tags;
                                     $scope.text = data.text;
+                                    $scope.type = data.type;
+                                    if ($scope.type==2){
+                                      $scope.lines = data.lines;
+                                    }else{
+                                      $scope.alternatives = data.alternatives;
+                                      $scope.num_alternatives = data.alternatives.length;
+                                    }
                                     $scope.tagText = "";
-                                    $scope.alternatives = data.alternatives;
-                                    $scope.num_alternatives = data.alternatives.length;
+
                                     $rootScope.loadingContent = false;
                                 });
                         }else{
@@ -71,6 +83,7 @@ SGPApp
                             $scope.arrTags = [];
                             $scope.tagText = "";
                             $scope.text = item.text;
+                            $scope.type = 1;
                             $scope.alternatives = item.alternatives;
                             $scope.num_alternatives = 5;
                             $scope.setNumAlternatives(5);
@@ -83,6 +96,8 @@ SGPApp
                         $scope.arrTags = [];
                         $scope.tagText = "";
                         $scope.text = "";
+                        $scope.type = 1;
+                        $scope.lines = 5;
                         $scope.num_alternatives = 5;
                         $scope.alternatives = [];
                         $scope.order = $scope.items.length+1;
@@ -105,6 +120,14 @@ SGPApp
             $rootScope.exam = exam;
             $scope.loadData();
 
+        };
+        $scope.setType = function(type) {
+
+          if (type==2){
+            $scope.order = $scope.itemsDiscursive.length+1;
+          }else{
+            $scope.order = $scope.items.length+1;
+          }
         };
         $scope.setNumAlternatives = function(num) {
             var arr = new Array();
@@ -129,29 +152,38 @@ SGPApp
             objSend["tags"] = $scope.tags;
             objSend["text"] = $scope.text;
             objSend["order"] = $scope.order;
-            objSend["num_alternatives"] = $scope.num_alternatives;
-            objSend["alternatives"] = $scope.alternatives;
+            objSend["type"] = $scope.type;
+
+          var blnAlternatives = false;
+
+
+            if ($scope.type==2){
+              objSend["lines"] = $scope.lines;
+            }else{
+              objSend["num_alternatives"] = $scope.num_alternatives;
+              objSend["alternatives"] = $scope.alternatives;
+              for (var x=0 ; x<objSend.alternatives.length ; x++){
+                if (objSend.alternatives[x].checked.toString()=="1"){
+                  blnAlternatives = true;
+                }
+              }
+            }
             objSend._id  = ($scope._id != undefined) ? $scope._id : Common.generateUUID();
 
-            var blnAlternatives = false;
-
-            for (var x=0 ; x<objSend.alternatives.length ; x++){
-                if (objSend.alternatives[x].checked.toString()=="1"){
-                    blnAlternatives = true;
-                }
-            }
             if (!isNotEmpty(objSend["tags"])){
                 Common.showToastMessage("Favor preencher ao menos uma tag !","warning");
                 $rootScope.loadingContent = false;
             }else if (!isNotEmpty(objSend["text"])){
                 Common.showToastMessage("Favor preencher o enunciado !","warning");
                 $rootScope.loadingContent = false;
-            }else if (!blnAlternatives){
-                Common.showToastMessage("Favor preencher a alternativa correta !","warning");
+            }else if ($scope.type==2 && !isIntegerGreatherThanZero($scope.lines)){
+                Common.showToastMessage("Favor preencher o número de linhas !","warning");
                 $rootScope.loadingContent = false;
+            }else if ($scope.type==1 && !blnAlternatives){
+              Common.showToastMessage("Favor preencher a alternativa correta !","warning");
+              $rootScope.loadingContent = false;
             }else{
                 UserService.currentUser().then(function(user) {
-
                     objService.save(user, objSend)
                         .then(function(data) {
                             $scope.loadData();
@@ -165,7 +197,13 @@ SGPApp
 
 
         };
+    $scope.addExistingItem = function() {
+      $rootScope.order = $scope.items.length+1;
+      $rootScope.orderDiscursive = $scope.itemsDiscursive.length+1;
+      $location.path("item-find");
 
+
+    };
     $scope.$watch('search', function(value) {
       if (value==="" || value===undefined){
         $("md-item-content").each(function(){
@@ -179,11 +217,17 @@ SGPApp
         });
       }
       $(".searchable").each(function(){
-        if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
-          $(this).closest("md-item-content").show();
-          $(this).closest("md-item-content").next("md-divider").show();
+        if ($(this).text()!=undefined){
+          if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+            $(this).closest("md-item-content").show();
+            $(this).closest("md-item-content").next("md-divider").show();
+          }
         }
+
       });
+
+
+
     });
 
         $scope.tagIndex = null;
@@ -217,7 +261,19 @@ SGPApp
             }
 
         };
-
+        function isIntegerGreatherThanZero(input) {
+          var number = /^\-{0,1}(?:[0-9]+){0,1}(?:\.[0-9]+){0,1}$/i;
+          var regex = RegExp(number);
+          if (regex.test(input) && input.toString().length>0){
+            if (parseInt(input) > 0){
+              return true;
+            }else{
+              return false;
+            }
+          }else{
+            return false;
+          }
+        }
 
         function isNotEmpty(str){
 

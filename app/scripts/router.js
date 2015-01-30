@@ -73,7 +73,11 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         })
 
 
-
+        .state('exam-pdf', {
+          url: '/exam-pdf/:email/:guid',
+          templateUrl: 'views/examPdf.html',
+          controller: 'ExamPdfController'
+        })
         .state('exam', {
             url: '/exam',
             templateUrl: 'views/exam.html',
@@ -85,10 +89,20 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
             templateUrl: 'views/item.html',
             controller: 'ItemController'
         })
+        .state('item-find', {
+          url: '/item-find',
+          templateUrl: 'views/itemFind.html',
+          controller: 'ItemFindController'
+        })
         .state('team', {
           url: '/team',
           templateUrl: 'views/team.html',
           controller: 'TeamController'
+        })
+        .state('matrix', {
+          url: '/matrix',
+          templateUrl: 'views/matrix.html',
+          controller: 'MatrixController'
         })
         .state('student', {
           url: '/student',

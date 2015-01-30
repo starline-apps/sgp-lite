@@ -2,7 +2,7 @@
 /*jshint -W083 */
 "use strict";
 SGPApp
-    .controller("GradeController", ["$rootScope", "$scope","$location", "$stateParams","TeamService","GradeService","Common","UserService","$q",function($rootScope, $scope,$location, $stateParams, TeamService, GradeService, Common,UserService, $q) {
+    .controller("GradeController", ["$rootScope", "$scope","$location", "$stateParams","TeamService","GradeService","Common","UserService","ExamService","$q",function($rootScope, $scope,$location, $stateParams, TeamService, GradeService, Common,UserService, ExamService, $q) {
 
         var objService = GradeService;
         $rootScope.loadingContent = true;
@@ -16,28 +16,45 @@ SGPApp
             TeamService.getAll(user)
               .then(function (teamData) {
                 $scope.teams = teamData;
-                if ($rootScope.team === undefined) {
-                  $rootScope.loadingContent = false;
-                } else {
-                  objService.getExamGradeByTeam(user, $rootScope.team._id)
-                    .then(function (allData) {
-                      $scope.exams = allData;
-                      $rootScope.loadingContent = false;
+                ExamService.getAll(user)
+                  .then(function (examData) {
+                    $scope.exams = examData;
+                    $rootScope.loadingContent = false;
 
-                    });
-                }
+                  });
               });
           });
         };
 
         $scope.loadData();
 
+        $scope.loadGrades = function(){
+          $rootScope.loadingContent = true;
+          UserService.currentUser().then(function(user) {
+
+
+            objService.getExamGradeByTeam(user, $scope.exam, $scope.team)
+              .then(function (allData) {
+                $scope.students = allData;
+                $rootScope.loadingContent = false;
+
+              });
+          });
+        };
 
 
         $scope.setTeam = function(team) {
-          $rootScope.team = team;
-          $scope.loadData();
+          $scope.team = team;
+          if (!Common.isEmpty($scope.exam)){
+            $scope.loadGrades();
+          }
+        };
 
+        $scope.setExam = function(exam) {
+          $scope.exam = exam;
+          if (!Common.isEmpty($scope.team)){
+            $scope.loadGrades();
+          }
         };
 
         $scope.$watch('search', function(value) {

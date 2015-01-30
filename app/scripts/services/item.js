@@ -130,6 +130,14 @@ SGPApp
                                     if (itemSetUserItems.Num_Alternatives.N!=undefined){
                                         questionSet.num_alternatives = itemSetUserItems.Num_Alternatives.N;
                                     }
+                                    questionSet.type = 1;
+                                    if (itemSetUserItems.Type!=undefined){
+                                      if (itemSetUserItems.Type.N!=undefined){
+                                        if (itemSetUserItems.Type.N.toString()=="2"){
+                                          questionSet.type = itemSetUserItems.Type.N;
+                                        }
+                                      }
+                                    }
                                 });
                             }
                         });
@@ -140,6 +148,57 @@ SGPApp
 
                 return d.promise;
             },
+          getDiscursiveByExam : function(user, guid) {
+            var d = $q.defer();
+            var arr = [];
+            var keyConditions = {
+              "ExamId": {
+                "ComparisonOperator": "EQ",
+                "AttributeValueList": [
+                  {"S": guid}
+                ]
+              }
+            };
+
+
+
+            Dynamo.query("UserItemsDiscursive",keyConditions).then(function(dataSetUserItems) {
+              if (dataSetUserItems) {
+                angular.forEach(dataSetUserItems, function(itemSetUserItems) {
+                  var obj = {};
+                  if (itemSetUserItems.Text.S!=undefined){
+                    obj.text = itemSetUserItems.Text.S;
+                  }
+                  if (itemSetUserItems.Guid.S!=undefined){
+                    obj._id = itemSetUserItems.Guid.S;
+                  }
+                  if (itemSetUserItems.Tags.S!=undefined){
+                    obj.tags = itemSetUserItems.Tags.S;
+                  }
+                  if (itemSetUserItems.Lines.N!=undefined){
+                    obj.lines = itemSetUserItems.Lines.N;
+                  }
+                  if (itemSetUserItems.Order.N!=undefined){
+                    obj.order = itemSetUserItems.Order.N;
+                  }
+                  if (itemSetUserItems.Type.N!=undefined){
+                    obj.type = parseInt(itemSetUserItems.Type.N);
+                  }
+                  arr.push(obj);
+                });
+
+              }
+              d.resolve(arr);
+
+            });
+
+
+
+
+
+
+            return d.promise;
+          },
             getFile : function(item) {
                 var defer = $q.defer();
                 if (item._id != undefined){
@@ -166,147 +225,193 @@ SGPApp
             save : function(user, item) {
                 var d = $q.defer();
                 var timestamp = Common.getTimestamp();
+              console.log(item);
+              if (item.type == 1){
                 var arrIndexes = ["A","B","C","D","E"];
 
                 //var a = {"questions":{"3":{"answers":{"A":0,"D":0,"B":1,"E":0,"C":0}},"1":{"answers":{"A":0,"D":1,"B":0,"E":0,"C":0}},"4":{"answers":{"A":1,"D":0,"B":0,"E":0,"C":0}},"2":{"answers":{"A":0,"D":0,"B":0,"E":0,"C":1}},"5":{"answers":{"A":0,"D":0,"B":0,"E":1,"C":0}}},"guid":"6129E92C-A082-4E4D-9288-676EF9CD4999","lastModified":1412708417}
 
                 var keyConditions = {
-                    "UserEmail": {
-                        "ComparisonOperator": "EQ",
-                        "AttributeValueList": [
-                            {"S": user.email}
-                        ]
-                    },
-                    "Guid": {
-                        "ComparisonOperator": "EQ",
-                        "AttributeValueList": [
-                            {"S": item.guid}
-                        ]
-                    }
+                  "UserEmail": {
+                    "ComparisonOperator": "EQ",
+                    "AttributeValueList": [
+                      {"S": user.email}
+                    ]
+                  },
+                  "Guid": {
+                    "ComparisonOperator": "EQ",
+                    "AttributeValueList": [
+                      {"S": item.guid}
+                    ]
+                  }
                 };
                 Dynamo.query("UserKeys",keyConditions).then(function(dataSetUserKeys) {
-                    var questions;
-                    var question = {"answers":{}};
-                    for(var j=0; j<item.alternatives.length;j++) {
-                        question.answers[arrIndexes[j]] = item.alternatives[j].checked==1 ? 1 : 0;
-                    }
+                  var questions;
+                  var question = {"answers":{}};
+                  for(var j=0; j<item.alternatives.length;j++) {
+                    question.answers[arrIndexes[j]] = item.alternatives[j].checked==1 ? 1 : 0;
+                  }
 
 
-                    if (dataSetUserKeys!=null){
-                        if (dataSetUserKeys.length!=0){
-                            questions = JSON.parse(dataSetUserKeys[0].Data.S).questions;
-                            questions[item.order] = question;
-                        }else{
-                            questions = {};
-                            questions[item.order] = question;
-                        }
-
+                  if (dataSetUserKeys!=null){
+                    if (dataSetUserKeys.length!=0){
+                      questions = JSON.parse(dataSetUserKeys[0].Data.S).questions;
+                      questions[item.order] = question;
                     }else{
-                        questions = {};
-                        questions.questions[item.order] = question;
+                      questions = {};
+                      questions[item.order] = question;
                     }
 
+                  }else{
+                    questions = {};
+                    questions.questions[item.order] = question;
+                  }
 
-                    var keys = {
-                        guid: item.guid,
-                        questions: questions,
-                        lastModified: timestamp
-                    };
 
-                    var dataSet = {
+                  var keys = {
+                    guid: item.guid,
+                    questions: questions,
+                    lastModified: timestamp
+                  };
+
+                  var dataSet = {
+                    Item: {
+                      'Guid': {S: item.guid},
+                      'UserEmail': {S: user.email},
+                      'Data': {
+                        S: JSON.stringify(keys)
+                      },
+                      'LastModifiedBy':{S: 'web'}
+                    }
+                  };
+                  Dynamo.putItem("UserKeys", dataSet).then(function(keysResult){
+                    if (keysResult!=null){
+                      dataSet = {
                         Item: {
-                            'Guid': {S: item.guid},
-                            'UserEmail': {S: user.email},
-                            'Data': {
-                                S: JSON.stringify(keys)
-                            },
-                            'LastModifiedBy':{S: 'web'}
+                          'ExamId': {S: item.guid},
+                          'Guid': {S: item._id},
+                          'LastModifiedBy': {S: "web"},
+                          'LastWritten' : {N: timestamp.toString()},
+                          'Order' : {N: item.order.toString()},
+                          'Type' : {N: item.type.toString()},
+                          'Text' : {S: $("<div/>").html(item.text).text()},
+                          'Tags' : {S: item.tags},
+                          'Num_Alternatives' : {N: item.num_alternatives.toString()}
+
                         }
-                    };
-                    Dynamo.putItem("UserKeys", dataSet).then(function(keysResult){
-                        if (keysResult!=null){
-                            dataSet = {
-                                Item: {
-                                    'ExamId': {S: item.guid},
-                                    'Guid': {S: item._id},
-                                    'LastModifiedBy': {S: "web"},
-                                    'LastWritten' : {N: timestamp.toString()},
-                                    'Order' : {N: item.order.toString()},
-                                    'Text' : {S: $("<div/>").html(item.text).text()},
-                                    'Tags' : {S: item.tags},
-                                    'Num_Alternatives' : {N: item.num_alternatives.toString()}
-
-                                }
-                            };
-                            Dynamo.putItem("UserItems", dataSet).then(function(itemsResult){
-                                if (itemsResult!=null){
-                                    var obj = {
-                                        "_id" : item._id,
-                                        "user_email" : user.email,
-                                        "guid" : item.guid,
-                                        "text" : item.text,
-                                        "alternatives" : item.alternatives
-                                    };
+                      };
+                      Dynamo.putItem("UserItems", dataSet).then(function(itemsResult){
+                        if (itemsResult!=null){
+                          var obj = {
+                            "_id" : item._id,
+                            "user_email" : user.email,
+                            "guid" : item.guid,
+                            "text" : item.text,
+                            "alternatives" : item.alternatives
+                          };
 
 
-                                    S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
+                          S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
 
-                                        if (data!=null) {
+                            if (data!=null) {
 
-                                            service.getByExam(user, item.guid).then(function(items){
+                              service.getByExam(user, item.guid).then(function(items){
 
-                                                if (items!==null) {
+                                if (items!==null) {
 
-                                                    var ctItems = items.length;
-                                                    ExamService.get(user, item.guid).then(function(examData){
+                                  var ctItems = items.length;
+                                  ExamService.get(user, item.guid).then(function(examData){
 
-                                                        var examSheetId = 1;
+                                    var examSheetId = 1;
 
-                                                        if (parseInt(ctItems>20)){
-                                                            examSheetId = 2;
-                                                        }else if (ctItems>50){
-                                                            examSheetId = 3;
-                                                        }
+                                    if (parseInt(ctItems>20)){
+                                      examSheetId = 2;
+                                    }else if (ctItems>50){
+                                      examSheetId = 3;
+                                    }
 
-                                                        if (examData!==null) {
-                                                            examData.answerSheetID = examSheetId;
-                                                            examData.tags = (examData.tags==="") ? examData.description : examData.tags;
-                                                            ExamService.save(user, examData).then(function(examSaveData){
+                                    if (examData!==null) {
+                                      examData.answerSheetID = examSheetId;
+                                      examData.tags = (examData.tags==="") ? examData.description : examData.tags;
+                                      ExamService.save(user, examData).then(function(examSaveData){
 
-                                                                if (examSaveData!==null) {
-                                                                    d.resolve(examSaveData);
-                                                                }else {
-                                                                    d.resolve(null);
-                                                                }
-
-                                                            });
-                                                        }else {
-                                                            d.resolve(null);
-                                                        }
-
-                                                    });
-                                                }else {
-                                                    d.resolve(null);
-                                                }
-
-                                            });
+                                        if (examSaveData!==null) {
+                                          d.resolve(examSaveData);
                                         }else {
-                                            d.resolve(null);
+                                          d.resolve(null);
                                         }
 
-                                    });
-                                }else{
-                                    d.resolve(null);
+                                      });
+                                    }else {
+                                      d.resolve(null);
+                                    }
+
+                                  });
+                                }else {
+                                  d.resolve(null);
                                 }
-                            });
+
+                              });
+                            }else {
+                              d.resolve(null);
+                            }
+
+                          });
                         }else{
-                            d.resolve(null);
+                          d.resolve(null);
                         }
+                      });
+                    }else{
+                      d.resolve(null);
+                    }
 
 
-                    });
+                  });
 
                 });
+              }else if (item.type == 2){
+
+                var dataSet = {
+                  Item: {
+                    'ExamId': {S: item.guid},
+                    'Guid': {S: item._id},
+                    'LastModifiedBy': {S: "web"},
+                    'LastWritten' : {N: timestamp.toString()},
+                    'Order' : {N: item.order.toString()},
+                    'Type' : {N: item.type.toString()},
+                    'Text' : {S: $("<div/>").html(item.text).text()},
+                    'Tags' : {S: item.tags},
+                    'Lines' : {N: item.lines.toString()}
+                  }
+                };
+                Dynamo.putItem("UserItemsDiscursive", dataSet).then(function(itemsResult){
+                  if (itemsResult!=null){
+                    var obj = {
+                      "_id" : item._id,
+                      "user_email" : user.email,
+                      "guid" : item.guid,
+                      "text" : item.text
+                    };
+
+
+                    S3.putObject(Config.getBucketName(), "items/" + item._id + ".json", obj).then(function(data){
+
+                      if (data!=null) {
+                        d.resolve(data);
+
+                      }else {
+                        d.resolve(null);
+                      }
+
+                    });
+                  }else{
+                    d.resolve(null);
+                  }
+                });
+
+              }
+
+
 
 
                 return d.promise;

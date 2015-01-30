@@ -145,9 +145,15 @@ SGPApp
             UserService.currentUser().then(function(user) {
                 ExamService.getPrintableVersion(user, exam).then(function(data){
                     $scope.printData = data;
+                    ItemService.getDiscursiveByExam(user, exam._id)
+                      .then(function (allDiscursiveData) {
+                        $scope.printDataDiscursive = allDiscursiveData;
 
-                    $rootScope.loadingContent = false;
-                    $scope.printMode = true;
+                        $rootScope.loadingContent = false;
+                        $scope.printMode = true;
+                      });
+
+
                 });
             });
 
@@ -168,10 +174,12 @@ SGPApp
                 });
             }
             $(".searchable").each(function(){
-                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
-                    $(this).closest("md-item-content").show();
-                    $(this).closest("md-item-content").next("md-divider").show();
+              if ($(this).text() != undefined) {
+                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                  $(this).closest("md-item-content").show();
+                  $(this).closest("md-item-content").next("md-divider").show();
                 }
+              }
             });
         });
 
