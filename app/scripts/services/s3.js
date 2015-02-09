@@ -1,5 +1,5 @@
 SGPApp
-    .factory('S3', function($q, AWSService) {
+    .factory('S3', ["$q","AWSService",function($q, AWSService) {
         var service = {
             putObject: function(bucket, key, object) {
                 var d = $q.defer();
@@ -61,4 +61,4 @@ SGPApp
 
         };
         return service;
-    });
+    }]);

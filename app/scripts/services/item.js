@@ -8,7 +8,6 @@ SGPApp
 
             var d = $q.defer();
 
-
             ExamService.getAll(user).then(function(arrExams){
               var guid, keyConditions, length, ct;
               length = 0;
@@ -38,10 +37,6 @@ SGPApp
 
                 }
               }
-
-
-
-
 
             });
 
@@ -98,8 +93,6 @@ SGPApp
                         });
                     }
 
-
-
                     angular.forEach(arr, function(questionSet, questionKey) {
                         keyConditions = {
                             "Order": {
@@ -127,6 +120,16 @@ SGPApp
                                     if (itemSetUserItems.Tags.S!=undefined){
                                         questionSet.tags = itemSetUserItems.Tags.S;
                                     }
+                                  if (itemSetUserItems.matrixParent!=undefined){
+                                    if (itemSetUserItems.matrixParent.S!=undefined){
+                                      questionSet.matrixParent = itemSetUserItems.matrixParent.S;
+                                    }
+                                  }
+                                  if (itemSetUserItems.matrixChild!=undefined){
+                                    if (itemSetUserItems.matrixChild.S!=undefined){
+                                      questionSet.matrixChild = itemSetUserItems.matrixChild.S;
+                                    }
+                                  }
                                     if (itemSetUserItems.Num_Alternatives.N!=undefined){
                                         questionSet.num_alternatives = itemSetUserItems.Num_Alternatives.N;
                                     }
@@ -160,8 +163,6 @@ SGPApp
               }
             };
 
-
-
             Dynamo.query("UserItemsDiscursive",keyConditions).then(function(dataSetUserItems) {
               if (dataSetUserItems) {
                 angular.forEach(dataSetUserItems, function(itemSetUserItems) {
@@ -175,6 +176,17 @@ SGPApp
                   if (itemSetUserItems.Tags.S!=undefined){
                     obj.tags = itemSetUserItems.Tags.S;
                   }
+                  if (itemSetUserItems.matrixParent!=undefined){
+                    if (itemSetUserItems.matrixParent.S!=undefined){
+                      obj.matrixParent = itemSetUserItems.matrixParent.S;
+                    }
+                  }
+                  if (itemSetUserItems.matrixChild!=undefined){
+                    if (itemSetUserItems.matrixChild.S!=undefined){
+                      obj.matrixChild = itemSetUserItems.matrixChild.S;
+                    }
+                  }
+
                   if (itemSetUserItems.Lines.N!=undefined){
                     obj.lines = itemSetUserItems.Lines.N;
                   }
@@ -191,11 +203,6 @@ SGPApp
               d.resolve(arr);
 
             });
-
-
-
-
-
 
             return d.promise;
           },
@@ -225,7 +232,6 @@ SGPApp
             save : function(user, item) {
                 var d = $q.defer();
                 var timestamp = Common.getTimestamp();
-              console.log(item);
               if (item.type == 1){
                 var arrIndexes = ["A","B","C","D","E"];
 
@@ -294,6 +300,8 @@ SGPApp
                           'LastWritten' : {N: timestamp.toString()},
                           'Order' : {N: item.order.toString()},
                           'Type' : {N: item.type.toString()},
+                          'matrixParent' : {S: item.matrixParent},
+                          'matrixChild' : {S: item.matrixChild},
                           'Text' : {S: $("<div/>").html(item.text).text()},
                           'Tags' : {S: item.tags},
                           'Num_Alternatives' : {N: item.num_alternatives.toString()}
@@ -378,6 +386,8 @@ SGPApp
                     'LastModifiedBy': {S: "web"},
                     'LastWritten' : {N: timestamp.toString()},
                     'Order' : {N: item.order.toString()},
+                    'matrixParent' : {S: item.matrixParent},
+                    'matrixChild' : {S: item.matrixChild},
                     'Type' : {N: item.type.toString()},
                     'Text' : {S: $("<div/>").html(item.text).text()},
                     'Tags' : {S: item.tags},
@@ -410,9 +420,6 @@ SGPApp
                 });
 
               }
-
-
-
 
                 return d.promise;
             },

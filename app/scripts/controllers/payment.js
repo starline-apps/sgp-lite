@@ -6,7 +6,7 @@ SGPApp
         $rootScope.payment = true;
 
         if (!auth.isAuthenticated) {
-            auth.signin({
+            auth.signup({
                 popup: true,
                 standalone:true,
                 icon:           "images/sgp_logo_toolbar.png",
@@ -22,9 +22,10 @@ SGPApp
         }
 
         function loadData(){
+          var timestamp = parseInt(Common.getTimestamp()) - 86400;
             User.get(auth.profile.email).then(function(data){
                 if (data!=null){
-                    if(data.isSubscribed.toString()=="1"){
+                    if(data.isSubscribed.toString()=="1" && timestamp<parseInt(data.subscriptionExpirationDate)){
                         $state.transitionTo('login');
                     }else{
                         done();
@@ -58,7 +59,7 @@ SGPApp
     }]);
 
 SGPApp
-    .controller("PaymentController", ["$scope","$rootScope", "$state", "Common","auth", function ($scope,$rootScope, $state, Common,auth) {
+    .controller("PaymentController", ["$scope","$rootScope", "$state", "Common","auth","Payment", function ($scope,$rootScope, $state, Common,auth, Payment) {
         $scope.descriptions = [
             {
                 "text": "Correção automatica de Gabaritos"
@@ -105,5 +106,21 @@ SGPApp
         ];
 
 
-
+        $scope.pay = function(email, code){
+          $scope.redirecting = true;
+          Payment.getPaymentLink({email:email,code:code}).then(function(data){
+            if (data.error!=undefined){
+              Common.showToastMessage("Tente novamente mais tarde !", "warning");
+              $scope.redirecting = false;
+            }else{
+              if (data.link!=undefined){
+                console.log(data);
+                window.location.href = data.link;
+              }else{
+                Common.showToastMessage("Tente novamente mais tarde !", "warning");
+                $scope.redirecting = false;
+              }
+            }
+          });
+        }
     }]);

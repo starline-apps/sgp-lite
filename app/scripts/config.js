@@ -29,7 +29,6 @@ SGPApp
 
 SGPApp
     .config(["authProvider",function (authProvider) {
-
         authProvider
             .init({
                 domain: getAuth0Domain(),

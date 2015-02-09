@@ -13,8 +13,8 @@
     </md-toolbar>
 
 
-    <md-content class="p-5 scrollable" ng-show="!printMode && !editMode && !loadingContent">
-      <div class="row m-v-10">
+    <md-content class="p-5 scrollable" id="divPrint" ng-show="!printMode && !editMode && !loadingContent">
+      <div class="row m-v-10" id="printCommands">
         <div class="col-xs-4">
           <div class=col-xs-12" ng-if="exams.length==0" layout="horizontal" layout-align="center center">
             <span class="s-110 m-t-10 bold">Não existem provas cadastradas. Clique <a ui-sref="team">aqui</a> para cadastrar</span>
@@ -46,13 +46,24 @@
           </div>
         </div>
         <div class="col-xs-4" layout="horizontal" layout-align="center center" ng-if="students.length>0">
-          <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="print()">
+          <md-button class="md-theme-green pull-right m-h-10" tabindex="-1" aria-label="Button" ng-click="printDiv()">
             <button class="md-button-inner">Imprimir</button>
           </md-button>
         </div>
       </div>
 
-
+      <div class="row m-v-10" id="printTitle" style="display:none">
+        <div class="col-xs-6">
+          <div class=col-xs-12" layout="horizontal" layout-align="center center">
+            <span class="s-140 m-t-10">Prova : {{exam.description}}</span>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class=col-xs-12" layout="horizontal" layout-align="center center">
+            <span class="s-140 m-t-10">Turma : {{team.description}}</span>
+          </div>
+        </div>
+      </div>
 
       <md-item class="ng-scope" ng-if="students.length>0" role="listitem">
         <md-item-content class="row p-h-20" style="min-height: 100px;">
@@ -85,8 +96,8 @@
         <md-divider inset=""></md-divider>
       </md-item>
 
-      <md-item ng-repeat="(key,item) in students" class="ng-scope" role="listitem">
-        <md-item-content class="row p-h-20" style="min-height: 100px;">
+      <md-item ng-repeat="(key,item) in students" class="ng-scope item-print" role="listitem">
+        <md-item-content class="row p-h-20 item-print" style="min-height: 100px;margin-top:2px !important;">
           <div class="md-tile-left col-xs-1 col-lg-1" layout="vertical" layout-align="center center">
             <h4 class="ng-binding m-h-10 s-150">{{$index+1}}</h4>
           </div>

@@ -1,5 +1,5 @@
 ﻿SGPApp
-    .controller('HeaderController', function($scope, $rootScope,$sce, $http, $location, $translate, Common,$state,auth) {
+    .controller('HeaderController', ["$scope", "$rootScope","$sce", "$http", "$location", "$translate", "Common","$state","auth", function($scope, $rootScope,$sce, $http, $location, $translate, Common,$state,auth) {
         $scope.formData = {};
 
         $rootScope.languages = new Array("pt_br", "en", "es");
@@ -258,7 +258,7 @@
                 $scope.menus = data;
             })
 */
-    });
+    }]);
 
 
 

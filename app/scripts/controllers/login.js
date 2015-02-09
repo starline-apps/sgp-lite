@@ -15,7 +15,7 @@ SGPApp
             /*
                   EMAIL PARA TESTES
              */
-            auth.profile.email = "arcrespo@terra.com.br";
+            //auth.profile.email = "arcrespo@terra.com.br";
 
           }
 
@@ -32,10 +32,11 @@ SGPApp
             $rootScope.session = auth;
             $rootScope.loadingApp = false;
             $rootScope.login = false;
+            var timestamp = parseInt(Common.getTimestamp()) - 86400;
 
             User.get(auth.profile.email).then(function(data){
                 if (data!=null){
-                    if(data.isSubscribed.toString()=="1"){
+                    if(data.isSubscribed.toString()=="1" && timestamp<parseInt(data.subscriptionExpirationDate)){
                         done();
                     }else{
                         alert("Sua assinatura não está ativa, ou seu pagamento ainda não foi processado !");

@@ -1,5 +1,5 @@
 ﻿SGPApp
-    .controller('MatrixController', function($scope, $rootScope,$sce, $http, $location, $translate, Common, ParamService) {
+    .controller('MatrixController', ["$scope", "$rootScope","$sce", "$http", "$location", "$translate", "Common", "ParamService", function($scope, $rootScope,$sce, $http, $location, $translate, Common, ParamService) {
 
     var objService = ParamService;
 
@@ -83,4 +83,4 @@
 
     };
 
-});
+}]);

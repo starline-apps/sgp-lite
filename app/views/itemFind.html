@@ -15,21 +15,21 @@
 
         <md-content class="p-5 scrollable" ng-show="!loadingContent" style="min-height:400px">
             <div class="row m-v-10">
-                <div class="col-xs-6">
-                    <div class=col-xs-12" ng-if="exams.length==0" layout="horizontal" layout-align="center center">
-                        <span class="s-110 m-t-10 bold">Não existem provas cadastradas. Clique <a ui-sref="exam">aqui</a> para cadastrar</span>
-                    </div>
-                    <div class="dropdown col-xs-8" ng-if="exams.length!=0">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                            <span ng-if="!examFind.description">Selecione a prova</span>
-                            <span ng-if="examFind.description">{{examFind.description}}</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation" ng-repeat="examFilter in exams"><a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a></li>
-                        </ul>
-                    </div>
-                </div>
+              <div class="col-xs-12">
+                  <div class=col-xs-12" ng-if="exams.length==0" layout="horizontal" layout-align="center center">
+                      <span class="s-110 m-t-10 bold">Não existem provas cadastradas. Clique <a ui-sref="exam">aqui</a> para cadastrar</span>
+                  </div>
+                  <div class="dropdown col-xs-12" ng-if="exams.length!=0">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                          <span ng-if="!examFind.description">Selecione a prova</span>
+                          <span ng-if="examFind.description">{{examFind.description}}</span>
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
+                          <li role="presentation" ng-repeat="examFilter in exams"><a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a></li>
+                      </ul>
+                  </div>
+              </div>
               <div class="col-xs-5 pull-left" ng-show="exam && items.length!=0" style="height:60px;" layout="vertical" layout-align="center center">
                 <md-input-group  class="md-input-group-theme-green s-130 text-left fill-horizontal" style="margin: 0 0 0 45px !important;">
                   <label class="fill-horizontal text-left">Pesquisar</label>
@@ -46,7 +46,7 @@
                         </md-checkbox>
                     </div>
                     <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
-                        {{item.order}}
+                        {{$index+1}}
                     </div>
                     <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
@@ -85,7 +85,7 @@
                 </md-checkbox>
               </div>
               <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
-                {{item.order}}
+                {{$index+items.length+1}}
               </div>
               <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
                 <div class="row">
@@ -116,7 +116,7 @@
             </md-item-content>
             <md-divider inset=""></md-divider>
           </md-item>
-            <div ng-if="items.length==0" layout="vertical" layout-align="center center" style="height:400px">
+            <div ng-if="items.length==0 && itemsDiscursive.length==0" layout="vertical" layout-align="center center" style="height:400px">
 
                 <h3 class="ng-binding">Não existem questões cadastradas</h4>
 

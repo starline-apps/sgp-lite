@@ -66,7 +66,23 @@ SGPApp
 
         };
 
+      $scope.printDiv = function(){
+        $("#printCommands").hide();
+        $("#printTitle").show();
+        $("#header").hide();
+        $("#footer").hide();
+        $("#container").hide();
+        $("#printWindow").show();
+        document.getElementById("printWindow").innerHTML = document.getElementById("divPrint").innerHTML;
+        window.print();
+        $("#printWindow").hide();
+        $("#printCommands").show();
+        $("#header").show();
+        $("#footer").show();
+        $("#printTitle").hide();
+        $("#container").show();
 
+      };
     }]);
 
 

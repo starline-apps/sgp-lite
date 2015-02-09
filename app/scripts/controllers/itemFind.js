@@ -1,7 +1,6 @@
 /*jslint evil: true */
 /*jshint -W083 */
 "use strict";
-var refreshResult, refreshExamTime, examListInterval, examResultInterval;
 SGPApp
     .controller("ItemFindController", ["$rootScope", "$scope", "$stateParams","ItemService","Common","UserService","ExamService","$location",function($rootScope, $scope, $stateParams, ItemService, Common, UserService, ExamService, $location) {
 
@@ -70,6 +69,16 @@ SGPApp
                 objSend["alternatives"] = data.alternatives;
               }
 
+              if (Common.isEmptyOrZero(data.matrixParent)){
+                objSend["matrixParent"] = "0";
+              }else{
+                objSend["matrixParent"] = data.matrixParent.toString();
+              }
+              if (Common.isEmptyOrZero(data.matrixChild)){
+                objSend["matrixChild"] = "0";
+              }else{
+                objSend["matrixChild"] = data.matrixChild.toString();
+              }
 
               delete $rootScope.order;
               delete $rootScope.orderDiscursive;

@@ -1,5 +1,5 @@
 SGPApp
-    .factory('Dynamo', function($q, AWSService) {
+    .factory('Dynamo', ["$q", "AWSService", function($q, AWSService) {
         var service = {
             putItem: function(table, item) {
                 var d = $q.defer();
@@ -14,6 +14,7 @@ SGPApp
                             d.resolve(null)
                         }else{
                             dataSet.putItem(item, function(err, data) {
+                              console.log(err);
                                 if (data===null){
                                     d.resolve(null);
                                 }else{
@@ -57,7 +58,7 @@ SGPApp
             }
         };
         return service;
-    })
+    }]);
 
 
 

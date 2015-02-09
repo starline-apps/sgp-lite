@@ -1,5 +1,5 @@
 ﻿SGPApp
-    .factory("User", function($http, Common, Dynamo, $q) {
+    .factory("User", ["$http","Common","Dynamo","$q",function($http, Common, Dynamo, $q) {
         return {
             get : function(email) {
                 var d = $q.defer();
@@ -67,4 +67,4 @@
                 return d.promise;
             }
         }
-     });
+     }]);
