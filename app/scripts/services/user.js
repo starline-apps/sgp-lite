@@ -23,7 +23,12 @@
                             obj.subscriptionExpirationDate = itemSet.SubscriptionExpirationDate.N;
                             obj.data = JSON.parse(itemSet.Data.S);
                             obj.creditBalance = itemSet.CreditBalance.N;
-                            obj.isSubscribed = itemSet.IsSubscribed.N;
+                            if (!Common.isEmpty(itemSet.IsSubscribed)){
+                              obj.isSubscribed = itemSet.IsSubscribed.N;
+                            }else{
+                              obj.isSubscribed = "0";
+                            }
+
                             obj.lastModifiedBy = itemSet.LastModifiedBy.S;
                             obj.userEmail = itemSet.UserEmail.S;
                             obj.lastWritten = itemSet.LastWritten.N;

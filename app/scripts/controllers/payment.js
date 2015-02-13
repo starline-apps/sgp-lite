@@ -25,7 +25,7 @@ SGPApp
           var timestamp = parseInt(Common.getTimestamp()) - 86400;
             User.get(auth.profile.email).then(function(data){
                 if (data!=null){
-                    if(data.isSubscribed.toString()=="1" && timestamp<parseInt(data.subscriptionExpirationDate)){
+                    if(timestamp<parseInt(data.subscriptionExpirationDate)){
                         $state.transitionTo('login');
                     }else{
                         done();
