@@ -47,6 +47,19 @@ SGPApp
 
         $scope.loadData();
 
+		$scope.delete = function(exam) {
+			if (confirm("Deseja excluir este item ?")){
+				$rootScope.loadingContent = true;
+				UserService.currentUser().then(function(user) {
+					exam["isDeleted"] = "1";
+					objService.save(user, exam)
+						.then(function(data) {
+							$scope.loadData();
+						});
+				});
+			}
+		};
+
         $scope.edit = function(exam) {
             $scope.editMode = true;
             if (exam !== undefined){

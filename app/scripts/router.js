@@ -40,7 +40,15 @@ SGPApp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
             url: '/payment',
             controller: 'PaymentLoginController'
         })
-
+        .state('paymentmenu', {
+          url: '/paymentmenu',
+          controller: 'PaymentMenuController'
+        })
+        .state('userfree', {
+          url: '/userfree',
+          templateUrl: 'views/userFree.html',
+          controller: 'UserFreeController'
+        })
         .state('logout', {
             url: '/logout',
             controller: 'LogoutController'

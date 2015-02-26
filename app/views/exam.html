@@ -177,12 +177,10 @@
                 </div>
             </div>
 
-            <md-item ng-repeat="(key,item) in dataSource" class="ng-scope" role="listitem">
+            <md-item ng-repeat="(key,item) in dataSource" ng-show="isNotDeleted(item)"  class="ng-scope" role="listitem">
                 <md-item-content class="row p-h-20" style="min-height: 100px;">
-                    <div class="md-tile-left col-xs-2 col-lg-1">
-                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                        </md-checkbox>
+                    <div class="col-xs-1 s-150" layout="vertical" layout-align="center center">
+                        {{$index+1}}
                     </div>
                     <div class="col-xs-6 col-lg-7 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
@@ -222,8 +220,6 @@
                                  css="'md-button-fab bg-grey-dark c-white m-v-10 m-h-10'"
                                  ng-click="print(item)">
                         </stl-fab>
-
-
                     </div>
 
                     <div class="col-xs-1" layout="vertical" layout-align="center center">
@@ -232,6 +228,15 @@
                             tooltip="'Gabarito'"
                             css="'md-button-fab bg-yellow-dark c-black m-v-10 m-h-10'"
                             ng-click="getAnswerSheet(item)">
+                        </stl-fab>
+                    </div>
+
+                    <div class="col-xs-1" layout="vertical" layout-align="center center">
+                        <stl-fab id="'fabDelete'+$index"
+                                 iconclass="'glyphicon glyphicon-remove'"
+                                 tooltip="'Deletar'"
+                                 css="'md-button-fab bg-red-dark c-white m-v-10 m-h-10'"
+                                 ng-click="delete(item)">
                         </stl-fab>
                     </div>
                 </md-item-content>
@@ -284,7 +289,7 @@
                     </div>
 
 
-                    <div class="row item-print border-styled" ng-repeat="item in printData.items" ng-if="item._id" ng-init="getItem($index)">
+                    <div class="row item-print" ng-repeat="item in printData.items" ng-if="item._id" ng-init="getItem($index)">
                         <div class="col-xs-12 col-xs-offset-0 m-h-10" style="margin-top:35px;" >
                             <table style="width:100%;border-top:0px;padding:10px">
                                 <tr>
@@ -302,7 +307,7 @@
                             </table>
                         </div>
                     </div>
-                  <div class="row item-print border-styled" ng-repeat="item in printDataDiscursive" ng-if="item._id" ng-init="getItem($index)">
+                  <div class="row item-print" ng-repeat="item in printDataDiscursive" ng-if="item._id" ng-init="getItem($index)">
                     <div class="col-xs-12 col-xs-offset-0 m-h-10" style="margin-top:35px;" >
                       <table style="width:100%;border-top:0px;padding:10px">
                         <tr>

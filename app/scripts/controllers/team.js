@@ -47,6 +47,19 @@ SGPApp
 
         };
 
+		$scope.delete = function(item) {
+			if (confirm("Deseja excluir este item ?")){
+				$rootScope.loadingContent = true;
+				UserService.currentUser().then(function(user) {
+					objService.delete(user, item)
+						.then(function(data) {
+							$scope.loadData();
+						});
+				});
+			}
+
+		};
+
         $scope.viewStudents = function(team) {
             $rootScope.team = team;
             $location.path("student");

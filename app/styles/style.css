@@ -7,6 +7,12 @@ body {
 body {
     overflow:hidden;
 }
+@media print{
+    @page{
+        margin-left:20px;
+        margin-right:20px;
+    }
+}
 
 .pointer {
     cursor: pointer;
@@ -224,7 +230,7 @@ body {
     }
 }
 .item-print{
-    margin-top:40px !important;
+    margin-top:30px !important;
     page-break-inside: avoid !important;
 
 }

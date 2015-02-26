@@ -120,16 +120,21 @@ SGPApp
                                     if (itemSetUserItems.Tags.S!=undefined){
                                         questionSet.tags = itemSetUserItems.Tags.S;
                                     }
-                                  if (itemSetUserItems.matrixParent!=undefined){
-                                    if (itemSetUserItems.matrixParent.S!=undefined){
-                                      questionSet.matrixParent = itemSetUserItems.matrixParent.S;
+                                    if (itemSetUserItems.matrixParent!=undefined){
+                                      if (itemSetUserItems.matrixParent.S!=undefined){
+                                        questionSet.matrixParent = itemSetUserItems.matrixParent.S;
+                                      }
                                     }
-                                  }
-                                  if (itemSetUserItems.matrixChild!=undefined){
-                                    if (itemSetUserItems.matrixChild.S!=undefined){
-                                      questionSet.matrixChild = itemSetUserItems.matrixChild.S;
+                                    if (itemSetUserItems.matrixChild!=undefined){
+                                      if (itemSetUserItems.matrixChild.S!=undefined){
+                                        questionSet.matrixChild = itemSetUserItems.matrixChild.S;
+                                      }
                                     }
-                                  }
+                                    if (itemSetUserItems.isDeleted!=undefined){
+                                      if (itemSetUserItems.isDeleted.N!=undefined){
+                                        questionSet.isDeleted = itemSetUserItems.isDeleted.N;
+                                      }
+                                    }
                                     if (itemSetUserItems.Num_Alternatives.N!=undefined){
                                         questionSet.num_alternatives = itemSetUserItems.Num_Alternatives.N;
                                     }
@@ -186,7 +191,11 @@ SGPApp
                       obj.matrixChild = itemSetUserItems.matrixChild.S;
                     }
                   }
-
+                  if (itemSetUserItems.isDeleted!=undefined){
+                    if (itemSetUserItems.isDeleted.N!=undefined){
+                      obj.isDeleted = itemSetUserItems.isDeleted.N;
+                    }
+                  }
                   if (itemSetUserItems.Lines.N!=undefined){
                     obj.lines = itemSetUserItems.Lines.N;
                   }
@@ -300,6 +309,7 @@ SGPApp
                           'LastWritten' : {N: timestamp.toString()},
                           'Order' : {N: item.order.toString()},
                           'Type' : {N: item.type.toString()},
+                          'isDeleted' : {N: (item.isDeleted==undefined) ? "0" : item.isDeleted},
                           'matrixParent' : {S: item.matrixParent},
                           'matrixChild' : {S: item.matrixChild},
                           'Text' : {S: $("<div/>").html(item.text).text()},
@@ -388,6 +398,7 @@ SGPApp
                     'Order' : {N: item.order.toString()},
                     'matrixParent' : {S: item.matrixParent},
                     'matrixChild' : {S: item.matrixChild},
+                    'isDeleted' : {N: (item.isDeleted==undefined) ? "0" : item.isDeleted},
                     'Type' : {N: item.type.toString()},
                     'Text' : {S: $("<div/>").html(item.text).text()},
                     'Tags' : {S: item.tags},
@@ -422,21 +433,6 @@ SGPApp
               }
 
                 return d.promise;
-            },
-            update : function(data) {
-                var defer = $q.defer();
-                var arr = localStorageService.get("test_item");
-
-                for (var x=0 ; x<arr.length ; x++){
-                    if (arr[x]._id == data._id){
-                        arr[x] = data;
-                        break;
-                    }
-                }
-                localStorageService.add("test_item", arr);
-                defer.resolve(localStorageService.get("test_item"));
-                return defer.promise;
-
             }
         };
 

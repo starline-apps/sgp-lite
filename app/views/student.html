@@ -82,7 +82,7 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation" ng-repeat="teamFilter in teams"><a role="menuitem" tabindex="-1" ng-click="setTeam(teamFilter)">{{teamFilter.description}}</a></li>
+                            <li role="presentation" ng-repeat="teamFilter in teams" ng-show="isNotDeleted(teamFilter)"><a role="menuitem" tabindex="-1" ng-click="setTeam(teamFilter)">{{teamFilter.description}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,13 +96,8 @@
                 </div>
             </div>
 
-            <md-item ng-repeat="(key,item) in students" class="ng-scope" role="listitem" >
+            <md-item ng-repeat="(key,item) in students" ng-show="isNotDeleted(item)" class="ng-scope" role="listitem" >
                 <md-item-content class="row p-h-20" style="min-height: 100px;">
-                    <div class="md-tile-left col-xs-1">
-                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                        </md-checkbox>
-                    </div>
                     <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
                         {{$index+1}}
                     </div>
@@ -129,6 +124,14 @@
                                css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
                                ng-click="edit(item)">
                       </stl-fab>
+                    </div>
+                    <div class="col-xs-1" layout="vertical" layout-align="center center">
+                        <stl-fab id="'fabDelete'+$index"
+                                 iconclass="'glyphicon glyphicon-remove'"
+                                 tooltip="'Deletar'"
+                                 css="'md-button-fab bg-red-dark c-white m-v-10 m-h-10'"
+                                 ng-click="delete(item)">
+                        </stl-fab>
                     </div>
                 </md-item-content>
                 <md-divider inset=""></md-divider>

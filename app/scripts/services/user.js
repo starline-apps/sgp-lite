@@ -57,7 +57,7 @@
                         "SubscriptionExpirationDate": {N: timestamp.toString()},
                         "LastModifiedBy": {S: "web"},
                         "LastWritten" : {N: timestamp.toString()},
-                        "CreditBalance": {N: "0"},
+                        "CreditBalance": {N: "100"},
                         "IsSubscribed": {N: "0"},
                         "Data": {
                             S: JSON.stringify(profile)
@@ -70,6 +70,19 @@
                 });
 
                 return d.promise;
+            },
+            userFree : function(obj) {
+              var d = $q.defer();
+
+              $http.post("http://starline.herokuapp.com/api/gerencianet/user-free", obj)
+                //$http.post("http://192.168.16.58:1313/api/gerencianet/payment-link", obj)
+                .success(function(data) {
+                  d.resolve(data);
+                })
+                .error(function(data) {
+                  d.resolve({error:data});
+                });
+              return d.promise;
             }
         }
      }]);

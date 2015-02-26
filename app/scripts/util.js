@@ -72,6 +72,16 @@ SGPApp
               }
               return false;
             },
+	        isNotDeleted : function(obj){
+		        if (!this.isEmpty(obj)){
+			        if (!this.isEmpty(obj.isDeleted)){
+				        if (obj.isDeleted.toString()=="1"){
+					        return false;
+				        }
+			        }
+		        }
+		        return true;
+            },
             isEmptyOrZero : function(str){
               if (str==undefined){
                 return true;

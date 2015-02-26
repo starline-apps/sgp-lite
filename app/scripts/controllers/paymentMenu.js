@@ -1,42 +1,24 @@
 "use strict";
 SGPApp
-	.controller("PaymentLoginController", ["$scope","$rootScope", "$stateParams", "Common","auth","User", function ($scope,$rootScope, $stateParams, Common,auth, User) {
+	.controller("PaymentMenuController", ["$scope","$rootScope", "$stateParams", "Common","auth","User", function ($scope,$rootScope, $stateParams, Common,auth, User) {
 		$scope.formData = {};
 
 		$rootScope.payment = true;
+		$("#container").fadeOut("fast");
 
-		if (!auth.isAuthenticated) {
-			auth.signup({
-				popup: true,
-				standalone:true,
-				icon:           "images/sgp_logo_toolbar.png",
-				showIcon:       true
-			}, function () {
-				loadData();
-			}, function () {
-				// Error callback
-			});
+		loadData();
 
-		}else{
-			loadData();
-		}
 
 		function loadData(){
 			var timestamp = parseInt(Common.getTimestamp()) - 86400;
 			User.get(auth.profile.email).then(function(data){
 				if (data!=null){
-					if (!Common.isEmpty($stateParams.fromMenu)){
-						done();
-					}else if(timestamp<parseInt(data.subscriptionExpirationDate)){
-						$state.transitionTo('login');
-					}else{
-						done();
-					}
+
+					done();
+
 
 				}else{
-					User.save(auth.profile).then(function(data){
-						done();
-					});
+					$state.transitionTo('login');
 				}
 			});
 		}

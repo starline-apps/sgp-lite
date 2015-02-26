@@ -26,7 +26,7 @@
                           <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu pointer" role="menu" aria-labelledby="dropdownMenu1">
-                          <li role="presentation" ng-repeat="examFilter in exams"><a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a></li>
+                          <li role="presentation" ng-repeat="examFilter in exams" ng-show="isNotDeleted(examFilter)"><a role="menuitem" tabindex="-1" ng-click="setExam(examFilter)">{{examFilter.description}}</a></li>
                       </ul>
                   </div>
               </div>
@@ -38,17 +38,12 @@
               </div>
             </div>
 
-            <md-item ng-repeat="(key,item) in items" class="ng-scope" role="listitem" >
+            <md-item ng-repeat="(key,item) in items" ng-show="isNotDeleted(item)"  class="ng-scope" role="listitem" >
                 <md-item-content class="row p-h-20" style="min-height: 100px;">
-                    <div class="md-tile-left col-xs-1">
-                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                        </md-checkbox>
-                    </div>
                     <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
                         {{$index+1}}
                     </div>
-                    <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
+                    <div class="col-xs-9 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
                             <div class="col-xs-12">
                                 <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>
@@ -77,17 +72,12 @@
                 </md-item-content>
                 <md-divider inset=""></md-divider>
             </md-item>
-          <md-item ng-repeat="(key,item) in itemsDiscursive" class="ng-scope" role="listitem" >
+          <md-item ng-repeat="(key,item) in itemsDiscursive" ng-show="isNotDeleted(item)"  class="ng-scope" role="listitem" >
             <md-item-content class="row p-h-20" style="min-height: 100px;">
-              <div class="md-tile-left col-xs-1">
-                <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                </md-checkbox>
-              </div>
               <div class="col-xs-1 s-150"  layout="vertical" layout-align="center center">
                 {{$index+items.length+1}}
               </div>
-              <div class="col-xs-8 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
+              <div class="col-xs-9 col-lg-8 md-tile-content" layout="vertical" layout-align="center start">
                 <div class="row">
                   <div class="col-xs-12">
                     <h4 class="ng-binding m-h-10 s-150 searchable">{{item.text}}</h4>

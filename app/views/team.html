@@ -80,13 +80,8 @@
                 </div>
             </div>
 
-            <md-item ng-repeat="(key,item) in dataSource" class="ng-scope" role="listitem">
+            <md-item ng-repeat="(key,item) in dataSource" ng-show="isNotDeleted(item)" class="ng-scope" role="listitem">
                 <md-item-content class="row p-h-20" style="min-height: 100px;">
-                    <div class="md-tile-left col-xs-2 col-lg-1">
-                        <md-checkbox ng-model="isChecked" aria-label="Finished?">
-
-                        </md-checkbox>
-                    </div>
                     <div class="col-xs-6 col-lg-7 md-tile-content" layout="vertical" layout-align="center start">
                         <div class="row">
                             <div class="col-xs-12">
@@ -96,14 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-1" layout="vertical" layout-align="center center">
-                        <stl-fab id="'fabEdit'+$index"
-                                 iconclass="'glyphicon glyphicon-pencil'"
-                                 tooltip="'Editar'"
-                                 css="'md-button-fab bg-blue-dark c-white m-v-10 m-h-10'"
-                                 ng-click="edit(item)">
-                        </stl-fab>
-                    </div>
+
                     <div class="col-xs-1 col-lg-1 glyphicon-com" layout="vertical" layout-align="center center">
                         <stl-fab id="'fabItems'+$index"
                                  iconclass="'glyphicon glyphicon-sort-by-alphabet'"
@@ -112,7 +100,14 @@
                                  ng-click="viewStudents(item)">
                         </stl-fab>
                     </div>
-
+                    <div class="col-xs-1" layout="vertical" layout-align="center center">
+                        <stl-fab id="'fabDelete'+$index"
+                                 iconclass="'glyphicon glyphicon-remove'"
+                                 tooltip="'Deletar'"
+                                 css="'md-button-fab bg-red-dark c-white m-v-10 m-h-10'"
+                                 ng-click="delete(item)">
+                        </stl-fab>
+                    </div>
                 </md-item-content>
                 <md-divider inset=""></md-divider>
             </md-item>

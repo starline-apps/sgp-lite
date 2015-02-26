@@ -24,11 +24,15 @@ SGPApp
                             data = JSON.parse(itemSet.Data.S);
                             obj.description = data.name;
                             obj.answerSheetID = (data.answerSheetID!==undefined) ? data.answerSheetID : null;
+                            obj.isDeleted = (data.isDeleted!==undefined) ? data.isDeleted : "0";
                             obj.points = data.points;
                             obj.header = (itemSet.Header!==undefined) ? JSON.parse(itemSet.Header.S) : [];
                             obj.tags = (itemSet.Tags!==undefined) ? itemSet.Tags.S : "";
                             obj._id = itemSet.Guid.S;
-                            arr.push(obj);
+	                        if (Common.isNotDeleted(obj)){
+		                        arr.push(obj);
+	                        }
+
                         });
                         d.resolve(arr);
                     } else {
@@ -226,6 +230,12 @@ SGPApp
                                     if (itemSetUserItems.Num_Alternatives.N!=undefined){
                                         questionSet.num_alternatives = itemSetUserItems.Num_Alternatives.N;
                                     }
+                                    if (itemSetUserItems.isDeleted!=undefined){
+                                      if (itemSetUserItems.isDeleted.N!=undefined){
+                                        questionSet.isDeleted = itemSetUserItems.isDeleted.N;
+                                      }
+                                    }
+
                                 });
                             }
                         });
@@ -239,18 +249,6 @@ SGPApp
             save : function(user, exam) {
 
                 var d = $q.defer();
-
-                /*
-                var answerSheet;
-                if (exam.questions.length <=20){
-                    answerSheet = 1;
-                }else if(exam.questions.length <=50){
-                    answerSheet = 2;
-                }else{
-                    answerSheet = 3;
-                }
-                */
-
 
                 service.getItemsByExam(user, exam._id).then(function(items){
 
@@ -282,7 +280,7 @@ SGPApp
                                         name: exam.description,
                                         idPublished: 0,
                                         points: exam.points,
-                                        isDeleted: 0,
+                                        isDeleted: (exam.isDeleted==undefined) ? "0" : exam.isDeleted,
                                         lastModified: timestamp,
                                         answerSheetID: exam.answerSheetID
                                     })
